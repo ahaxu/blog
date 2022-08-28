@@ -54,3 +54,64 @@ div.info {
     font-size: 14px;
     font-style: italic;
 }
+
+p {
+    padding: 0px;
+    margin: 10px 0px 10px 0px;
+}
+
+a {
+    color: black;
+}
+
+h1 {
+    font-size: 20px;
+    margin: 12px 0px 12px 0px;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 12px 0px 12px 0px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+h1 a, h2 a, h3 a {
+    text-decoration: none;
+}
+
+img {
+    border: none;
+    display: block;
+    margin: 6px auto 30px auto;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 1em;
+    margin-left: 1em;
+}
+
+code {
+    background-color: rgb(250, 250, 250);
+    border: 1px solid rgb(200, 200, 200);
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+pre code {
+    display: block;
+    padding: 8px;
+    margin-bottom: 2em;
+}
+
+p.caption {
+    display: none;
+}
