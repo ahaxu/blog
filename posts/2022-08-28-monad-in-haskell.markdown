@@ -4,7 +4,8 @@ author: lk
 ---
 
 ## Link youtube
-[8.1 Monad trong haskell](https://youtu.be/LhGxO9-tKzg "monad trong haskell")
+
+- [8.1 Monad trong haskell](https://youtu.be/LhGxO9-tKzg "monad trong haskell")
 
 ## Từ cụ thể đến tổng quát hoá
 
