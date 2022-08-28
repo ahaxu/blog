@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>AhaXu Blog - Monad in Haskell</title>
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../">AhaXu Blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../">Home</a>
+                <a href="../about.html">About</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Monad in Haskell</h1>
+
+            <div class="info">
+    Posted on August 28, 2022
+    
+        by lk
+    
+</div>
+
+<h2 id="từ-cụ-thể-đến-tổng-quát-hoá">Từ cụ thể đến tổng quát hoá</h2>
+<p>Tham khảo <a href="./8_monad.hs">file</a></p>
+<ol type="1">
+<li><p>maybePlus</p></li>
+<li><p>eitherPlus</p></li>
+<li><p>listPlus</p></li>
+</ol>
+<p>Chúng ta thấy các pattern sau:</p>
+<pre><code>andThen   :: Maybe a      -&gt; (a -&gt; Maybe b)    -&gt; Maybe b
+andThen'  :: (Either e a) -&gt; (a -&gt; Either e b) -&gt; (Either e b)
+andThen'' :: [a]          -&gt; (a -&gt; [b])        -&gt; [b]   
+             [] a         -&gt; (a-&gt;   [] b)      -&gt;[] b</code></pre>
+<p>Qua đó chúng ta có thể tổng quát hoá (generalize)</p>
+<pre><code>bind  :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code></pre>
+<p>Nếu chúng ta có thể viết ngược lại</p>
+<p><code>flip bind</code> hay <code>(=&lt;&lt;)</code></p>
+<pre><code>(=&lt;&lt;) ::   Monad m =&gt; (a -&gt; m b) -&gt; m a -&gt; m b
+fmap  :: Functor f =&gt; (a -&gt; b)   -&gt; f a -&gt; f b (*)
+</code></pre>
+<p>Nếu ta thay</p>
+<pre><code>f ~ m
+b ~ m b'</code></pre>
+<p>vào (*)</p>
+<pre><code>fmap  :: Functor f =&gt; (a -&gt; m b') -&gt; m a -&gt; m (m b')
+(=&lt;&lt;) ::   Monad m =&gt; (a -&gt; m b)  -&gt; m a -&gt; m b
+</code></pre>
+<p>Nếu chúng ta có hàm số nào đó <code>join :: m (m b') -&gt; m b'</code></p>
+<pre><code>fmap :: Functor f =&gt;    (a -&gt; m b') -&gt; m a -&gt; m (m b')
+join ::                                       m (m b') -&gt; m b'
+join (fmap) ::          (a -&gt; m b') -&gt; m a             -&gt; m b'</code></pre>
+<p>Như thế, hàm flip bind (=&lt;&lt;) là sự kết hợp giữa <code>fmap</code> và <code>join</code>, có thể viết <code>(=&lt;&lt;) = (join .) . fmap</code> theo cách áp dụng function composition</p>
+<p>Chứng minh <code>(=&lt;&lt;) = (join .) . fmap</code></p>
+<pre><code>(=&lt;&lt;) f ma = join (fmap f ma)
+(=&lt;&lt;) f ma = join ((fmap f) ma)   -- function application associates to the left
+(=&lt;&lt;) f ma = join . (fmap f) ma   -- function composition  g ( h x) with g = join, h = (fmap f)
+(=&lt;&lt;) f    = join . (fmap f)      -- pointfree on ma
+(=&lt;&lt;) f    = (join .) (fmap f)    -- function application associates to the left
+(=&lt;&lt;) f    = ((join .) . fmap) f  -- function composition g (h x), g = (join .), h = fmap
+(=&lt;&lt;)      = (join .) . fmap      -- pointfree on f
+(=&lt;&lt;)      = (join .) . fmap      -- QED</code></pre>
+<p>Ngoài các lý do là tổng quát hoá, Monad còn có gì hữu ích không??</p>
+<pre><code>-- pure
+def integrity_checksum(input)
+    Digest::MD5.base64digest(input)
+end
+
+-- impure
+def impure_integrity_checksum(input)
+    k = File.read(&quot;~/.secret-key&quot;)
+    Digest::MD5.base64digest(k+input)
+end</code></pre>
+<p>Haskell way,</p>
+<pre><code>-- pure
+integrityChecksum :: ByteString -&gt; ByteString
+integrityChecksum input = MD5.hash input
+
+-- impure with explicit side effect
+integrityChecksum' :: ByteString -&gt; IO ByteString
+integrityChecksum' input = 
+    readFile &quot;~/.secret-key&quot; &gt;&gt;= \k -&gt;
+        pure (MD5.hash(k &lt;&gt; input))
+
+-- desugar way, impure with explicit side effect
+integrityChecksum'' :: ByteString -&gt; IO ByteString
+integrityChecksum'' input = do
+    k &lt;- readFile &quot;~/.secret-key&quot; 
+    pure (MD5.hash(k &lt;&gt; input))</code></pre>
+<p>Như thế, chúng ta lường trưóc được rằng: hàm <code>integrityChecksum</code> sẽ có side effect.
+Chúng ta sẽ tách bạch các hàm ko có side effect va các hàm có side effect, như thế khi code sẽ giảm thiêủ lỗi, code dễ đọc hơn.</p>
+<h2 id="monad-type-class">Monad type class</h2>
+<pre><code>class Applicative m =&gt; Monad m where
+  (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b
+  (&gt;&gt;) :: m a -&gt; m b -&gt; m b
+  return :: a -&gt; m a
+  {-# MINIMAL (&gt;&gt;=) #-}</code></pre>
+<h2 id="monad-laws">Monad laws</h2>
+<p>Mọi Monad instances phải thỏa mãn các luật sau:</p>
+<ul>
+<li>Left identity(đồng nhất trái):</li>
+</ul>
+<pre><code>return a &gt;&gt;= h ≡ h a</code></pre>
+<ul>
+<li>Right identity(đồng nhất phải):</li>
+</ul>
+<pre><code>m &gt;&gt;= return ≡ m</code></pre>
+<ul>
+<li>Associativity(tính kết hợp):</li>
+</ul>
+<pre><code>(m &gt;&gt;= g) &gt;&gt;= h ≡ m &gt;&gt;= (\x -&gt; g x &gt;&gt;= h)</code></pre>
+<p>Trong <code>Control.Monad</code>, chúng ta có 1 toán tử (<code>&gt;=&gt;</code>) goị là monad-composition hoặc là Kleisli-composition operator có signature như sau:</p>
+<pre><code>infixr 1 &gt;=&gt;
+(&gt;=&gt;)   ::
+    Monad m =&gt;
+       (a -&gt; m b)
+    -&gt; (b -&gt; m c)
+    -&gt; (a -&gt; m c)
+f &gt;=&gt; g =
+    \x -&gt; f x &gt;&gt;= g</code></pre>
+<p>Như thế, tính chất kết hợp</p>
+<pre><code>(m &gt;&gt;= g) &gt;&gt;= h ≡ m &gt;&gt;= (\x -&gt; g x &gt;&gt;= h)</code></pre>
+<p>chúng ta có thể viết lại như sau:</p>
+<pre><code>(m &gt;=&gt; g) &gt;=&gt; h ≡  m &gt;=&gt; (g &gt;=&gt; h)</code></pre>
+<h2 id="tham-khảo">Tham khảo</h2>
+<ul>
+<li><a href="https://www.haskell.org/tutorial/functions.html">Function application associates to the left</a></li>
+<li><a href="https://www.youtube.com/watch?v=JKJaD7E6WxE">Why Is Haskell So Hard To Learn? (And How To Deal With It) by Saurabh Nanda #FnConf19</a></li>
+<li><a href="https://www.youtube.com/watch?v=12D4Y2Hdnhg">Haskell Beginners 2022: Lecture 4</a></li>
+<li><a href="https://wiki.haskell.org/Monad_laws">https://wiki.haskell.org/Monad_laws</a></li>
+</ul>
+<h2 id="todo">TODO</h2>
+<ul>
+<li><p>Giải thích:
+&gt;A monad is just a monoid in the category of endofunctors, what’s the problem?</p></li>
+<li><p>endofunctor category</p></li>
+<li><p>monoidal</p></li>
+</ul>
+
+        </div>
+        <div id="footer">
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </div>
+    </body>
+</html>
