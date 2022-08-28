@@ -1,5 +1,5 @@
 ---
-title: Monad trong haskell
+title: (Vi) Monad trong haskell
 author: lk
 ---
 
