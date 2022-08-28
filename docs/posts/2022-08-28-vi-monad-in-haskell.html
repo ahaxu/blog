@@ -51,101 +51,108 @@
 <li><p>listPlus</p></li>
 </ol>
 <p>Chúng ta thấy các pattern sau:</p>
-<pre><code>andThen   :: Maybe a      -&gt; (a -&gt; Maybe b)    -&gt; Maybe b
-andThen'  :: (Either e a) -&gt; (a -&gt; Either e b) -&gt; (Either e b)
-andThen'' :: [a]          -&gt; (a -&gt; [b])        -&gt; [b]   
-             [] a         -&gt; (a-&gt;   [] b)      -&gt;[] b</code></pre>
-<p>Qua đó chúng ta có thể tổng quát hoá (generalize)</p>
-<pre><code>bind  :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
-(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ot">andThen   ::</span> <span class="dt">Maybe</span> a      <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Maybe</span> b)    <span class="ot">-&gt;</span> <span class="dt">Maybe</span> b</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">andThen'  ::</span> (<span class="dt">Either</span> e a) <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> <span class="dt">Either</span> e b) <span class="ot">-&gt;</span> (<span class="dt">Either</span> e b)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ot">andThen'' ::</span> [a]          <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> [b])        <span class="ot">-&gt;</span> [b]   </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>             [] a         <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span>   [] b)     <span class="ot">-&gt;</span> [] b</span></code></pre></div>
+<p>Qua đó chúng ta có thể tổng quát hoá (generalization)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ot">bind  ::</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span> m a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> m b) <span class="ot">-&gt;</span> m b</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">(&gt;&gt;=) ::</span> <span class="dt">Monad</span> m <span class="ot">=&gt;</span> m a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> m b) <span class="ot">-&gt;</span> m b</span></code></pre></div>
 <p>Nếu chúng ta có thể viết ngược lại</p>
 <p><code>flip bind</code> hay <code>(=&lt;&lt;)</code></p>
-<pre><code>(=&lt;&lt;) ::   Monad m =&gt; (a -&gt; m b) -&gt; m a -&gt; m b
-fmap  :: Functor f =&gt; (a -&gt; b)   -&gt; f a -&gt; f b (*)
-</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">(=&lt;&lt;) ::</span>   <span class="dt">Monad</span> m <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> m b) <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m b</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fmap</span><span class="ot">  ::</span> <span class="dt">Functor</span> f <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b)   <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b (<span class="op">*</span>)</span></code></pre></div>
 <p>Nếu ta thay</p>
 <pre><code>f ~ m
 b ~ m b'</code></pre>
 <p>vào (*)</p>
-<pre><code>fmap  :: Functor f =&gt; (a -&gt; m b') -&gt; m a -&gt; m (m b')
-(=&lt;&lt;) ::   Monad m =&gt; (a -&gt; m b)  -&gt; m a -&gt; m b
-</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fmap</span><span class="ot">  ::</span> <span class="dt">Functor</span> f <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> m b') <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m (m b')</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ot">(=&lt;&lt;) ::</span>   <span class="dt">Monad</span> m <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> m b)  <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m b</span></code></pre></div>
 <p>Nếu chúng ta có hàm số nào đó <code>join :: m (m b') -&gt; m b'</code></p>
-<pre><code>fmap :: Functor f =&gt;    (a -&gt; m b') -&gt; m a -&gt; m (m b')
-join ::                                       m (m b') -&gt; m b'
-join (fmap) ::          (a -&gt; m b') -&gt; m a             -&gt; m b'</code></pre>
-<p>Như thế, hàm flip bind (=&lt;&lt;) là sự kết hợp giữa <code>fmap</code> và <code>join</code>, có thể viết <code>(=&lt;&lt;) = (join .) . fmap</code> theo cách áp dụng function composition</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fmap</span><span class="ot"> ::</span> <span class="dt">Functor</span> f <span class="ot">=&gt;</span>    (a <span class="ot">-&gt;</span> m b') <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m (m b')</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ot">join ::</span>                                       m (m b') <span class="ot">-&gt;</span> m b'</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>join (<span class="fu">fmap</span>)<span class="ot"> ::</span>          (a <span class="ot">-&gt;</span> m b') <span class="ot">-&gt;</span> m a             <span class="ot">-&gt;</span> m b'</span></code></pre></div>
+<p>Như thế, hàm <strong>flip bind (=&lt;&lt;)</strong> là sự kết hợp giữa <code>fmap</code> và <code>join</code>, có thể viết <code>(=&lt;&lt;) = (join .) . fmap</code> theo cách áp dụng function composition</p>
 <p>Chứng minh <code>(=&lt;&lt;) = (join .) . fmap</code></p>
-<pre><code>(=&lt;&lt;) f ma = join (fmap f ma)
-(=&lt;&lt;) f ma = join ((fmap f) ma)   -- function application associates to the left
-(=&lt;&lt;) f ma = join . (fmap f) ma   -- function composition  g ( h x) with g = join, h = (fmap f)
-(=&lt;&lt;) f    = join . (fmap f)      -- pointfree on ma
-(=&lt;&lt;) f    = (join .) (fmap f)    -- function application associates to the left
-(=&lt;&lt;) f    = ((join .) . fmap) f  -- function composition g (h x), g = (join .), h = fmap
-(=&lt;&lt;)      = (join .) . fmap      -- pointfree on f
-(=&lt;&lt;)      = (join .) . fmap      -- QED</code></pre>
-<p>Ngoài các lý do là tổng quát hoá, Monad còn có gì hữu ích không??</p>
-<pre><code>-- pure
-def integrity_checksum(input)
-    Digest::MD5.base64digest(input)
-end
-
--- impure
-def impure_integrity_checksum(input)
-    k = File.read(&quot;~/.secret-key&quot;)
-    Digest::MD5.base64digest(k+input)
-end</code></pre>
-<p>Haskell way,</p>
-<pre><code>-- pure
-integrityChecksum :: ByteString -&gt; ByteString
-integrityChecksum input = MD5.hash input
-
--- impure with explicit side effect
-integrityChecksum' :: ByteString -&gt; IO ByteString
-integrityChecksum' input = 
-    readFile &quot;~/.secret-key&quot; &gt;&gt;= \k -&gt;
-        pure (MD5.hash(k &lt;&gt; input))
-
--- desugar way, impure with explicit side effect
-integrityChecksum'' :: ByteString -&gt; IO ByteString
-integrityChecksum'' input = do
-    k &lt;- readFile &quot;~/.secret-key&quot; 
-    pure (MD5.hash(k &lt;&gt; input))</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>) f ma <span class="ot">=</span> join (<span class="fu">fmap</span> f ma)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>) f ma <span class="ot">=</span> join ((<span class="fu">fmap</span> f) ma)   <span class="co">-- function application associates to the left</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>) f ma <span class="ot">=</span> join <span class="op">.</span> (<span class="fu">fmap</span> f) ma   <span class="co">-- function composition  g ( h x) with g = join, h = (fmap f)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>) f    <span class="ot">=</span> join <span class="op">.</span> (<span class="fu">fmap</span> f)      <span class="co">-- pointfree on ma</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>) f    <span class="ot">=</span> (join <span class="op">.</span>) (<span class="fu">fmap</span> f)    <span class="co">-- function application associates to the left</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>) f    <span class="ot">=</span> ((join <span class="op">.</span>) <span class="op">.</span> <span class="fu">fmap</span>) f  <span class="co">-- function composition g (h x), g = (join .), h = fmap</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>)      <span class="ot">=</span> (join <span class="op">.</span>) <span class="op">.</span> <span class="fu">fmap</span>      <span class="co">-- pointfree on f</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>(<span class="op">=&lt;&lt;</span>)      <span class="ot">=</span> (join <span class="op">.</span>) <span class="op">.</span> <span class="fu">fmap</span>      <span class="co">-- QED</span></span></code></pre></div>
+<p>Ngoài lý do tổng quát hoá, <strong>Monad</strong> còn có điểm gì khác hay không??</p>
+<p>Xét đọan mã sau về hàm băm (md5 hash) đọc khóa bí mật từ file</p>
+<p>Viết bằng ruby</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pure</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">def</span> integrity_checksum(input)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Digest</span><span class="kw">::</span><span class="dt">MD5</span><span class="at">.base64digest</span>(input)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># impure</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="cf">def</span> impure_integrity_checksum(input)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    k <span class="kw">=</span> <span class="dt">File</span><span class="at">.read</span>(<span class="st">&quot;~/.secret-key&quot;</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Digest</span><span class="kw">::</span><span class="dt">MD5</span><span class="at">.base64digest</span>(k<span class="kw">+</span>input)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div>
+<p>Viết lại bằng haskell</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- pure</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ot">integrityChecksum ::</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ByteString</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="ot">-&gt;</span> <span class="dt">ByteString</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>integrityChecksum input <span class="ot">=</span> MD5.hash input</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- impure with explicit side effect</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ot">integrityChecksum' ::</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ByteString</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="ot">-&gt;</span> <span class="dt">IO</span> <span class="dt">ByteString</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>integrityChecksum' input <span class="ot">=</span> </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readFile</span> <span class="st">&quot;~/.secret-key&quot;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">&gt;&gt;=</span> \k <span class="ot">-&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pure</span> (MD5.hash(k <span class="op">&lt;&gt;</span> input))</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- desugar way, impure with explicit side effect</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ot">integrityChecksum'' ::</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">ByteString</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="ot">-&gt;</span> <span class="dt">IO</span> <span class="dt">ByteString</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>integrityChecksum'' input <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    k <span class="ot">&lt;-</span> <span class="fu">readFile</span> <span class="st">&quot;~/.secret-key&quot;</span> </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pure</span> (MD5.hash(k <span class="op">&lt;&gt;</span> input))</span></code></pre></div>
 <p>Như thế, chúng ta lường trưóc được rằng: hàm <code>integrityChecksum</code> sẽ có side effect.
-Chúng ta sẽ tách bạch các hàm ko có side effect va các hàm có side effect, như thế khi code sẽ giảm thiêủ lỗi, code dễ đọc hơn.</p>
+Chúng ta sẽ tách bạch các hàm ko có <strong>side effect</strong> và các hàm có <strong>side effect</strong>, như thế khi code sẽ giảm thiêủ lỗi, code dễ đọc hơn.</p>
 <h2 id="monad-type-class">Monad type class</h2>
-<pre><code>class Applicative m =&gt; Monad m where
-  (&gt;&gt;=) :: m a -&gt; (a -&gt; m b) -&gt; m b
-  (&gt;&gt;) :: m a -&gt; m b -&gt; m b
-  return :: a -&gt; m a
-  {-# MINIMAL (&gt;&gt;=) #-}</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="dt">Applicative</span> m <span class="ot">=&gt;</span> <span class="dt">Monad</span> m <span class="kw">where</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ot">  (&gt;&gt;=) ::</span> m a <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> m b) <span class="ot">-&gt;</span> m b</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ot">  (&gt;&gt;) ::</span> m a <span class="ot">-&gt;</span> m b <span class="ot">-&gt;</span> m b</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ot">  return ::</span> a <span class="ot">-&gt;</span> m a</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="ot">{-# MINIMAL (&gt;&gt;=) #-}</span></span></code></pre></div>
 <h2 id="monad-laws">Monad laws</h2>
 <p>Mọi Monad instances phải thỏa mãn các luật sau:</p>
 <ul>
 <li>Left identity(đồng nhất trái):</li>
 </ul>
-<pre><code>return a &gt;&gt;= h ≡ h a</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span> a <span class="op">&gt;&gt;=</span> h ≡ h a</span></code></pre></div>
 <ul>
 <li>Right identity(đồng nhất phải):</li>
 </ul>
-<pre><code>m &gt;&gt;= return ≡ m</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">&gt;&gt;=</span> <span class="fu">return</span> ≡ m</span></code></pre></div>
 <ul>
 <li>Associativity(tính kết hợp):</li>
 </ul>
-<pre><code>(m &gt;&gt;= g) &gt;&gt;= h ≡ m &gt;&gt;= (\x -&gt; g x &gt;&gt;= h)</code></pre>
-<p>Trong <code>Control.Monad</code>, chúng ta có 1 toán tử (<code>&gt;=&gt;</code>) goị là monad-composition hoặc là Kleisli-composition operator có signature như sau:</p>
-<pre><code>infixr 1 &gt;=&gt;
-(&gt;=&gt;)   ::
-    Monad m =&gt;
-       (a -&gt; m b)
-    -&gt; (b -&gt; m c)
-    -&gt; (a -&gt; m c)
-f &gt;=&gt; g =
-    \x -&gt; f x &gt;&gt;= g</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(m <span class="op">&gt;&gt;=</span> g) <span class="op">&gt;&gt;=</span> h ≡ m <span class="op">&gt;&gt;=</span> (\x <span class="ot">-&gt;</span> g x <span class="op">&gt;&gt;=</span> h)</span></code></pre></div>
+<p>Trong <code>Control.Monad</code>, chúng ta có 1 toán tử (<code>&gt;=&gt;</code>) goị là <strong>monad-composition</strong> hoặc là <strong>Kleisli-composition operator</strong> có signature như sau:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">infixr</span> <span class="dv">1</span> <span class="op">&gt;=&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>(<span class="op">&gt;=&gt;</span>)   <span class="ot">::</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Monad</span> m <span class="ot">=&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>       (a <span class="ot">-&gt;</span> m b)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">-&gt;</span> (b <span class="ot">-&gt;</span> m c)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="ot">-&gt;</span> (a <span class="ot">-&gt;</span> m c)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">&gt;=&gt;</span> g <span class="ot">=</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    \x <span class="ot">-&gt;</span> f x <span class="op">&gt;&gt;=</span> g</span></code></pre></div>
 <p>Như thế, tính chất kết hợp</p>
-<pre><code>(m &gt;&gt;= g) &gt;&gt;= h ≡ m &gt;&gt;= (\x -&gt; g x &gt;&gt;= h)</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(m <span class="op">&gt;&gt;=</span> g) <span class="op">&gt;&gt;=</span> h ≡ m <span class="op">&gt;&gt;=</span> (\x <span class="ot">-&gt;</span> g x <span class="op">&gt;&gt;=</span> h)</span></code></pre></div>
 <p>chúng ta có thể viết lại như sau:</p>
-<pre><code>(m &gt;=&gt; g) &gt;=&gt; h ≡  m &gt;=&gt; (g &gt;=&gt; h)</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(m <span class="op">&gt;=&gt;</span> g) <span class="op">&gt;=&gt;</span> h ≡  m <span class="op">&gt;=&gt;</span> (g <span class="op">&gt;=&gt;</span> h)</span></code></pre></div>
 <h2 id="cách-hiểu-nôm-na-mù-mờ-và-chưa-đúng-về-monad">Cách hiểu nôm na, mù mờ và chưa đúng về monad</h2>
 <p><img src="../images/2022_08_28_monad_hieu_sai_ve_monad.png" title="hieu sai ve monad trong haskell" alt="Hiểu sai về monad trong haskell" />.</p>
 <h2 id="tham-khảo">Tham khảo</h2>
@@ -157,8 +164,9 @@ f &gt;=&gt; g =
 </ul>
 <h2 id="todo">TODO</h2>
 <ul>
+<li><p>Inside IO monad !!</p></li>
 <li><p>Giải thích:
-&gt;A monad is just a monoid in the category of endofunctors, what’s the problem?</p></li>
+<strong>“A monad is just a monoid in the category of endofunctors, what’s the problem?”</strong></p></li>
 <li><p>endofunctor category</p></li>
 <li><p>monoidal</p></li>
 </ul>

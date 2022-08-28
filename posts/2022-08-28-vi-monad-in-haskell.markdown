@@ -19,16 +19,16 @@ Tham khảo [file](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/m
 
 Chúng ta thấy các pattern sau:
 
-```
+```haskell
 andThen   :: Maybe a      -> (a -> Maybe b)    -> Maybe b
 andThen'  :: (Either e a) -> (a -> Either e b) -> (Either e b)
 andThen'' :: [a]          -> (a -> [b])        -> [b]   
-             [] a         -> (a->   [] b)      ->[] b
+             [] a         -> (a ->   [] b)     -> [] b
 ```
 
-Qua đó chúng ta có thể tổng quát hoá (generalize)
+Qua đó chúng ta có thể tổng quát hoá (generalization)
 
-```
+```haskell
 bind  :: Monad m => m a -> (a -> m b) -> m b
 (>>=) :: Monad m => m a -> (a -> m b) -> m b
 ```
@@ -37,7 +37,7 @@ Nếu chúng ta có thể viết ngược lại
 
 `flip bind` hay `(=<<)`
 
-```
+```haskell
 (=<<) ::   Monad m => (a -> m b) -> m a -> m b
 fmap  :: Functor f => (a -> b)   -> f a -> f b (*)
 
@@ -50,7 +50,7 @@ Nếu ta thay
 
 vào (*)
 
-```
+```haskell
 fmap  :: Functor f => (a -> m b') -> m a -> m (m b')
 (=<<) ::   Monad m => (a -> m b)  -> m a -> m b
 
@@ -58,17 +58,17 @@ fmap  :: Functor f => (a -> m b') -> m a -> m (m b')
 
 Nếu chúng ta có hàm số nào đó  `join :: m (m b') -> m b'`
 
-```
+```haskell
 fmap :: Functor f =>    (a -> m b') -> m a -> m (m b')
 join ::                                       m (m b') -> m b'
 join (fmap) ::          (a -> m b') -> m a             -> m b'
 ```
 
-Như thế, hàm flip bind (=<<) là sự kết hợp giữa `fmap` và `join`, có thể viết `(=<<) = (join .) . fmap` theo cách áp dụng function composition
+Như thế, hàm **flip bind (=<<)** là sự kết hợp giữa `fmap` và `join`, có thể viết `(=<<) = (join .) . fmap` theo cách áp dụng function composition
 
 Chứng minh `(=<<) = (join .) . fmap` 
 
-```
+```haskell
 (=<<) f ma = join (fmap f ma)
 (=<<) f ma = join ((fmap f) ma)   -- function application associates to the left
 (=<<) f ma = join . (fmap f) ma   -- function composition  g ( h x) with g = join, h = (fmap f)
@@ -79,46 +79,57 @@ Chứng minh `(=<<) = (join .) . fmap`
 (=<<)      = (join .) . fmap      -- QED
 ```      
 
-Ngoài các lý do là tổng quát hoá, Monad còn có gì hữu ích không??
+Ngoài lý do tổng quát hoá, **Monad** còn có điểm gì khác hay không??
 
-```
--- pure
+Xét đọan mã sau về hàm băm (md5 hash) đọc khóa bí mật từ file
+
+Viết bằng ruby
+```ruby
+# pure
 def integrity_checksum(input)
     Digest::MD5.base64digest(input)
 end
 
--- impure
+# impure
 def impure_integrity_checksum(input)
     k = File.read("~/.secret-key")
     Digest::MD5.base64digest(k+input)
 end
 ```
 
-Haskell way,
-```
+Viết lại bằng haskell
+
+```haskell
 -- pure
-integrityChecksum :: ByteString -> ByteString
+integrityChecksum ::
+  ByteString
+  -> ByteString
 integrityChecksum input = MD5.hash input
 
 -- impure with explicit side effect
-integrityChecksum' :: ByteString -> IO ByteString
+integrityChecksum' ::
+  ByteString
+  -> IO ByteString
 integrityChecksum' input = 
-    readFile "~/.secret-key" >>= \k ->
-        pure (MD5.hash(k <> input))
+  readFile "~/.secret-key"
+    >>= \k ->
+      pure (MD5.hash(k <> input))
 
 -- desugar way, impure with explicit side effect
-integrityChecksum'' :: ByteString -> IO ByteString
+integrityChecksum'' ::
+  ByteString
+  -> IO ByteString
 integrityChecksum'' input = do
     k <- readFile "~/.secret-key" 
     pure (MD5.hash(k <> input))
 ```
 
 Như thế, chúng ta lường trưóc được rằng: hàm `integrityChecksum` sẽ có side effect.
-Chúng ta sẽ tách bạch các hàm ko có side effect va các hàm có side effect, như thế khi code sẽ giảm thiêủ lỗi, code dễ đọc hơn. 
+Chúng ta sẽ tách bạch các hàm ko có **side effect** và các hàm có **side effect**, như thế khi code sẽ giảm thiêủ lỗi, code dễ đọc hơn. 
 
 ## Monad type class
 
-```
+```haskell
 class Applicative m => Monad m where
   (>>=) :: m a -> (a -> m b) -> m b
   (>>) :: m a -> m b -> m b
@@ -130,20 +141,21 @@ class Applicative m => Monad m where
 Mọi Monad instances phải thỏa mãn các luật sau:
 
 - Left identity(đồng nhất trái):
-```
+```haskell
 return a >>= h ≡ h a
 ```
 - Right identity(đồng nhất phải):
-```
+```haskell
 m >>= return ≡ m
 ```
 - Associativity(tính kết hợp):
-```
+```haskell
 (m >>= g) >>= h ≡ m >>= (\x -> g x >>= h)
 ```
 
-Trong `Control.Monad`, chúng ta có 1 toán tử (`>=>`) goị là monad-composition hoặc là Kleisli-composition operator có signature như sau:
-```
+Trong `Control.Monad`, chúng ta có 1 toán tử (`>=>`) goị là **monad-composition** hoặc là **Kleisli-composition operator** có signature như sau:
+
+```haskell
 infixr 1 >=>
 (>=>)   ::
     Monad m =>
@@ -155,11 +167,12 @@ f >=> g =
 ```
 
 Như thế, tính chất kết hợp
-```
+```haskell
 (m >>= g) >>= h ≡ m >>= (\x -> g x >>= h)
 ```
+
 chúng ta có thể viết lại như sau:
-```
+```haskell
 (m >=> g) >=> h ≡  m >=> (g >=> h)
 ```
 
@@ -177,8 +190,9 @@ chúng ta có thể viết lại như sau:
 
 ## TODO
 
+- Inside IO monad !!
 - Giải thích:
-    >A monad is just a monoid in the category of endofunctors, what's the problem?
+    **"A monad is just a monoid in the category of endofunctors, what's the problem?"**
 
 - endofunctor category
 - monoidal 
