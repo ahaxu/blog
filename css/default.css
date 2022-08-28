@@ -41,14 +41,6 @@ div#footer {
     text-align: right;
 }
 
-h1 {
-    font-size: 24px;
-}
-
-h2 {
-    font-size: 20px;
-}
-
 div.info {
     color: #555;
     font-size: 14px;
@@ -91,6 +83,8 @@ img {
     border: none;
     display: block;
     margin: 6px auto 30px auto;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 ul {

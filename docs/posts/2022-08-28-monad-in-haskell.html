@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>AhaXu Blog - Monad in Haskell</title>
+        <title>AhaXu Blog - Monad trong haskell</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
@@ -31,7 +31,7 @@
         </div>
 
         <div id="content">
-            <h1>Monad in Haskell</h1>
+            <h1>Monad trong haskell</h1>
 
             <div class="info">
     Posted on August 28, 2022
@@ -40,8 +40,10 @@
     
 </div>
 
+<h2 id="link-youtube">Link youtube</h2>
+<p><a href="https://youtu.be/LhGxO9-tKzg" title="monad trong haskell">8.1 Monad trong haskell</a></p>
 <h2 id="từ-cụ-thể-đến-tổng-quát-hoá">Từ cụ thể đến tổng quát hoá</h2>
-<p>Tham khảo <a href="./8_monad.hs">file</a></p>
+<p>Tham khảo <a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.hs">file</a></p>
 <ol type="1">
 <li><p>maybePlus</p></li>
 <li><p>eitherPlus</p></li>
@@ -143,6 +145,8 @@ f &gt;=&gt; g =
 <pre><code>(m &gt;&gt;= g) &gt;&gt;= h ≡ m &gt;&gt;= (\x -&gt; g x &gt;&gt;= h)</code></pre>
 <p>chúng ta có thể viết lại như sau:</p>
 <pre><code>(m &gt;=&gt; g) &gt;=&gt; h ≡  m &gt;=&gt; (g &gt;=&gt; h)</code></pre>
+<h2 id="cách-hiểu-nôm-na-mù-mờ-và-chưa-đúng-về-monad">Cách hiểu nôm na, mù mờ và chưa đúng về monad</h2>
+<p><img src="../images/2022_08_28_monad_hieu_sai_ve_monad.png" title="hieu sai ve monad trong haskell" alt="Hiểu sai về monad trong haskell" />.</p>
 <h2 id="tham-khảo">Tham khảo</h2>
 <ul>
 <li><a href="https://www.haskell.org/tutorial/functions.html">Function application associates to the left</a></li>

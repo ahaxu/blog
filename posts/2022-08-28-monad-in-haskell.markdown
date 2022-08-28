@@ -1,12 +1,14 @@
 ---
-title: Monad in Haskell
+title: Monad trong haskell
 author: lk
 ---
 
+## Link youtube
+[8.1 Monad trong haskell](https://youtu.be/LhGxO9-tKzg "monad trong haskell")
 
 ## Từ cụ thể đến tổng quát hoá
 
-Tham khảo [file](./8_monad.hs)  
+Tham khảo [file](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.hs)  
 
 1. maybePlus
 
@@ -159,6 +161,10 @@ chúng ta có thể viết lại như sau:
 ```
 (m >=> g) >=> h ≡  m >=> (g >=> h)
 ```
+
+## Cách hiểu nôm na, mù mờ và chưa đúng về monad
+![Hiểu sai về monad trong haskell](../images/2022_08_28_monad_hieu_sai_ve_monad.png "hieu sai ve monad trong haskell").
+
 
 ## Tham khảo
 - [Function application associates to the left](https://www.haskell.org/tutorial/functions.html)
