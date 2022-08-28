@@ -12,5 +12,8 @@ git add .
 git commit -am "$COMMIT_MSG"
 git push origin main
 
+echo "sleep abit for page rendering ...!"
+sleep 10
+
 echo "https://ahaxu.github.io/ updated!"
 
