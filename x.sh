@@ -8,6 +8,9 @@ stack exec ahaxu-blog clean
 echo "building ..."
 stack exec ahaxu-blog build
 
+# todo check if any update from local
+# git status
+
 git add .
 git commit -am "$COMMIT_MSG"
 git push origin main
