@@ -65,8 +65,8 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">(=&lt;&lt;) ::</span>   <span class="dt">Monad</span> m <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> m b) <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m b</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fmap</span><span class="ot">  ::</span> <span class="dt">Functor</span> f <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> b)   <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b (<span class="op">*</span>)</span></code></pre></div>
 <p>Nếu ta thay</p>
-<pre><code>f ~ m
-b ~ m b'</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    f <span class="ot">=</span> m</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    b <span class="ot">=</span> m b'</span></code></pre></div>
 <p>vào (*)</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fmap</span><span class="ot">  ::</span> <span class="dt">Functor</span> f <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> m b') <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m (m b')</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ot">(=&lt;&lt;) ::</span>   <span class="dt">Monad</span> m <span class="ot">=&gt;</span> (a <span class="ot">-&gt;</span> m b)  <span class="ot">-&gt;</span> m a <span class="ot">-&gt;</span> m b</span></code></pre></div>

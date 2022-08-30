@@ -44,9 +44,10 @@ fmap  :: Functor f => (a -> b)   -> f a -> f b (*)
 ```
 
 Nếu ta thay
-
-    f ~ m
-    b ~ m b'
+```haskell
+    f = m
+    b = m b'
+```
 
 vào (*)
 
