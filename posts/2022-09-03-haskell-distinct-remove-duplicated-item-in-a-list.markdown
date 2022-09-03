@@ -124,7 +124,7 @@ distinct4 as =
   in evalStateT rs Set.empty
 ```
 
-And, Logger defined as
+And, Logger data type defined as
 ```haskell
 -- implement logger for logging
 data Logger l a = 

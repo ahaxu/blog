@@ -131,7 +131,7 @@
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                  <span class="op">|</span> <span class="fu">otherwise</span>        <span class="ot">=</span> (<span class="fu">show</span> a <span class="op">++</span> <span class="st">&quot; duplicated&quot;</span>, (<span class="dt">False</span>, s))</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">in</span> <span class="dt">Logger</span> [l] bs) as</span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">in</span> evalStateT rs Set.empty</span></code></pre></div>
-<p>And, Logger defined as</p>
+<p>And, Logger data type defined as</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- implement logger for logging</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Logger</span> l a <span class="ot">=</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Logger</span> [l] a</span>
