@@ -21,7 +21,7 @@ Assume that we need to write a function to remove duplicated item in a list as c
 [1,2,3,4,5,6,7,8,9]
 
 ~> distinct4 xs
-Logger ["1 checked","2 checked","3 checked","4 checked","5 checked","2 duplicated","3 duplicated","4 duplicated","5 duplicated","6 checked","7 checked","8 checked","9 checked"] [1,2,3,4,5,6,7,8,9]
+Logger ["inserting 1","inserting 2","inserting 3","inserting 4","inserting 5","2 duplicated","3 duplicated","4 duplicated","5 duplicated","inserting 6","inserting 7","inserting 8","inserting 9"] [1,2,3,4,5,6,7,8,9]
 ```
 
 If you are rush to see how hell the code is ^^, here is the link to replit.co <a href="https://replit.com/@longnguyen207/AhaxuBlog1?v=1" target="_blank">https://replit.com/@longnguyen207/AhaxuBlog1?v=1</a>
@@ -118,7 +118,7 @@ distinct4 as =
   let
     rs = filterM2 (\a -> StateT $ \s -> 
         let
-          (l,bs)  | Set.notMember a s = (show a ++ " checked", (True, Set.insert a s))
+          (l,bs)  | Set.notMember a s = ("inserting " ++ show a, (True, Set.insert a s))
                   | otherwise        = (show a ++ " duplicated", (False, s))
         in Logger [l] bs) as
   in evalStateT rs Set.empty
@@ -174,7 +174,7 @@ Try with ghci [repl.it](https://replit.com/@longnguyen207/HarmlessSteelblueDownl
 [1,2,3,4,5,6,7,8,9]
 
 ~> distinct4 xs
-Logger ["1 checked","2 checked","3 checked","4 checked","5 checked","2 duplicated","3 duplicated","4 duplicated","5 duplicated","6 checked","7 checked","8 checked","9 checked"] [1,2,3,4,5,6,7,8,9]
+Logger ["inserting 1","inserting 2","inserting 3","inserting 4","inserting 5","2 duplicated","3 duplicated","4 duplicated","5 duplicated","inserting 6","inserting 7","inserting 8","inserting 9"] [1,2,3,4,5,6,7,8,9]
 ```
 
 ## More about StateT
