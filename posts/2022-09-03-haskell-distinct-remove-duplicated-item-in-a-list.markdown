@@ -185,7 +185,7 @@ _TODO
 
 _TODO
 
-StateT help us to add State action a long with those compuation need temporary variable for computation ...
+`StateT` help us to **stack** `State` action within other monads which need temporary variable to deal with complex computation.
 
 
 ## Reference
