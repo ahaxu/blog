@@ -110,3 +110,6 @@ pre code {
 p.caption {
     display: none;
 }
+
+img[alt=coverimage] { width: 70%; }
+
