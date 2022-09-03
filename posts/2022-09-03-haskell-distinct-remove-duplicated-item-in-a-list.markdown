@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Haskell distinct remove duplicated item in a list
+title: Haskell `distinct` function to remove duplicated item in a list
 author: lk
 ---
 
