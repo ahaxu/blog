@@ -42,7 +42,13 @@
 </div>
 
 <p>Khởi tạo môi truờng dev plutus</p>
-<p>Cách cũ trước đây khá rườm rà</p>
+<h3 id="section">!!</h3>
+<p>Video huớng dẫn cụ thể sẽ được upload tại kênh này ;)</p>
+<h2 id="section-1">!!</h2>
+<p><a href="https://www.youtube.com/user/logauit/featured">
+https://www.youtube.com/user/logauit/featured
+</a></p>
+<h3 id="cách-cũ-trước-đây-khá-rườm-rà">Cách cũ trước đây khá rườm rà</h3>
 <ul>
 <li>Clone <a href="https://github.com/input-output-hk/plutus-apps" target="_blank">plutus-apps</a></li>
 <li>Checkout tag version mà bạn cần làm</li>
@@ -52,7 +58,8 @@
 <li>Edit các git commit hash liên quan đến <code>plutus-apps</code> commit hash ở buớc trên</li>
 <li>Sau do chay <code>cabal update &amp;&amp; cabal repl -v</code></li>
 </ul>
-<p>Cách mới, tiện hơn</p>
+<h3 id="cách-mới-tiện-hơn">Cách mới, tiện hơn</h3>
+<p>Cách này tiện hơn là do chúng ta không cần phải switch thư mục qua lại giữa <code>plutus-apps</code> và thư mục project</p>
 <ul>
 <li>Clone repo <a href="https://github.com/input-output-hk/plutus-starter" target="_blank">plutus-starter repo</a></li>
 <li>Check out <em>main</em> branch, tại thời điểm bài viết này thì <em>main</em> branch đang dùng <code>plutus-apps</code> với tag <code>v0.1.0</code></li>
@@ -61,21 +68,21 @@
 <li>Chạy <code>cabal update &amp;&amp; cabal repl</code></li>
 <li>Bật editor lên và code thôi ^^</li>
 </ul>
-<p>Tự chọn commit hash cho mình</p>
+<h3 id="tự-chọn-commit-hash-cho-mình">Tự chọn commit hash cho mình</h3>
 <ul>
 <li>Các bạn có thể tùy chỉnh tag version hoặc commit hash của <code>plutus-apps</code> cho phù hợp với mục đích của project mà bạn làm</li>
-<li>Tham khảo file này https://github.com/input-output-hk/plutus-starter/blob/main/CONTRIBUTING.md</li>
+<li>Tham khảo file này <a href="https://github.com/input-output-hk/plutus-starter/blob/main/CONTRIBUTING.md" target="_blank">plutus-starter contributing.md</a></li>
 <li>Modify các file liên quan theo hướng dẫn ở bước trên cho phù hợp</li>
 <li>Cách này làm khá tốn thời gian, vì bạn phải sắp xếp và liên kết các commit hash cho phù hợp với nhau (resolve dependencies)</li>
 <li>sau do chay <code>nix-shell &amp;&amp; cabal update &amp;&amp; cabal repl</code></li>
 </ul>
-<p>Cấu trúc thư mục của <strong>plutus-starter</strong></p>
+<h3 id="cấu-trúc-thư-mục-của-plutus-starter">Cấu trúc thư mục của <strong>plutus-starter</strong></h3>
 <ul>
 <li><code>src</code> là thư mục liên quan đến smart contract mà bạn sẽ viết</li>
 <li><code>app</code> la thư mục liên quan đến việc generate plutus script từ thư mục <code>src</code></li>
 <li>Các bạn cũng có thể tham khảo thư mục <strong>examples</strong> để tổ chức lại theo ý bạn</li>
 </ul>
-<p>Happy coding!</p>
+<h2 id="happy-coding">Happy coding!</h2>
 
         </div>
         <div id="footer">
