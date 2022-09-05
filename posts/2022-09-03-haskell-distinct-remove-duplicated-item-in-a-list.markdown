@@ -4,7 +4,7 @@ title: Haskell `distinct` function to remove duplicated item in a list
 author: lk
 ---
 
-Assume that we need to write a function to remove duplicated item in a list as code snippet bellow
+Assume that we need to write a function to remove duplicated items in a list as a code snippet bellow
 
 ```bash
 ~> let xs = [1..5] ++ [2..9]
