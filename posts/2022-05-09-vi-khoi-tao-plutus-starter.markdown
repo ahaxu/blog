@@ -18,13 +18,13 @@ https://www.youtube.com/user/logauit/featured
 
 ### Cách cũ trước đây khá rườm rà 
 
-- Clone <a href="https://github.com/input-output-hk/plutus-apps" target="_blank">plutus-apps</a>
-- Checkout tag version mà bạn cần làm
-- Chay `nix-shell` trong thư mục *plutus-apps*
-- Sau khi khoi tao `nix-shell` xong, copy commit hash(tag version) ở buớc 2
-- Vào thư mục chứa project mà bạn sẽ viết smart contract, edit commit hash cua `plutus-apps` trong file *cabal.project*
-- Edit các git commit hash liên quan đến `plutus-apps` commit hash ở buớc trên
-- Sau do chay `cabal update && cabal repl -v`
+1. Clone <a href="https://github.com/input-output-hk/plutus-apps" target="_blank">plutus-apps</a>
+2. Checkout tag version mà bạn cần làm `git checkout v0.1.0`
+3. Chay `nix-shell` trong thư mục *plutus-apps*
+4. Sau khi khoi tao `nix-shell` xong, copy commit hash(tag version) ở buớc 2
+5. Vào thư mục chứa project mà bạn sẽ viết smart contract, edit commit hash cua `plutus-apps` trong file *cabal.project*
+6. Edit các git commit hash liên quan đến `plutus-apps` commit hash ở buớc trên
+7. Sau đó chạy `cabal update && cabal repl -v`
 
 ### Cách mới, tiện hơn
 
@@ -39,11 +39,11 @@ Cách này tiện hơn là do chúng ta không cần phải switch thư mục qu
 
 ### Tự chọn commit hash cho mình
 
-- Các bạn có thể tùy chỉnh tag version hoặc commit hash của `plutus-apps` cho phù hợp với mục đích của project mà bạn làm
-- Tham khảo file này <a href="https://github.com/input-output-hk/plutus-starter/blob/main/CONTRIBUTING.md" target="_blank">plutus-starter contributing.md</a>
-- Modify các file liên quan theo hướng dẫn ở bước trên cho phù hợp
-- Cách này làm khá tốn thời gian, vì bạn phải sắp xếp và liên kết các commit hash cho phù hợp với nhau (resolve dependencies)
-- sau do chay `nix-shell && cabal update && cabal repl`
+1. Các bạn có thể tùy chỉnh tag version hoặc commit hash của `plutus-apps` cho phù hợp với mục đích của project mà bạn làm
+2. Tham khảo file này <a href="https://github.com/input-output-hk/plutus-starter/blob/main/CONTRIBUTING.md" target="_blank">plutus-starter contributing.md</a>
+3. Modify các file liên quan theo hướng dẫn ở *bước 2* cho phù hợp
+4. Cách này làm khá tốn thời gian, vì bạn phải sắp xếp và liên kết các commit hash cho phù hợp với nhau (resolve dependencies)
+5. Sau đó chạy `nix-shell && cabal update && cabal repl`
 
 ### Cấu trúc thư mục của **plutus-starter**
 

@@ -49,15 +49,15 @@
 https://www.youtube.com/user/logauit/featured
 </a></p>
 <h3 id="cách-cũ-trước-đây-khá-rườm-rà">Cách cũ trước đây khá rườm rà</h3>
-<ul>
+<ol type="1">
 <li>Clone <a href="https://github.com/input-output-hk/plutus-apps" target="_blank">plutus-apps</a></li>
-<li>Checkout tag version mà bạn cần làm</li>
+<li>Checkout tag version mà bạn cần làm <code>git checkout v0.1.0</code></li>
 <li>Chay <code>nix-shell</code> trong thư mục <em>plutus-apps</em></li>
 <li>Sau khi khoi tao <code>nix-shell</code> xong, copy commit hash(tag version) ở buớc 2</li>
 <li>Vào thư mục chứa project mà bạn sẽ viết smart contract, edit commit hash cua <code>plutus-apps</code> trong file <em>cabal.project</em></li>
 <li>Edit các git commit hash liên quan đến <code>plutus-apps</code> commit hash ở buớc trên</li>
-<li>Sau do chay <code>cabal update &amp;&amp; cabal repl -v</code></li>
-</ul>
+<li>Sau đó chạy <code>cabal update &amp;&amp; cabal repl -v</code></li>
+</ol>
 <h3 id="cách-mới-tiện-hơn">Cách mới, tiện hơn</h3>
 <p>Cách này tiện hơn là do chúng ta không cần phải switch thư mục qua lại giữa <code>plutus-apps</code> và thư mục project</p>
 <ul>
@@ -69,13 +69,13 @@ https://www.youtube.com/user/logauit/featured
 <li>Bật editor lên và code thôi ^^</li>
 </ul>
 <h3 id="tự-chọn-commit-hash-cho-mình">Tự chọn commit hash cho mình</h3>
-<ul>
+<ol type="1">
 <li>Các bạn có thể tùy chỉnh tag version hoặc commit hash của <code>plutus-apps</code> cho phù hợp với mục đích của project mà bạn làm</li>
 <li>Tham khảo file này <a href="https://github.com/input-output-hk/plutus-starter/blob/main/CONTRIBUTING.md" target="_blank">plutus-starter contributing.md</a></li>
-<li>Modify các file liên quan theo hướng dẫn ở bước trên cho phù hợp</li>
+<li>Modify các file liên quan theo hướng dẫn ở <em>bước 2</em> cho phù hợp</li>
 <li>Cách này làm khá tốn thời gian, vì bạn phải sắp xếp và liên kết các commit hash cho phù hợp với nhau (resolve dependencies)</li>
-<li>sau do chay <code>nix-shell &amp;&amp; cabal update &amp;&amp; cabal repl</code></li>
-</ul>
+<li>Sau đó chạy <code>nix-shell &amp;&amp; cabal update &amp;&amp; cabal repl</code></li>
+</ol>
 <h3 id="cấu-trúc-thư-mục-của-plutus-starter">Cấu trúc thư mục của <strong>plutus-starter</strong></h3>
 <ul>
 <li><code>src</code> là thư mục liên quan đến smart contract mà bạn sẽ viết</li>
