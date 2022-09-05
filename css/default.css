@@ -65,13 +65,15 @@ h1 {
 h2 {
     font-size: 16px;
     margin: 12px 0px 12px 0px;
+	  font-weight: bold;
 }
 
 h3 {
     font-size: 14px;
+	  font-weight: bold;
 }
 
-h1, h2, h3 {
+h1 {
     text-transform: uppercase;
     font-weight: bold;
 }
