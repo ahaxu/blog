@@ -91,6 +91,10 @@ filterM2 p =
 ```
 and the `distinct3` function using `StateT`
 
+__TODO__
+
+- more explaination about to combine StateT with Set
+
 ```haskell
 distinct3
   :: (Ord a)
@@ -108,6 +112,10 @@ distinct3 as =
 ```
 
 ## In case we want to log each step we do
+
+__TODO__
+
+- explain more about stack of StateT over Logger over Set
 
 ```haskell
 distinct4

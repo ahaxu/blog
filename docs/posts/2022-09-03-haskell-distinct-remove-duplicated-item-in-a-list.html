@@ -105,6 +105,10 @@
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">pure</span> [])</span></code></pre></div>
 <p>and the <code>distinct3</code> function using <code>StateT</code></p>
+<p><strong>TODO</strong></p>
+<ul>
+<li>more explaination about to combine StateT with Set</li>
+</ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>distinct3</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ot">  ::</span> (<span class="dt">Ord</span> a)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=&gt;</span> [a]</span>
@@ -119,6 +123,10 @@
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>          <span class="kw">else</span> (<span class="dt">False</span>, s)) as</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">in</span> <span class="fu">fst</span> <span class="op">$</span> runState rs Set.empty</span></code></pre></div>
 <h2 id="in-case-we-want-to-log-each-step-we-do">In case we want to log each step we do</h2>
+<p><strong>TODO</strong></p>
+<ul>
+<li>explain more about stack of StateT over Logger over Set</li>
+</ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>distinct4</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ot">  ::</span> (<span class="dt">Ord</span> a, <span class="dt">Show</span> a)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">=&gt;</span> [a]</span>
