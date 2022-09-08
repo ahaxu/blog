@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <title>AhaXu Blog - Cardano plutus policyid deserialisation error</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PHNTX4TPM"></script>
+        <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-1PHNTX4TPM');
+        </script>
+    </head>
+    <body class"container-fluid">
+        <div id="header">
+            <div id="logo">
+                <a href="../">AhaXu Blog</a>
+            </div>
+            <div id="navigation">
+              <a href="../"><i class="bi bi-house-heart-fill"></i> </a>
+                <a href="../about.html"><i class="bi bi-info-circle-fill"></i> </a>
+                <a href="../archive.html"><i class="bi bi-file-code-fill"></i> </a>
+            </div>
+        </div>
+
+        <div id="content">
+					
+						<h2>Cardano plutus policyid deserialisation error</h2>
+            <div class="info">
+    Posted on September  8, 2022
+    
+        by lk
+    
+</div>
+
+<p>There is a case, when calling <code>Contract.submitTxConstraints</code> in off chain code</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    ledgerTx <span class="ot">&lt;-</span> Contract.submitTxConstraints axuTypeValidator tx</span></code></pre></div>
+<p>it throw this error</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00001: <span class="pp">***</span> CONTRACT STOPPED WITH ERROR: <span class="st">&quot;</span><span class="dt">\&quot;</span><span class="st">WalletContractError (ToCardanoError (Tag </span><span class="dt">\\\&quot;</span><span class="st">toCardanoPolicyId</span><span class="dt">\\\&quot;</span><span class="st"> (Tag </span><span class="dt">\\\&quot;</span><span class="st">2 bytes</span><span class="dt">\\\&quot;</span><span class="st"> DeserialisationError)))</span><span class="dt">\&quot;</span><span class="st">&quot;</span></span></code></pre></div>
+<p>the problem is the code from tutorial use <code>ff</code> for <code>CurrencySymbol</code></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">gameTokenCurrency ::</span> <span class="dt">CurrencySymbol</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gameTokenCurrency <span class="ot">=</span> <span class="st">&quot;ff&quot;</span></span></code></pre></div>
+<p>To fix this, we need to use correct serialisation of <strong>policyid</strong> as <strong>CurrencySymbol</strong>
+for eg</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ot">gameTokenCurrency ::</span> <span class="dt">CurrencySymbol</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gameTokenCurrency <span class="ot">=</span> <span class="st">&quot;baa836fef09cb35e180fce4b55ded152907af1e2c840ed5218776aaa&quot;</span></span></code></pre></div>
+<p>Then, <strong>wuho0o0o!!</strong>, it’s work perfectly, with <strong>Emulator</strong>,I can do <strong>lock</strong> a validator script as bellow (logs were substracted)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00001: W[1]: TxSubmit: 8f6ed8d628d028084ff4d01fa7afc21bbb3911b0ebd037b75870ff16b4052614</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00001: <span class="pp">***</span> CONTRACT LOG: <span class="st">&quot;before calling awaitTxConfirmed&quot;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00001: TxnValidate 8f6ed8d628d028084ff4d01fa7afc21bbb3911b0ebd037b75870ff16b4052614</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00001: SlotAdd Slot 2</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00002: W[2]: InsertionSuccess: New tip is Tip<span class="er">(</span><span class="ex">Slot</span> 2, BlockId fd32b5f7e47fae4f2b35b27908647c311ad59beba76f3c596b03072c5f07d81b, BlockNumber 1<span class="kw">)</span><span class="bu">.</span> UTxO state was added to the end.</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00002: W[1]: InsertionSuccess: New tip is Tip<span class="er">(</span><span class="ex">Slot</span> 2, BlockId fd32b5f7e47fae4f2b35b27908647c311ad59beba76f3c596b03072c5f07d81b, BlockNumber 1<span class="kw">)</span><span class="bu">.</span> UTxO state was added to the end.</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Slot</span> 00002: <span class="pp">***</span> CONTRACT LOG: <span class="st">&quot;100 km target set&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code></pre></div>
+<p>Credit to this great <a href="https://cardano.stackexchange.com/questions/5952/deserialisationerror-when-exporting-unbalancedtx/9025#9025" target="_blank">answer</a> of <span class="citation" data-cites="Jey">@Jey</span> on cardano stackexchange.</p>
+
+							
+				</div>
+        <div id="footer">
+						AhaXuBlog@2022 - generated by Hakyll
+        </div>
+    </body>
+</html>
