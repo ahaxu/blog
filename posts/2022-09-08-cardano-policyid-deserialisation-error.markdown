@@ -3,6 +3,8 @@ title: Cardano plutus policyid deserialisation error
 author: lk
 ---
 
+*tags: #cardano #plutus #DeserialisationError*
+
 There is a case, when calling `Contract.submitTxConstraints ` in off chain code
 ```haskell
     ledgerTx <- Contract.submitTxConstraints axuTypeValidator tx
