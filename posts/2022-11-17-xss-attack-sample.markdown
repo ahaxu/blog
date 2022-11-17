@@ -55,5 +55,6 @@ Hoặc callback luôn bằng curl
 ```
 
 **Hãy luôn sanitize input data có kiểu string ;) và kỹ hơn nữa thì nên sanitize data load từ database khi render html page.**
+Hoặc nên dùng các thư viện ORM có hỗ trợ việc sanitize/ cast các malicious input data này.
 
 Nếu bạn còn tò mò, hãy vọc vạch thêm từ đây https://xsshunter.com/

