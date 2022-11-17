@@ -3,7 +3,7 @@ title: (Vi) XSS attack sample
 author: lk
 ---
 
-Disclaimer: Kỹ thuật này có thể đã lạc hậu tại thời điểm bài  này đuợc viết ;).
+Disclaimer: Kỹ thuật này có thể đã lạc hậu tại thời điểm bài  này đuợc viết ;). Enjoy your day lah ^^.
 
 **XSS attack là kỹ thuật tấn công khá phổ biến bên cạnh SQL injection. Hãy cùng xem thử một ví dụ mà attacker inject thành công một đọan mã độc vào hệ thống nhé!**
 
