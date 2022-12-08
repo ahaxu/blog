@@ -3,10 +3,13 @@ title: (Vi) So sánh functor applicative và monad
 author: lk
 ---
 
+![](https://adit.io/imgs/functors/recap.png)
 
 ## Review về kiểu của các hàm `($)`, `(<>)`, `(<$>)`, `(<*>)`, `(>>=)` hay flip bind `(=<<)`
 
 - Function application `($) :: (a -> b) -> a -> b`
+![Function application](https://adit.io/imgs/functors/value_apply.png)
+
 
 Xét hàm số `f :: a -> b`, các phép biến đổi bên dưới là tương đương 
 
@@ -21,13 +24,16 @@ Thực tế ta sẽ thấy các đoạn code sau
 print $ show a
 ````
 
-- Monoid `(<>) :: Semigroup m => m -> m -> m`
+- Monoid (hàm mappend) `(<>) :: Semigroup m => m -> m -> m`
+![](https://www.michael-noll.com/assets/uploads/monoid-illustration.png)
 
 ```
 putStrLn $ "hello" <> " " <> "world!"
 ```
 
-- Functor `(<$>) :: Functor f => (a->b) -> f a -> f b`
+- Functor (hàm fmap) `(<$>) :: Functor f => (a->b) -> f a -> f b`
+
+![](https://adit.io/imgs/functors/fmap_just.png)
 
 ```
 (\x -> x * 2) <$> [1..2]
@@ -36,6 +42,7 @@ getSum $ fold $ Sum <$> [1..5]
 ```
 
 - Applicative `(<*>) :: Applicative k => k (a -> b) -> k a -> k b`
+![apply function](https://adit.io/imgs/functors/applicative_just.png)
 
 ```
 pure (\x -> x * 2) <*> [1..2]
@@ -44,6 +51,7 @@ getSum $ fold $ pure Sum <*> [1..5]
 ```
 
 - Monad `(>>=) :: Monad m => m a -> (a -> m b) -> m b`
+![](https://adit.io/imgs/functors/monad_chain.png)
 
 Ta thấy có nhiều trường hợp, cần phải lấy được giá trị `a` ra khỏi context tính toán nào đó (ký hiệu là `m`).
 
@@ -93,3 +101,5 @@ Ta có thể thấy rằng bản chất của flip bind `(=<<)` là sự kết h
 ## Link tham khảo
 
 - [Bài giảng về monad](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md)
+- Hình minh hoạ tham khảo tại [adit.io](https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
+- [https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid](https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid)
