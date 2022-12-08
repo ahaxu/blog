@@ -1,5 +1,5 @@
 ---
-title: (Vi) So sánh functor applicative và monad 
+title: (Vi) So sánh functor, applicative và monad 
 author: lk
 ---
 
