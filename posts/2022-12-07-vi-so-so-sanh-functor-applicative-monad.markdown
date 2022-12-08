@@ -8,7 +8,7 @@ author: lk
 ## Review về kiểu của các hàm `($)`, `(<>)`, `(<$>)`, `(<*>)`, `(>>=)` hay flip bind `(=<<)`
 
 - Function application `($) :: (a -> b) -> a -> b`
-![Function application](https://adit.io/imgs/functors/value_apply.png)
+![](https://adit.io/imgs/functors/value_apply.png)
 
 
 Xét hàm số `f :: a -> b`, các phép biến đổi bên dưới là tương đương 
@@ -26,6 +26,8 @@ print $ show a
 
 - Monoid (hàm mappend) `(<>) :: Semigroup m => m -> m -> m`
 ![](https://www.michael-noll.com/assets/uploads/monoid-illustration.png)
+
+Chúng ta có thể thấy rằng `(<>)` hay `mappend` nhận vào 2 tham số cùng kiểu (type),và trả về kết quả mà vẫn giữ nguyên cấu trúc (structure) 
 
 ```
 putStrLn $ "hello" <> " " <> "world!"
@@ -50,7 +52,7 @@ pure (\x -> x * 2) <*> [1..2]
 getSum $ fold $ pure Sum <*> [1..5]
 ```
 
-- Monad `(>>=) :: Monad m => m a -> (a -> m b) -> m b`
+- Monad (hàm bind) `(>>=) :: Monad m => m a -> (a -> m b) -> m b`
 ![](https://adit.io/imgs/functors/monad_chain.png)
 
 Ta thấy có nhiều trường hợp, cần phải lấy được giá trị `a` ra khỏi context tính toán nào đó (ký hiệu là `m`).
@@ -95,11 +97,10 @@ Ta có thể thấy rằng, `(<*>)` là sự kết hợp giữa `($)` và `(<>)`
 (=<<) :: (a-> m b) -> m a -> m b
 ```
 
-Ta có thể thấy rằng bản chất của flip bind `(=<<)` là sự kết hợp theo trình tự: hàm `fmap`(hay `(<$>)`) và sau đó là hàm `join :: Monad m => m (m a) -> m a`.
-
+Ta có thể thấy rằng bản chất của flip bind `(=<<)` là sự kết hợp theo trình tự: hàm `fmap`(hay `(<$>)`) và sau đó là hàm `join :: Monad m => m (m a) -> m a`. Bạn có thể đọc thêm tại [đây](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap) 
 
 ## Link tham khảo
 
 - [Bài giảng về monad](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md)
 - Hình minh hoạ tham khảo tại [adit.io](https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
-- [https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid](https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid)
+- [Of Algebirds, Monoids, Monads, and other Bestiary for Large-Scale Data Analytics](https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid)

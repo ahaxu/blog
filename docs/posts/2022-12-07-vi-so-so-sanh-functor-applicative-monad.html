@@ -45,7 +45,7 @@
 <h2 id="review-về-kiểu-của-các-hàm-hay-flip-bind">Review về kiểu của các hàm <code>($)</code>, <code>(&lt;&gt;)</code>, <code>(&lt;$&gt;)</code>, <code>(&lt;*&gt;)</code>, <code>(&gt;&gt;=)</code> hay flip bind <code>(=&lt;&lt;)</code></h2>
 <ul>
 <li>Function application <code>($) :: (a -&gt; b) -&gt; a -&gt; b</code>
-<img src="https://adit.io/imgs/functors/value_apply.png" alt="Function application" /></li>
+<img src="https://adit.io/imgs/functors/value_apply.png" /></li>
 </ul>
 <p>Xét hàm số <code>f :: a -&gt; b</code>, các phép biến đổi bên dưới là tương đương</p>
 <pre><code>f             :: a -&gt; b
@@ -58,6 +58,7 @@ f a           :: b              -- apply a vào f
 <li>Monoid (hàm mappend) <code>(&lt;&gt;) :: Semigroup m =&gt; m -&gt; m -&gt; m</code>
 <img src="https://www.michael-noll.com/assets/uploads/monoid-illustration.png" /></li>
 </ul>
+<p>Chúng ta có thể thấy rằng <code>(&lt;&gt;)</code> hay <code>mappend</code> nhận vào 2 tham số cùng kiểu (type),và trả về kết quả mà vẫn giữ nguyên cấu trúc (structure)</p>
 <pre><code>putStrLn $ &quot;hello&quot; &lt;&gt; &quot; &quot; &lt;&gt; &quot;world!&quot;</code></pre>
 <ul>
 <li>Functor (hàm fmap) <code>(&lt;$&gt;) :: Functor f =&gt; (a-&gt;b) -&gt; f a -&gt; f b</code></li>
@@ -74,7 +75,7 @@ getSum $ fold $ Sum &lt;$&gt; [1..5]</code></pre>
 
 getSum $ fold $ pure Sum &lt;*&gt; [1..5]</code></pre>
 <ul>
-<li>Monad <code>(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code>
+<li>Monad (hàm bind) <code>(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code>
 <img src="https://adit.io/imgs/functors/monad_chain.png" /></li>
 </ul>
 <p>Ta thấy có nhiều trường hợp, cần phải lấy được giá trị <code>a</code> ra khỏi context tính toán nào đó (ký hiệu là <code>m</code>).</p>
@@ -108,12 +109,12 @@ maybePlus' ma mb = ma `andThen` \a -&gt; mb `andThen` \b -&gt; Just (a + b)</cod
 <pre><code>(&lt;$&gt;) :: (a -&gt; b)  -&gt; f a -&gt; f b
 
 (=&lt;&lt;) :: (a-&gt; m b) -&gt; m a -&gt; m b</code></pre>
-<p>Ta có thể thấy rằng bản chất của flip bind <code>(=&lt;&lt;)</code> là sự kết hợp theo trình tự: hàm <code>fmap</code>(hay <code>(&lt;$&gt;)</code>) và sau đó là hàm <code>join :: Monad m =&gt; m (m a) -&gt; m a</code>.</p>
+<p>Ta có thể thấy rằng bản chất của flip bind <code>(=&lt;&lt;)</code> là sự kết hợp theo trình tự: hàm <code>fmap</code>(hay <code>(&lt;$&gt;)</code>) và sau đó là hàm <code>join :: Monad m =&gt; m (m a) -&gt; m a</code>. Bạn có thể đọc thêm tại <a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap">đây</a></p>
 <h2 id="link-tham-khảo">Link tham khảo</h2>
 <ul>
 <li><a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md">Bài giảng về monad</a></li>
 <li>Hình minh hoạ tham khảo tại <a href="https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">adit.io</a></li>
-<li><a href="https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid">https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid</a></li>
+<li><a href="https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid">Of Algebirds, Monoids, Monads, and other Bestiary for Large-Scale Data Analytics</a></li>
 </ul>
 
 							
