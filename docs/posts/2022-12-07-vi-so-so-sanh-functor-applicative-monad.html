@@ -41,11 +41,20 @@
     
 </div>
 
-<p><img src="https://adit.io/imgs/functors/recap.png" /></p>
+<p><img src="../images/2022-12-07-recap.png" /></p>
+<h2 id="tóm-tắt-nội-dung">Tóm tắt nội dung</h2>
+<p>Bài viết này sẽ trình bày về sự liên quan giữa các type class, bạn có thể tìm hiểu thêm về các type class này ở link video đính kèm trong bài viết.</p>
+<ul>
+<li><a href="https://youtu.be/I48P7LY1LHk">Giới thiệu về type class</a></li>
+<li><a href="https://youtu.be/DurtGLmG1qc">Monoid</a></li>
+<li><a href="https://youtu.be/pqkNBKiYOY8">Functor</a></li>
+<li><a href="https://youtu.be/h2pVUDLL82g">Applicative</a></li>
+<li><a href="https://youtu.be/LhGxO9-tKzg">Monad</a></li>
+</ul>
 <h2 id="review-về-kiểu-của-các-hàm-hay-flip-bind">Review về kiểu của các hàm <code>($)</code>, <code>(&lt;&gt;)</code>, <code>(&lt;$&gt;)</code>, <code>(&lt;*&gt;)</code>, <code>(&gt;&gt;=)</code> hay flip bind <code>(=&lt;&lt;)</code></h2>
 <ul>
 <li>Function application <code>($) :: (a -&gt; b) -&gt; a -&gt; b</code>
-<img src="https://adit.io/imgs/functors/value_apply.png" /></li>
+<img src="../images/2022-12-07-value-apply.png" /></li>
 </ul>
 <p>Xét hàm số <code>f :: a -&gt; b</code>, các phép biến đổi bên dưới là tương đương</p>
 <pre><code>f             :: a -&gt; b
@@ -56,27 +65,27 @@ f a           :: b              -- apply a vào f
 <pre><code>print $ show a</code></pre>
 <ul>
 <li>Monoid (hàm mappend) <code>(&lt;&gt;) :: Semigroup m =&gt; m -&gt; m -&gt; m</code>
-<img src="https://www.michael-noll.com/assets/uploads/monoid-illustration.png" /></li>
+<img src="../images/2022-12-07-monoid-illustration.png" /></li>
 </ul>
 <p>Chúng ta có thể thấy rằng <code>(&lt;&gt;)</code> hay <code>mappend</code> nhận vào 2 tham số cùng kiểu (type),và trả về kết quả mà vẫn giữ nguyên cấu trúc (structure)</p>
 <pre><code>putStrLn $ &quot;hello&quot; &lt;&gt; &quot; &quot; &lt;&gt; &quot;world!&quot;</code></pre>
 <ul>
 <li>Functor (hàm fmap) <code>(&lt;$&gt;) :: Functor f =&gt; (a-&gt;b) -&gt; f a -&gt; f b</code></li>
 </ul>
-<p><img src="https://adit.io/imgs/functors/fmap_just.png" /></p>
+<p><img src="../images/2022-12-07-fmap.png" /></p>
 <pre><code>(\x -&gt; x * 2) &lt;$&gt; [1..2]
 
 getSum $ fold $ Sum &lt;$&gt; [1..5]</code></pre>
 <ul>
 <li>Applicative <code>(&lt;*&gt;) :: Applicative k =&gt; k (a -&gt; b) -&gt; k a -&gt; k b</code>
-<img src="https://adit.io/imgs/functors/applicative_just.png" alt="apply function" /></li>
+<img src="../images/2022-12-07-applicative-just.png" alt="apply function" /></li>
 </ul>
 <pre><code>pure (\x -&gt; x * 2) &lt;*&gt; [1..2]
 
 getSum $ fold $ pure Sum &lt;*&gt; [1..5]</code></pre>
 <ul>
 <li>Monad (hàm bind) <code>(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code>
-<img src="https://adit.io/imgs/functors/monad_chain.png" /></li>
+<img src="../images/2022-12-07-monad-chain.png" /></li>
 </ul>
 <p>Ta thấy có nhiều trường hợp, cần phải lấy được giá trị <code>a</code> ra khỏi context tính toán nào đó (ký hiệu là <code>m</code>).</p>
 <p>Ví dụ bên dưới minh hoạ về trường hợp chúng ta cần lấy giá trị <code>a</code> ra khỏi context <code>Maybe</code> sau đó dùng hàm <code>+</code> để tính tổng, sau đó để giá trị sau khi tính tổng vào lại trong context <code>Maybe</code>.</p>
