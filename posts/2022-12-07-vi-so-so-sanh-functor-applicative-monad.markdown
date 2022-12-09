@@ -3,12 +3,23 @@ title: (Vi) So sánh functor, applicative và monad
 author: lk
 ---
 
-![](https://adit.io/imgs/functors/recap.png)
+![](../images/2022-12-07-recap.png)
+
+## Tóm tắt nội dung
+
+Bài viết này sẽ trình bày về sự liên quan giữa các type class, bạn có thể tìm hiểu thêm về các type class này ở link video đính kèm trong bài viết.
+
+- [Giới thiệu về type class](https://youtu.be/I48P7LY1LHk)
+- [Monoid](https://youtu.be/DurtGLmG1qc)
+- [Functor](https://youtu.be/pqkNBKiYOY8)
+- [Applicative](https://youtu.be/h2pVUDLL82g)
+- [Monad](https://youtu.be/LhGxO9-tKzg)
+
 
 ## Review về kiểu của các hàm `($)`, `(<>)`, `(<$>)`, `(<*>)`, `(>>=)` hay flip bind `(=<<)`
 
 - Function application `($) :: (a -> b) -> a -> b`
-![](https://adit.io/imgs/functors/value_apply.png)
+![](../images/2022-12-07-value-apply.png)
 
 
 Xét hàm số `f :: a -> b`, các phép biến đổi bên dưới là tương đương 
@@ -25,7 +36,7 @@ print $ show a
 ````
 
 - Monoid (hàm mappend) `(<>) :: Semigroup m => m -> m -> m`
-![](https://www.michael-noll.com/assets/uploads/monoid-illustration.png)
+![](../images/2022-12-07-monoid-illustration.png)
 
 Chúng ta có thể thấy rằng `(<>)` hay `mappend` nhận vào 2 tham số cùng kiểu (type),và trả về kết quả mà vẫn giữ nguyên cấu trúc (structure) 
 
@@ -35,7 +46,7 @@ putStrLn $ "hello" <> " " <> "world!"
 
 - Functor (hàm fmap) `(<$>) :: Functor f => (a->b) -> f a -> f b`
 
-![](https://adit.io/imgs/functors/fmap_just.png)
+![](../images/2022-12-07-fmap.png)
 
 ```
 (\x -> x * 2) <$> [1..2]
@@ -44,7 +55,7 @@ getSum $ fold $ Sum <$> [1..5]
 ```
 
 - Applicative `(<*>) :: Applicative k => k (a -> b) -> k a -> k b`
-![apply function](https://adit.io/imgs/functors/applicative_just.png)
+![apply function](../images/2022-12-07-applicative-just.png)
 
 ```
 pure (\x -> x * 2) <*> [1..2]
@@ -53,7 +64,7 @@ getSum $ fold $ pure Sum <*> [1..5]
 ```
 
 - Monad (hàm bind) `(>>=) :: Monad m => m a -> (a -> m b) -> m b`
-![](https://adit.io/imgs/functors/monad_chain.png)
+![](../images/2022-12-07-monad-chain.png)
 
 Ta thấy có nhiều trường hợp, cần phải lấy được giá trị `a` ra khỏi context tính toán nào đó (ký hiệu là `m`).
 
