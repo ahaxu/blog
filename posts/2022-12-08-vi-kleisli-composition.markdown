@@ -2,6 +2,7 @@
 title: (Vi) Kleisli composition và ứng dụng thực tế
 author: lk
 ---
+![](../images/2022-12-08-kleisli.png)
 
 ## (Vi) Kleisli composition và ứng dụng thực tế
 
@@ -109,3 +110,7 @@ với file test2.xml có nội dung như sau
 **hint:** cần tìm các element tag là `h2` và thoả `class` name là `bar`, sau đó tìm element kế trước nó và in ra content 
 
 Bạn có thể tham khảo repo này nhé [https://github.com/ahaxu/test-xml/](https://github.com/ahaxu/test-xml/)
+
+#### Tham khảo
+
+Hình minh hoạ tham khảo từ video https://youtu.be/CFOdAUjwWoE
