@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-        <title>AhaXu Blog - (Draft Vi) Kleisli composition và ứng dụng thực tế</title>
+        <title>AhaXu Blog - (Vi) Kleisli composition và ứng dụng thực tế</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
@@ -33,7 +33,7 @@
 
         <div id="content">
 					
-						<h2>(Draft Vi) Kleisli composition và ứng dụng thực tế</h2>
+						<h2>(Vi) Kleisli composition và ứng dụng thực tế</h2>
             <div class="info">
     Posted on December  8, 2022
     
@@ -41,7 +41,7 @@
     
 </div>
 
-<h2 id="draft-vi-kleisli-composition-và-ứng-dụng-thực-tế">(Draft Vi) Kleisli composition và ứng dụng thực tế</h2>
+<h2 id="vi-kleisli-composition-và-ứng-dụng-thực-tế">(Vi) Kleisli composition và ứng dụng thực tế</h2>
 <p>Giả sử chúng ta có hàm số f và g như sau</p>
 <pre><code>f     :: A -&gt; T (B)
 g     :: B -&gt; T (C) </code></pre>
@@ -69,7 +69,50 @@ g' . f :: A -&gt; T C
 <p><code>??</code> -&gt; <code>&gt;=&gt;</code> còn gọi là <em>fishy operator</em></p>
 <pre><code>g &gt;=&gt; f :: (B -&gt; T (C)) -&gt; (A -&gt; T (B))-&gt; (A-&gt;T(C)) -- Kleisli composition</code></pre>
 <h3 id="ứng-dụng-của-kleisli-composition">Ứng dụng của Kleisli composition</h3>
-<p>TODO</p>
+<p>Như chúng ta có thể thấy ở trên, bản chất của Kleisli composition vẫn dựa trên monadic function và hàm bind &gt;&gt;= của Monad.
+Chúng ta ít thấy Kleisli được sử dụng trong thực tế, tuy nhiên với thư viện <a href="https://hackage.haskell.org/package/xml-conduit-1.9.1.1"><code>xml-conduit</code></a> khi làm việc với <code>xml</code> chúng ta thấy được sự tiện lợi khi dùng Kleisli <code>(&gt;=&gt;)</code></p>
+<pre><code>{-# LANGUAGE OverloadedStrings #-}
+
+module Main where
+
+import Prelude hiding (readFile)
+import Text.XML
+import Text.XML.Cursor
+import qualified Data.Text as T
+import System.Directory(getCurrentDirectory)
+
+main :: IO ()
+main = do
+    currDir &lt;- getCurrentDirectory
+    putStrLn $ &quot;currDir &quot; &lt;&gt; currDir
+    doc &lt;- readFile def $ currDir &lt;&gt; &quot;/test2.xml&quot;
+    let cursor = fromDocument doc
+    print $ T.concat $
+        cursor $// element &quot;h2&quot;
+               &gt;=&gt; attributeIs &quot;class&quot; &quot;bar&quot;
+               &gt;=&gt; precedingSibling
+               &gt;=&gt; element &quot;h1&quot;
+               &amp;// content</code></pre>
+<p>với file test2.xml có nội dung như sau</p>
+<pre><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Headings&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;hgroup&gt;
+            &lt;h1&gt;Heading 1 foo&lt;/h1&gt;
+            &lt;h2 class=&quot;foo&quot;&gt;Heading 2 foo&lt;/h2&gt;
+        &lt;/hgroup&gt;
+        &lt;hgroup&gt;
+            &lt;h1&gt;Heading 1 bar&lt;/h1&gt;
+            &lt;h2 class=&quot;bar&quot;&gt;Heading 2 bar&lt;/h2&gt;
+        &lt;/hgroup&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Đoạn code trên sẽ in ra kết quả gì, bạn hãy thử xem nhé!</p>
+<p><strong>hint:</strong> cần tìm các element tag là <code>h2</code> và thoả <code>class</code> name là <code>bar</code>, sau đó tìm element kế trước nó và in ra content</p>
+<p>Bạn có thể tham khảo repo này nhé <a href="https://github.com/ahaxu/test-xml/">https://github.com/ahaxu/test-xml/</a></p>
 
 							
 				</div>
