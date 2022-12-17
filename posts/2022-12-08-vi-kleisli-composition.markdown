@@ -2,7 +2,8 @@
 title: (Vi) Kleisli composition và ứng dụng thực tế
 author: lk
 ---
-![](../images/2022-12-08-kleisli.png)
+<img src="../images/2022-12-08-kleisli.png" width=30% height=30%>
+
 
 ## (Vi) Kleisli composition và ứng dụng thực tế
 
@@ -113,4 +114,5 @@ Bạn có thể tham khảo repo này nhé [https://github.com/ahaxu/test-xml/](
 
 #### Tham khảo
 
-Hình minh hoạ tham khảo từ video https://youtu.be/CFOdAUjwWoE
+- [https://dev.to/gcanti/getting-started-with-fp-ts-monad-6k](https://dev.to/gcanti/getting-started-with-fp-ts-monad-6k)
+- [Lambda World 2019 - A categorical view of computational effects - Emily Riehl](https://youtu.be/Ssx2_JKpB3U)
