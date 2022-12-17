@@ -43,7 +43,7 @@
 
 <p><img src="../images/2022-12-08-kleisli.png" /></p>
 <h2 id="vi-kleisli-composition-và-ứng-dụng-thực-tế">(Vi) Kleisli composition và ứng dụng thực tế</h2>
-<p>Giả sử chúng ta có 2 hàm số monadic (monadic function) f và g như sau</p>
+<p>Giả sử chúng ta có 2 hàm số monadic (<strong>monadic function</strong>) f và g như sau</p>
 <p><em>note: monadic function là hàm số nhận vào một tham số <code>a</code> bất kỳ và trả vệ một giá trị <code>b</code> nằm trong 1 context/action hay một computation nào đó</em></p>
 <pre><code>f     :: A -&gt; T (B)
 g     :: B -&gt; T (C) </code></pre>
@@ -71,7 +71,7 @@ g' . f :: A -&gt; T C
 <p><code>??</code> -&gt; <code>&gt;=&gt;</code> còn gọi là <em>fishy operator</em></p>
 <pre><code>g &gt;=&gt; f :: (B -&gt; T (C)) -&gt; (A -&gt; T (B))-&gt; (A-&gt;T(C)) -- Kleisli composition</code></pre>
 <h3 id="ứng-dụng-của-kleisli-composition">Ứng dụng của Kleisli composition</h3>
-<p>Như chúng ta có thể thấy ở trên, bản chất của Kleisli composition vẫn dựa trên monadic function và hàm bind &gt;&gt;= của Monad.
+<p>Như chúng ta có thể thấy ở trên, bản chất của Kleisli composition vẫn dựa trên monadic function và hàm bind <code>&gt;&gt;=</code> của Monad.
 Chúng ta ít thấy Kleisli được sử dụng trong thực tế, tuy nhiên với thư viện <a href="https://hackage.haskell.org/package/xml-conduit-1.9.1.1"><code>xml-conduit</code></a> khi làm việc với <code>xml</code> chúng ta thấy được sự tiện lợi khi dùng Kleisli <code>(&gt;=&gt;)</code></p>
 <pre><code>{-# LANGUAGE OverloadedStrings #-}
 
