@@ -5,7 +5,10 @@ author: lk
 
 ## (Vi) Kleisli composition và ứng dụng thực tế
 
-Giả sử chúng ta có hàm số f và g như sau
+Giả sử chúng ta có 2 hàm số monadic (monadic function) f và g như sau
+
+*note: monadic function là hàm số nhận vào một tham số `a` bất kỳ và trả vệ một giá trị `b` nằm trong 1 context/action hay một computation nào đó*
+
 ```
 f     :: A -> T (B)
 g     :: B -> T (C) 
