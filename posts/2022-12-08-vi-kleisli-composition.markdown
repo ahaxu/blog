@@ -6,7 +6,7 @@ author: lk
 
 ## (Vi) Kleisli composition và ứng dụng thực tế
 
-Giả sử chúng ta có 2 hàm số monadic (monadic function) f và g như sau
+Giả sử chúng ta có 2 hàm số monadic (**monadic function**) f và g như sau
 
 *note: monadic function là hàm số nhận vào một tham số `a` bất kỳ và trả vệ một giá trị `b` nằm trong 1 context/action hay một computation nào đó*
 
@@ -56,7 +56,7 @@ g >=> f :: (B -> T (C)) -> (A -> T (B))-> (A->T(C)) -- Kleisli composition
 
 ### Ứng dụng của Kleisli composition
 
-Như chúng ta có thể thấy ở trên, bản chất của Kleisli composition vẫn dựa trên monadic function và hàm bind  >>= của Monad.
+Như chúng ta có thể thấy ở trên, bản chất của Kleisli composition vẫn dựa trên monadic function và hàm bind  `>>=` của Monad.
 Chúng ta ít thấy Kleisli được sử dụng trong thực tế, tuy nhiên với thư viện [`xml-conduit`](https://hackage.haskell.org/package/xml-conduit-1.9.1.1) khi làm việc với `xml` chúng ta thấy được  sự tiện lợi khi dùng Kleisli `(>=>)`
 
 ```
