@@ -2,7 +2,7 @@
 title: (Vi) Kleisli composition và ứng dụng thực tế
 author: lk
 ---
-<img src="../images/2022-12-08-kleisli.png" width=30% height=30%>
+<img src="../images/2022-12-08-kleisli.png" width=60% height=60%>
 
 
 ## (Vi) Kleisli composition và ứng dụng thực tế
