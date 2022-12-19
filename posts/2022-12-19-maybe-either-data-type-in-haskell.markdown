@@ -5,6 +5,9 @@ author: lk
 
 ## Maybe data type
 
+![](https://reddspark.files.wordpress.com/2021/07/maybe.jpg
+)
+
 `Maybe` data type được đinh nghĩa như bên dưới
 
 ```haskell
@@ -88,6 +91,9 @@ safeDiv a b
 Tuy nhiên, thay vì trả về `Nothing`, nếu chúng ta muốn trả về lỗi cụ thể nào đó, tường minh hơn thì sao nhỉ? hãy xét data type `Either` bên dưới
 
 ## Either data type
+
+![](http://blog.ezyang.com/img/haskell-hasse/either.png)
+
 
 `Either` data type được định nghĩa như sau:
 
@@ -201,3 +207,7 @@ Với `Maybe` và `Either` chúng ta thấy được sự thuần khiết (purit
 - [Haskell data declaration](https://youtu.be/rk9myy_C9Io)
 - [Haskell type class](https://youtu.be/I48P7LY1LHk)
 - [Monad transformer tutorial](https://github.com/ahaxu/monad_transformer_tut)
+
+- Hình mình hoạ tham khảo từ 2 bài viết bên dưới:
+    - http://blog.ezyang.com/2010/12/hussling-haskell-types-into-hasse-diagrams/
+    - https://reddspark.blog/haskell-programming-daily-quiz/

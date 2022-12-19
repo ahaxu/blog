@@ -42,6 +42,7 @@
 </div>
 
 <h2 id="maybe-data-type">Maybe data type</h2>
+<p><img src="https://reddspark.files.wordpress.com/2021/07/maybe.jpg" /></p>
 <p><code>Maybe</code> data type được đinh nghĩa như bên dưới</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Prelude</span><span class="op">&gt;</span> <span class="op">:</span>info <span class="dt">Maybe</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -107,6 +108,7 @@ errorWithoutStackTrace s = raise# (errorCallException s)
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> <span class="fu">otherwise</span>  <span class="ot">=</span> <span class="dt">Just</span> <span class="op">$</span> a <span class="ot">`div`</span> b</span></code></pre></div>
 <p>Tuy nhiên, thay vì trả về <code>Nothing</code>, nếu chúng ta muốn trả về lỗi cụ thể nào đó, tường minh hơn thì sao nhỉ? hãy xét data type <code>Either</code> bên dưới</p>
 <h2 id="either-data-type">Either data type</h2>
+<p><img src="http://blog.ezyang.com/img/haskell-hasse/either.png" /></p>
 <p><code>Either</code> data type được định nghĩa như sau:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Prelude</span><span class="op">&gt;</span> <span class="op">:</span>i <span class="dt">Either</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -202,9 +204,14 @@ errorWithoutStackTrace s = raise# (errorCallException s)
 <p>Với <code>Maybe</code> và <code>Either</code> chúng ta thấy được sự thuần khiết (purity) khi lập trình với Haskell. Và tính hữu ích của <code>Maybe</code> và <code>Either</code> cho từng context hay computation.</p>
 <h2 id="tham-khảo">Tham khảo</h2>
 <ul>
-<li><a href="https://youtu.be/rk9myy_C9Io">Haskell data declaration</a></li>
-<li><a href="https://youtu.be/I48P7LY1LHk">Haskell type class</a></li>
-<li><a href="https://github.com/ahaxu/monad_transformer_tut">Monad transformer tutorial</a></li>
+<li><p><a href="https://youtu.be/rk9myy_C9Io">Haskell data declaration</a></p></li>
+<li><p><a href="https://youtu.be/I48P7LY1LHk">Haskell type class</a></p></li>
+<li><p><a href="https://github.com/ahaxu/monad_transformer_tut">Monad transformer tutorial</a></p></li>
+<li><p>Hình mình hoạ tham khảo từ 2 bài viết bên dưới:</p>
+<ul>
+<li>http://blog.ezyang.com/2010/12/hussling-haskell-types-into-hasse-diagrams/</li>
+<li>https://reddspark.blog/haskell-programming-daily-quiz/</li>
+</ul></li>
 </ul>
 
             
