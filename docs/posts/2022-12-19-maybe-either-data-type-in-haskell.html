@@ -109,7 +109,7 @@ errorWithoutStackTrace s = raise# (errorCallException s)
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> <span class="fu">otherwise</span>  <span class="ot">=</span> <span class="dt">Just</span> <span class="op">$</span> a <span class="ot">`div`</span> b</span></code></pre></div>
 <p>Tuy nhiên, thay vì trả về <code>Nothing</code>, nếu chúng ta muốn trả về lỗi cụ thể nào đó, tường minh hơn thì sao nhỉ? hãy xét data type <code>Either</code> bên dưới</p>
 <h2 id="either-data-type">Either data type</h2>
-<p><img src="http://blog.ezyang.com/img/haskell-hasse/either.png" /></p>
+<p><img src="../images/2022-12-19-either-data-type-vis.png" /></p>
 <p><code>Either</code> data type được định nghĩa như sau:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Prelude</span><span class="op">&gt;</span> <span class="op">:</span>i <span class="dt">Either</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>

@@ -93,7 +93,7 @@ Tuy nhiên, thay vì trả về `Nothing`, nếu chúng ta muốn trả về l�
 
 ## Either data type
 
-![](http://blog.ezyang.com/img/haskell-hasse/either.png)
+![](../images/2022-12-19-either-data-type-vis.png)
 
 
 `Either` data type được định nghĩa như sau:
