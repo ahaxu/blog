@@ -1,12 +1,13 @@
 ---
-title: (Draft) (Vi) 1.1 Maybe, Either data type
+title: (Draft) (Vi) 2.1 Maybe, Either data type
 author: lk
 ---
 
+<img src="../images/2022-12-19-2-1-maybe-either-data-type-in-haskell.png" width=50% height=50%>
+
 ## Maybe data type
 
-![](https://reddspark.files.wordpress.com/2021/07/maybe.jpg
-)
+![](https://reddspark.files.wordpress.com/2021/07/maybe.jpg)
 
 `Maybe` data type được đinh nghĩa như bên dưới
 
