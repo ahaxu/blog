@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <title>AhaXu Blog - (Draft) (Vi) 1.1 Maybe, Either data type</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PHNTX4TPM"></script>
+        <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-1PHNTX4TPM');
+        </script>
+    </head>
+    <body class"container-fluid">
+        <div id="header">
+            <div id="logo">
+                <a href="../">AhaXu Blog</a>
+            </div>
+            <div id="navigation">
+              <a href="../"><i class="bi bi-house-heart-fill"></i> </a>
+                <a href="../about.html"><i class="bi bi-info-circle-fill"></i> </a>
+                <a href="../archive.html"><i class="bi bi-archive-fill"></i> </a>
+            </div>
+        </div>
+
+        <div id="content">
+            
+                <h2>(Draft) (Vi) 1.1 Maybe, Either data type</h2>
+                <div class="info">
+    Posted on December 19, 2022
+    
+        by lk
+    
+</div>
+
+<h2 id="maybe-data-type">Maybe data type</h2>
+<p><code>Maybe</code> data type được đinh nghĩa như bên dưới</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Prelude</span><span class="op">&gt;</span> <span class="op">:</span>info <span class="dt">Maybe</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> <span class="dt">Maybe</span><span class="ot"> ::</span> <span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Maybe</span> a <span class="ot">=</span> <span class="dt">Nothing</span> <span class="op">|</span> <span class="dt">Just</span> a</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">-- Defined in ‘GHC.Maybe’</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Applicative</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘GHC.Base’</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Eq</span> a <span class="ot">=&gt;</span> <span class="dt">Eq</span> (<span class="dt">Maybe</span> a) <span class="co">-- Defined in ‘GHC.Maybe’</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Functor</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘GHC.Base’</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Monad</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘GHC.Base’</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Semigroup</span> a <span class="ot">=&gt;</span> <span class="dt">Monoid</span> (<span class="dt">Maybe</span> a) <span class="co">-- Defined in ‘GHC.Base’</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Ord</span> a <span class="ot">=&gt;</span> <span class="dt">Ord</span> (<span class="dt">Maybe</span> a) <span class="co">-- Defined in ‘GHC.Maybe’</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Semigroup</span> a <span class="ot">=&gt;</span> <span class="dt">Semigroup</span> (<span class="dt">Maybe</span> a)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Defined in ‘GHC.Base’</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Show</span> a <span class="ot">=&gt;</span> <span class="dt">Show</span> (<span class="dt">Maybe</span> a) <span class="co">-- Defined in ‘GHC.Show’</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">MonadFail</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘Control.Monad.Fail’</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Read</span> a <span class="ot">=&gt;</span> <span class="dt">Read</span> (<span class="dt">Maybe</span> a) <span class="co">-- Defined in ‘GHC.Read’</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Foldable</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘Data.Foldable’</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Traversable</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘Data.Traversable’</span></span></code></pre></div>
+<p>Maybe data type được dùng khi chúng ta muốn break ra khỏi 1 <em>context/ compuation</em> nào đó và trả về <code>Nothing</code> thay vì error hay 1 <em>exception</em> nào đó.</p>
+<p>Hãy xem hàm lấy phần tử của list theo index từ <strong>ghc</strong> được định nghĩa thế nào nhé (<a href="https://github.com/ghc/ghc/blob/aacf616df0b4059e6b177ecb64624ae6fb1d1c87/libraries/base/GHC/List.hs#L1376-L1384">link github ghc</a>)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#if defined(USE_REPORT_PRELUDE)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">(!!)                ::</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> a</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>xs     <span class="op">!!</span> n <span class="op">|</span> n <span class="op">&lt;</span> <span class="dv">0</span> <span class="ot">=</span>  errorWithoutStackTrace <span class="st">&quot;Prelude.!!: negative index&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>[]     <span class="op">!!</span> _         <span class="ot">=</span>  errorWithoutStackTrace <span class="st">&quot;Prelude.!!: index too large&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>(x<span class="op">:</span>_)  <span class="op">!!</span> <span class="dv">0</span>         <span class="ot">=</span>  x</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>(_<span class="op">:</span>xs) <span class="op">!!</span> n         <span class="ot">=</span>  xs <span class="op">!!</span> (n<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Prelude version is without HasCallStack to avoid building linear one</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ot">(!!)                    ::</span> <span class="dt">HasCallStack</span> <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> a</span></code></pre></div>
+<p>chúng ta thấy là type trả về ko đồng nhất lắm, vì hàm <code>errorWithoutStackTrace</code> trả về data type <code>a</code> nào đó, cụ thể ở đây là anything (bất kỳ kiểu gì). Điều này đi ngược lại với sự chặt chẽ và <strong>tính thuần khiết (purity)</strong> của Haskell.</p>
+<pre><code>errorWithoutStackTrace :: forall (r :: RuntimeRep). forall (a :: TYPE r).
+                          [Char] -&gt; a
+errorWithoutStackTrace s = raise# (errorCallException s)
+</code></pre>
+<p>Để Haskell ngày càng hoàn thiện và bám sát triết lý chặt chẽ, trong sáng khi code, thì đã có merge request để cải tiến hàm <code>(!!)</code> ở <a href="https://gitlab.haskell.org/ghc/ghc/-/merge_requests/9511">đây</a></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- &gt;&gt;&gt; [2,3,4] !? 1</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Just 3</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- &gt;&gt;&gt; [2,3,4] !? (-1)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Nothing</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- &gt;&gt;&gt; []      !? 0</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Nothing</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="ot">(!?) ::</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Maybe</span> a</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="ot">{-# INLINABLE (!?) #-}</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>xs <span class="op">!?</span> n</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> n <span class="op">&lt;</span> <span class="dv">0</span>     <span class="ot">=</span> <span class="dt">Nothing</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">|</span> <span class="fu">otherwise</span> <span class="ot">=</span> <span class="fu">foldr</span> (</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    \x r k <span class="ot">-&gt;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="kw">case</span> k <span class="kw">of</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            <span class="dv">0</span> <span class="ot">-&gt;</span> <span class="dt">Just</span> x</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            _ <span class="ot">-&gt;</span> r (k<span class="op">-</span><span class="dv">1</span>)) (<span class="fu">const</span> <span class="dt">Nothing</span>) xs n</span></code></pre></div>
+<p>Chúng ta hãy xét thêm một ví dụ nữa về phép chia 2 số, với trường hợp số bị chia là <code>0</code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>safeDiv</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ot">    ::</span> <span class="dt">Integral</span> a</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">=&gt;</span> a</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="ot">-&gt;</span> a</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">-&gt;</span> <span class="dt">Maybe</span> a</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>safeDiv a b</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> b <span class="op">==</span> <span class="dv">0</span>     <span class="ot">=</span> <span class="dt">Nothing</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> <span class="fu">otherwise</span>  <span class="ot">=</span> <span class="dt">Just</span> <span class="op">$</span> a <span class="ot">`div`</span> b</span></code></pre></div>
+<p>Tuy nhiên, thay vì trả về <code>Nothing</code>, nếu chúng ta muốn trả về lỗi cụ thể nào đó, tường minh hơn thì sao nhỉ? hãy xét data type <code>Either</code> bên dưới</p>
+<h2 id="either-data-type">Either data type</h2>
+<p><code>Either</code> data type được định nghĩa như sau:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Prelude</span><span class="op">&gt;</span> <span class="op">:</span>i <span class="dt">Either</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> <span class="dt">Either</span><span class="ot"> ::</span> <span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Either</span> a b <span class="ot">=</span> <span class="dt">Left</span> a <span class="op">|</span> <span class="dt">Right</span> b</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Applicative</span> (<span class="dt">Either</span> e) <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> (<span class="dt">Eq</span> a, <span class="dt">Eq</span> b) <span class="ot">=&gt;</span> <span class="dt">Eq</span> (<span class="dt">Either</span> a b)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Functor</span> (<span class="dt">Either</span> a) <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Monad</span> (<span class="dt">Either</span> e) <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> (<span class="dt">Ord</span> a, <span class="dt">Ord</span> b) <span class="ot">=&gt;</span> <span class="dt">Ord</span> (<span class="dt">Either</span> a b)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Semigroup</span> (<span class="dt">Either</span> a b) <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> (<span class="dt">Show</span> a, <span class="dt">Show</span> b) <span class="ot">=&gt;</span> <span class="dt">Show</span> (<span class="dt">Either</span> a b)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> (<span class="dt">Read</span> a, <span class="dt">Read</span> b) <span class="ot">=&gt;</span> <span class="dt">Read</span> (<span class="dt">Either</span> a b)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Defined in ‘Data.Either’</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Foldable</span> (<span class="dt">Either</span> a) <span class="co">-- Defined in ‘Data.Foldable’</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Traversable</span> (<span class="dt">Either</span> a) <span class="co">-- Defined in ‘Data.Traversable’</span></span></code></pre></div>
+<p>Với data type <code>Either</code>, Khi xử lý thành công thì chúng ta trả về <code>Right b</code>, ngược lại, nếu bị lỗi, chúng ta sẽ trả về giá trị <code>Left a</code>.
+Ở đây, <code>Right b</code> hay <code>Left a</code> là data constructor của type constructor <code>Either a b</code> (<a href="https://youtu.be/rk9myy_C9Io">link</a> bài giảng về haskell data declaration)</p>
+<p>Sau đây là hàm <code>safeDiv'</code> dùng <code>Either</code> data type, để xử lý trường hợp số bị chia bằng 0</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>safeDiv'</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ot">    ::</span> <span class="dt">Integral</span> a</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">=&gt;</span> a</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="ot">-&gt;</span> a</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="ot">-&gt;</span> <span class="dt">Either</span> <span class="dt">String</span> a</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>safeDiv' a b</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> b <span class="op">==</span> <span class="dv">0</span>     <span class="ot">=</span> <span class="dt">Left</span> <span class="st">&quot;can't divide by zero&quot;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> <span class="fu">otherwise</span> <span class="ot">=</span> <span class="dt">Right</span> <span class="op">$</span> a <span class="ot">`div`</span> b</span></code></pre></div>
+<p>Bằng cách dùng <code>Either</code> data type chúng ta tường minh chỉ ra lỗi khi chia cho 0, và đồng nhất data type trả về là <code>Either</code>.</p>
+<p>Chúng ta xét thêm một ví dụ cụ thể nữa ở đây:</p>
+<ul>
+<li><a href="https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_naive_way.hs#L64">Dùng Maybe data type</a></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ...</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- ...</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- some func(s) defined above this</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ot">getUserInfo ::</span> <span class="dt">IO</span> (<span class="dt">Maybe</span> <span class="dt">UserInfo</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>getUserInfo <span class="ot">=</span> <span class="kw">do</span> <span class="co">-- IO</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    name <span class="ot">&lt;-</span> getName <span class="co">-- name:: Maybe String</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">case</span> name <span class="kw">of</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="dt">Nothing</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Just</span> name' <span class="ot">-&gt;</span> <span class="kw">do</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            age <span class="ot">&lt;-</span> getAge <span class="co">-- age:: Maybe Int</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            <span class="kw">case</span> age <span class="kw">of</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="dt">Nothing</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                <span class="dt">Just</span> age' <span class="ot">-&gt;</span> <span class="kw">do</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                    address <span class="ot">&lt;-</span> getAddress</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">case</span> address <span class="kw">of</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="dt">Nothing</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>                        <span class="dt">Just</span> address' <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="op">$</span> <span class="dt">Just</span> <span class="op">$</span> <span class="dt">UserInfo</span> name' age' address' <span class="co">-- IO Maybe UserInfo</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="ot">main ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>main <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    userInfo <span class="ot">&lt;-</span> getUserInfo <span class="co">-- IO Maybe UserInfo</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- ^ :: Maybe UserInfo</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">case</span> userInfo <span class="kw">of</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">print</span> <span class="st">&quot;no valid info&quot;</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Just</span> uI <span class="ot">-&gt;</span> <span class="fu">print</span> uI</span></code></pre></div>
+<ul>
+<li><a href="https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_improve_1.hs">Dùng Either data type</a></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ...</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- ...</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- some func(s) defined above this</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ot">getUserInfo ::</span> <span class="dt">IO</span> (<span class="dt">Either</span> <span class="dt">Error</span> <span class="dt">UserInfo</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>getUserInfo <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    name <span class="ot">&lt;-</span> getName <span class="co">-- Either Error UserInfo</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">case</span> name <span class="kw">of</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Left</span> err <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="op">$</span> <span class="dt">Left</span> err</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Right</span> name' <span class="ot">-&gt;</span> <span class="kw">do</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>            age <span class="ot">&lt;-</span> getAge</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            <span class="kw">case</span> age <span class="kw">of</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                <span class="dt">Left</span> err <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="op">$</span> <span class="dt">Left</span> err</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                <span class="dt">Right</span> age' <span class="ot">-&gt;</span> <span class="kw">do</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                    address <span class="ot">&lt;-</span> getAddress</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                    <span class="kw">case</span> address <span class="kw">of</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                        <span class="dt">Left</span> err <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="op">$</span> <span class="dt">Left</span> err</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                        <span class="dt">Right</span> address' <span class="ot">-&gt;</span> <span class="fu">return</span> <span class="op">$</span> <span class="dt">Right</span> <span class="op">$</span> <span class="dt">UserInfo</span> name' age' address'</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ot">improvedMain1 ::</span> <span class="dt">IO</span> ()</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>improvedMain1 <span class="ot">=</span> <span class="kw">do</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    userInfo <span class="ot">&lt;-</span> getUserInfo</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- in this improved version we want to print out what is exactly error</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">case</span> userInfo <span class="kw">of</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Left</span> err <span class="ot">-&gt;</span> <span class="fu">print</span> err</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Right</span> uI <span class="ot">-&gt;</span> <span class="fu">print</span> uI</span></code></pre></div>
+<h2 id="kết-bài">Kết bài</h2>
+<p>Với <code>Maybe</code> và <code>Either</code> chúng ta thấy được sự thuần khiết (purity) khi lập trình với Haskell. Và tính hữu ích của <code>Maybe</code> và <code>Either</code> cho từng context hay computation.</p>
+<h2 id="tham-khảo">Tham khảo</h2>
+<ul>
+<li><a href="https://youtu.be/rk9myy_C9Io">Haskell data declaration</a></li>
+<li><a href="https://youtu.be/I48P7LY1LHk">Haskell type class</a></li>
+<li><a href="https://github.com/ahaxu/monad_transformer_tut">Monad transformer tutorial</a></li>
+</ul>
+
+            
+        </div>
+        <div id="footer">
+            AhaXuBlog@2022 - generated by Hakyll
+        </div>
+    </body>
+</html>
