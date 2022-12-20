@@ -46,7 +46,7 @@ xs     !! n | n < 0 =  errorWithoutStackTrace "Prelude.!!: negative index"
 #else
 (!!)                    :: HasCallStack => [a] -> Int -> a
 ```
-Chúng ta thấy là type trả về ko đồng nhất lắm, như vậy nếu nói **haskell** là ngôn ngữ trong sáng, thuần khiết(the most purity language), strong type language, hay ko có side effect (thế nào là side effect thì mình sẽ nói thêm các bài viết sắp tới nếu các bạn chưa biết) ...  là chém gió &#128514;.
+Chúng ta thấy là type trả về ko đồng nhất lắm, như vậy nếu nói **haskell** là ngôn ngữ trong sáng, thuần khiết(the most purity language), strong type language, hay ko có side effect (thế nào là *side effect* thì mình sẽ nói thêm các bài viết sắp tới nếu các bạn chưa biết) ...  là chém gió &#128514;.
 Vì hàm `errorWithoutStackTrace` trả về data type `a` nào đó, cụ thể ở đây là anything (bất kỳ kiểu gì). Điều này đi ngược lại với sự chặt chẽ và **tính thuần khiết (purity)** của Haskell.
 ```
 errorWithoutStackTrace :: forall (r :: RuntimeRep). forall (a :: TYPE r).
