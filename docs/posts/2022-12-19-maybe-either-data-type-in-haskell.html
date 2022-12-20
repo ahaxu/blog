@@ -74,7 +74,7 @@
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Prelude version is without HasCallStack to avoid building linear one</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ot">(!!)                    ::</span> <span class="dt">HasCallStack</span> <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> a</span></code></pre></div>
-<p>Chúng ta thấy là type trả về ko đồng nhất lắm, như vậy nếu nói <strong>haskell</strong> là ngôn ngữ trong sáng, thuần khiết(the most purity language), strong type language, hay ko có side effect (thế nào là side effect thì mình sẽ nói thêm các bài viết sắp tới nếu các bạn chưa biết) … là chém gió 😂.
+<p>Chúng ta thấy là type trả về ko đồng nhất lắm, như vậy nếu nói <strong>haskell</strong> là ngôn ngữ trong sáng, thuần khiết(the most purity language), strong type language, hay ko có side effect (thế nào là <em>side effect</em> thì mình sẽ nói thêm các bài viết sắp tới nếu các bạn chưa biết) … là chém gió 😂.
 Vì hàm <code>errorWithoutStackTrace</code> trả về data type <code>a</code> nào đó, cụ thể ở đây là anything (bất kỳ kiểu gì). Điều này đi ngược lại với sự chặt chẽ và <strong>tính thuần khiết (purity)</strong> của Haskell.</p>
 <pre><code>errorWithoutStackTrace :: forall (r :: RuntimeRep). forall (a :: TYPE r).
                           [Char] -&gt; a
