@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-        <title>AhaXu Blog - (Draft) (Vi) 2.1 Maybe, Either data type</title>
+        <title>AhaXu Blog - (Vi) 2.1 Maybe, Either data type</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
@@ -33,7 +33,7 @@
 
         <div id="content">
             
-                <h2>(Draft) (Vi) 2.1 Maybe, Either data type</h2>
+                <h2>(Vi) 2.1 Maybe, Either data type</h2>
                 <div class="info">
     Posted on December 19, 2022
     
@@ -63,8 +63,8 @@
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Read</span> a <span class="ot">=&gt;</span> <span class="dt">Read</span> (<span class="dt">Maybe</span> a) <span class="co">-- Defined in ‘GHC.Read’</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Foldable</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘Data.Foldable’</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Traversable</span> <span class="dt">Maybe</span> <span class="co">-- Defined in ‘Data.Traversable’</span></span></code></pre></div>
-<p>Maybe data type được dùng khi chúng ta muốn break ra khỏi 1 <em>context/ compuation</em> nào đó và trả về <code>Nothing</code> thay vì error hay 1 <em>exception</em> nào đó.</p>
-<p>Hãy xem hàm lấy phần tử của list theo index từ <strong>ghc</strong> được định nghĩa thế nào nhé (<a href="https://github.com/ghc/ghc/blob/aacf616df0b4059e6b177ecb64624ae6fb1d1c87/libraries/base/GHC/List.hs#L1376-L1384">link github ghc</a>)</p>
+<p><code>Maybe</code> data type được dùng khi chúng ta muốn <em>break/thoát hay tạm dừng</em> ra khỏi 1 <em>context/ compuation</em> nào đó và trả về <code>Nothing</code> thay vì <em>error</em> hay 1 <em>exception</em> nào đó.</p>
+<p>Hãy xét hàm lấy phần tử của list theo index từ <strong>ghc</strong> được định nghĩa thế nào nhé (<a href="https://github.com/ghc/ghc/blob/aacf616df0b4059e6b177ecb64624ae6fb1d1c87/libraries/base/GHC/List.hs#L1376-L1384">link github ghc</a>)</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#if defined(USE_REPORT_PRELUDE)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">(!!)                ::</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> a</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>xs     <span class="op">!!</span> n <span class="op">|</span> n <span class="op">&lt;</span> <span class="dv">0</span> <span class="ot">=</span>  errorWithoutStackTrace <span class="st">&quot;Prelude.!!: negative index&quot;</span></span>
@@ -74,12 +74,13 @@
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Prelude version is without HasCallStack to avoid building linear one</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ot">(!!)                    ::</span> <span class="dt">HasCallStack</span> <span class="ot">=&gt;</span> [a] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> a</span></code></pre></div>
-<p>chúng ta thấy là type trả về ko đồng nhất lắm, vì hàm <code>errorWithoutStackTrace</code> trả về data type <code>a</code> nào đó, cụ thể ở đây là anything (bất kỳ kiểu gì). Điều này đi ngược lại với sự chặt chẽ và <strong>tính thuần khiết (purity)</strong> của Haskell.</p>
+<p>Chúng ta thấy là type trả về ko đồng nhất lắm, như vậy nếu nói <strong>haskell</strong> là ngôn ngữ trong sáng, thuần khiết(the most purity language), strong type language, hay ko có side effect (thế nào là side effect thì mình sẽ nói thêm các bài viết sắp tới nếu các bạn chưa biết) … là chém gió 😂.
+Vì hàm <code>errorWithoutStackTrace</code> trả về data type <code>a</code> nào đó, cụ thể ở đây là anything (bất kỳ kiểu gì). Điều này đi ngược lại với sự chặt chẽ và <strong>tính thuần khiết (purity)</strong> của Haskell.</p>
 <pre><code>errorWithoutStackTrace :: forall (r :: RuntimeRep). forall (a :: TYPE r).
                           [Char] -&gt; a
 errorWithoutStackTrace s = raise# (errorCallException s)
 </code></pre>
-<p>Để Haskell ngày càng hoàn thiện và bám sát triết lý chặt chẽ, trong sáng khi code, thì đã có merge request để cải tiến hàm <code>(!!)</code> ở <a href="https://gitlab.haskell.org/ghc/ghc/-/merge_requests/9511">đây</a></p>
+<p>Để Haskell ngày càng hoàn thiện và bám sát triết lý chặt chẽ, trong sáng khi code, thì đã có merge request để cải tiến hàm <code>(!!)</code> ở <a href="https://gitlab.haskell.org/ghc/ghc/-/merge_requests/9511">đây</a>(tại thời điểm bài viết được viết)</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">--</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- &gt;&gt;&gt; [2,3,4] !? 1</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- Just 3</span></span>
@@ -146,6 +147,7 @@ errorWithoutStackTrace s = raise# (errorCallException s)
 <ul>
 <li><a href="https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_naive_way.hs#L64">Dùng Maybe data type</a></li>
 </ul>
+<p>Dùng cách này thì chúng ta thấy được vấn đề là chúng ta chỉ trả về được <code>Nothing</code> chung chung khi có lỗi, mà không tường minh chỉ ra được cụ thể lỗi là gì. Cụ thể là các hàm <code>getName</code>, <code>getAge</code>, <code>getAddress</code> được gọi trong hàm <code>getUserInfo</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ...</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- ...</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- some func(s) defined above this</span></span>
@@ -172,6 +174,7 @@ errorWithoutStackTrace s = raise# (errorCallException s)
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">case</span> userInfo <span class="kw">of</span></span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Nothing</span> <span class="ot">-&gt;</span> <span class="fu">print</span> <span class="st">&quot;no valid info&quot;</span></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Just</span> uI <span class="ot">-&gt;</span> <span class="fu">print</span> uI</span></code></pre></div>
+<p><em>Để hiểu rõ hơn đoạn code trên, bạn có thể xem thêm ở <a href="https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_naive_way.hs#L64">đây</a></em></p>
 <ul>
 <li><a href="https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_improve_1.hs">Dùng Either data type</a></li>
 </ul>
@@ -201,6 +204,7 @@ errorWithoutStackTrace s = raise# (errorCallException s)
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">case</span> userInfo <span class="kw">of</span></span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Left</span> err <span class="ot">-&gt;</span> <span class="fu">print</span> err</span>
 <span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">Right</span> uI <span class="ot">-&gt;</span> <span class="fu">print</span> uI</span></code></pre></div>
+<p><em>Để hiểu rõ hơn bạn có thể xem full code ở <a href="https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_improve_1.hs">đây</a></em></p>
 <h2 id="kết-bài">Kết bài</h2>
 <p>Với <code>Maybe</code> và <code>Either</code> chúng ta thấy được sự thuần khiết (purity) khi lập trình với Haskell. Và tính hữu ích của <code>Maybe</code> và <code>Either</code> cho từng context hay computation.</p>
 <h2 id="tham-khảo">Tham khảo</h2>

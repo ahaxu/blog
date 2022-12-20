@@ -1,5 +1,5 @@
 ---
-title: (Draft) (Vi) 2.1 Maybe, Either data type
+title: (Vi) 2.1 Maybe, Either data type
 author: lk
 ---
 
@@ -31,9 +31,9 @@ instance Read a => Read (Maybe a) -- Defined in ‘GHC.Read’
 instance Foldable Maybe -- Defined in ‘Data.Foldable’
 instance Traversable Maybe -- Defined in ‘Data.Traversable’
 ```
-Maybe data type được dùng khi chúng ta muốn break ra khỏi 1 *context/ compuation* nào đó và trả về `Nothing` thay vì error hay 1 *exception* nào đó.
+`Maybe` data type được dùng khi chúng ta muốn *break/thoát hay tạm dừng* ra khỏi 1 *context/ compuation* nào đó và trả về `Nothing` thay vì *error* hay 1 *exception* nào đó.
 
-Hãy xem hàm lấy phần tử của list theo index từ **ghc** được định nghĩa thế nào nhé ([link github ghc](https://github.com/ghc/ghc/blob/aacf616df0b4059e6b177ecb64624ae6fb1d1c87/libraries/base/GHC/List.hs#L1376-L1384))
+Hãy xét hàm lấy phần tử của list theo index từ **ghc** được định nghĩa thế nào nhé ([link github ghc](https://github.com/ghc/ghc/blob/aacf616df0b4059e6b177ecb64624ae6fb1d1c87/libraries/base/GHC/List.hs#L1376-L1384))
 
 ```haskell
 #if defined(USE_REPORT_PRELUDE)
@@ -46,7 +46,8 @@ xs     !! n | n < 0 =  errorWithoutStackTrace "Prelude.!!: negative index"
 #else
 (!!)                    :: HasCallStack => [a] -> Int -> a
 ```
-chúng ta thấy là type trả về ko đồng nhất lắm, vì hàm `errorWithoutStackTrace` trả về data type `a` nào đó, cụ thể ở đây là anything (bất kỳ kiểu gì). Điều này đi ngược lại với sự chặt chẽ và **tính thuần khiết (purity)** của Haskell.
+Chúng ta thấy là type trả về ko đồng nhất lắm, như vậy nếu nói **haskell** là ngôn ngữ trong sáng, thuần khiết(the most purity language), strong type language, hay ko có side effect (thế nào là side effect thì mình sẽ nói thêm các bài viết sắp tới nếu các bạn chưa biết) ...  là chém gió &#128514;.
+Vì hàm `errorWithoutStackTrace` trả về data type `a` nào đó, cụ thể ở đây là anything (bất kỳ kiểu gì). Điều này đi ngược lại với sự chặt chẽ và **tính thuần khiết (purity)** của Haskell.
 ```
 errorWithoutStackTrace :: forall (r :: RuntimeRep). forall (a :: TYPE r).
                           [Char] -> a
@@ -54,7 +55,7 @@ errorWithoutStackTrace s = raise# (errorCallException s)
 
 ```
 
-Để Haskell ngày càng hoàn thiện và bám sát triết lý chặt chẽ, trong sáng khi code, thì đã có merge request để cải tiến hàm `(!!)` ở [đây](https://gitlab.haskell.org/ghc/ghc/-/merge_requests/9511)
+Để Haskell ngày càng hoàn thiện và bám sát triết lý chặt chẽ, trong sáng khi code, thì đã có merge request để cải tiến hàm `(!!)` ở [đây](https://gitlab.haskell.org/ghc/ghc/-/merge_requests/9511)(tại thời điểm bài viết được viết)
 
 ```haskell
 --
@@ -140,8 +141,10 @@ Bằng cách dùng `Either` data type chúng ta tường minh chỉ ra lỗi khi
 
 Chúng ta xét thêm một ví dụ cụ thể nữa ở đây:
 
-- [Dùng Maybe data type](https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_naive_way.hs#L64
-)
+- [Dùng Maybe data type](https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_naive_way.hs#L64)
+
+Dùng cách này thì chúng ta thấy được vấn đề là chúng ta chỉ trả về được `Nothing` chung chung khi có lỗi, mà không tường minh chỉ ra được cụ thể lỗi là gì. Cụ thể là các hàm `getName`, `getAge`, `getAddress` được gọi trong hàm `getUserInfo`.
+
 ```haskell
 -- ...
 -- ...
@@ -171,6 +174,10 @@ main = do
         Just uI -> print uI
 
 ```
+
+*Để hiểu rõ hơn đoạn code trên, bạn có thể xem thêm ở [đây](https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_naive_way.hs#L64)*
+
+
 - [Dùng Either data type](https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_improve_1.hs)
 ```haskell
 -- ...
@@ -200,6 +207,9 @@ improvedMain1 = do
         Left err -> print err
         Right uI -> print uI
 ```
+
+*Để hiểu rõ hơn bạn có thể xem full code ở [đây](https://github.com/ahaxu/monad_transformer_tut/blob/master/haskell/monad_transformer_improve_1.hs)*
+
 
 ## Kết bài
 Với `Maybe` và `Either` chúng ta thấy được sự thuần khiết (purity) khi lập trình với Haskell. Và tính hữu ích của `Maybe` và `Either` cho từng context hay computation.
