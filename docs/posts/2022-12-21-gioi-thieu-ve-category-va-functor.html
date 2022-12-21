@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <title>AhaXu Blog - (Vi) 5.2. Sơ lược về category theory và functor</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PHNTX4TPM"></script>
+        <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-1PHNTX4TPM');
+        </script>
+    </head>
+    <body class"container-fluid">
+        <div id="header">
+            <div id="logo">
+                <a href="../">AhaXu Blog</a>
+            </div>
+            <div id="navigation">
+              <a href="../"><i class="bi bi-house-heart-fill"></i> </a>
+                <a href="../about.html"><i class="bi bi-info-circle-fill"></i> </a>
+                <a href="../archive.html"><i class="bi bi-archive-fill"></i> </a>
+            </div>
+        </div>
+
+        <div id="content">
+            
+                <h2>(Vi) 5.2. Sơ lược về category theory và functor</h2>
+                <div class="info">
+    Posted on December 21, 2022
+    
+        by lk
+    
+</div>
+
+<h2 id="mở-bài">Mở bài</h2>
+<p>Về cơ bản, <strong>category theory</strong>(hay lý thuyết phạm trù) là mối quan hệ giữa các <em>objects</em>, được thể hiện bởi các <em>arrows</em>(hay <em>morphisms</em>), và thoả các tính chất (sẽ được nói cụ thể ở trong video):</p>
+<ul>
+<li>Identity</li>
+<li>Associativity</li>
+<li>Composition</li>
+</ul>
+<p>Như vậy, liệu có tồn tại một thế giới song song với thế giới của chúng ta(<strong>C</strong>), khi mà bản thân mỗi chúng ta, sẽ có một <strong>ảnh</strong> của mình ở thế giới song song(<strong>C’</strong>),
+và có một hàm số (một phép tiên kỳ diệu) nào đó sao cho:</p>
+<ul>
+<li><strong>mối quan hệ(arrows) giữa các cá nhân ở thế giới hiện tại (<em>C</em>)</strong></li>
+</ul>
+<p>được ánh xạ (hay biến đổi) thành</p>
+<ul>
+<li><strong>mối quan hệ(arrows) giữa các ảnh của mỗi cá thể ở thế giới song song (<em>C’</em>)</strong></li>
+</ul>
+<p><em>(tất nhiên, mối quan hệ giữa các cá thể ở thế giới hiện tại, tương ứng với ảnh của nó ở thế giới song song, giữa nguyên thứ tự liên kết, nôm na là morphism <code>a -&gt; b</code> ở thế giới C, thì sẽ biến thành <code>f a -&gt; f b</code> ở thế giới C’, với <code>f a</code> là ảnh của <code>a</code>, <code>f b</code> là ảnh của <code>b</code>)</em></p>
+<p>Như thế, khả năng tồn tại một thế giới song song với thế giới hiện tại là điều cũng có thể xảy ra phải không? 🤓 ^^ :)</p>
+<h2 id="sơ-lược-về-category-theory">Sơ lược về category theory</h2>
+<p><img src="../images/2022-12-21-catgories.png" width="68%" height="68%"></p>
+<h2 id="functor">Functor</h2>
+<p><img src="../images/2022-12-21-functor.png" width="68%" height="68%"></p>
+<h2 id="link-tới-video">Link tới video</h2>
+<p><a href="https://youtu.be/GfaUExzCt2g">https://youtu.be/GfaUExzCt2g</a></p>
+<h2 id="link-tới-slides">Link tới slides</h2>
+<p><a href="https://docs.google.com/presentation/d/1EZJqGTqFFFQ09OFw5w0sDV2WLkvkxPXmsDUFAKXFiVQ/edit?usp=sharing">https://docs.google.com/presentation/d/1EZJqGTqFFFQ09OFw5w0sDV2WLkvkxPXmsDUFAKXFiVQ/edit?usp=sharing</a></p>
+<h2 id="credit">Credit</h2>
+<ul>
+<li>Bác tài taxi, programmer đặc biệt nhất từng được biết <a href="https://github.com/ngoclinhng">LinhKyAnh</a>, đã hỗ trợ review phần lý thuyết</li>
+</ul>
+<h2 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h2>
+<ul>
+<li>Bartosz Milewski’s ‘Category Theory for Programmers’ unofficial PDF and LaTeX source: <a href="https://github.com/hmemcpy/milewski-ctfp-pdf">https://github.com/hmemcpy/milewski-ctfp-pdf</a></li>
+</ul>
+
+            
+        </div>
+        <div id="footer">
+            AhaXuBlog@2022 - generated by Hakyll
+        </div>
+    </body>
+</html>
