@@ -1,5 +1,5 @@
 ---
-title: (Vi) Linux 101 - Các lệnh hữu ích thường dùng
+title: (Vi) Linux 101 - Tìm top IP trong log file
 author: lk
 ---
 
@@ -55,7 +55,7 @@ và chúng ta được kết quả như sau
 
 ## Link video
 
-(todo)[todo]
+[Linux tìm top IP trong log file](https://youtu.be/Vuu0t5pB2No)
 
 ## Tham khảo
 
