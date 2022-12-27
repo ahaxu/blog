@@ -21,6 +21,10 @@ ps aux | grep "chrome" | awk '{print $2}' | xargs -I$ kill -9 $
 cat /tmp/website.list | xargs -I$ -P5 sh -c 'curl -s $'
 ```
 
+## Link video
+
+[Linux 101 -  Lệnh xargs bá đao thế nào ?](https://youtu.be/xzcGDAKtyZs)
+
 ## Tài liệu tham khảo
 
 - [xargs man page](https://man7.org/linux/man-pages/man1/xargs.1.html)
