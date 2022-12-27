@@ -52,6 +52,8 @@
 </ul>
 <p>ở đây chúng ta muốn in ra các website từ trong file <a href="../sample-files/website.list">website.list</a>, sau đó lấy content của từng website bằng lệnh <code>curl</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /tmp/website.list <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-I</span>$ <span class="at">-P5</span> sh <span class="at">-c</span> <span class="st">'curl -s $'</span></span></code></pre></div>
+<h2 id="link-video">Link video</h2>
+<p><a href="https://youtu.be/xzcGDAKtyZs">Linux 101 - Lệnh xargs bá đao thế nào ?</a></p>
 <h2 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h2>
 <ul>
 <li><a href="https://man7.org/linux/man-pages/man1/xargs.1.html">xargs man page</a></li>
