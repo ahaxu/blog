@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-        <title>AhaXu Blog - (Draft) (Vi) Haskell function application</title>
+        <title>AhaXu Blog - (Vi) Haskell function application</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
@@ -33,7 +33,7 @@
 
         <div id="content">
             
-                <h2>(Draft) (Vi) Haskell function application</h2>
+                <h2>(Vi) Haskell function application</h2>
                 <div class="info">
     Posted on December 30, 2022
     
@@ -43,12 +43,12 @@
 
 <h2 id="function-application">Function application ($)</h2>
 <p>Hãy check thử thông tin của <code>($)</code> trong <code>ghci</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Prelude</span><span class="op">&gt;</span> :info <span class="er">(</span><span class="ex">$</span><span class="kw">)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">$</span><span class="kw">)</span> <span class="ex">::</span> <span class="er">(</span><span class="ex">a</span> <span class="at">-</span><span class="op">&gt;</span> b<span class="kw">)</span> <span class="ex">-</span><span class="op">&gt;</span> a <span class="at">-</span><span class="op">&gt;</span> b       <span class="at">--</span> Defined in ‘GHC.Base’</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">infixr</span> 0 $</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Prelude</span><span class="op">&gt;</span> <span class="op">:</span>info (<span class="op">$</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">($) ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> b       <span class="co">-- Defined in ‘GHC.Base’</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">infixr</span> <span class="dv">0</span> <span class="op">$</span></span></code></pre></div>
 <p>Khi bắt đầu học haskell, chúng ta thường thắc mắc tại sao <code>($)</code> lại được sử dụng khá phổ biến khi code.
-Hãy xét một vài ví dụ: <a href="https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L152">dòng 152</a>, hoặc <a href="https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L104">hoặc dòng 104</a>.</p>
-<p>Chúng ta có thể thấy <code>($)</code> là một cách viết khác tương đương với việc gôm các biểu thức tính toán vào trong dấu <code>( )</code> (<strong>chú ý <em>không phải là unit type <code>()</code></em> </strong>) để gôm thứ tự thực hiện (<em>evaluation</em>) các biểu thức lại với nhau từ trong ra ngoài.</p>
+Hãy xét một vài ví dụ: <a href="https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L152">dòng 152</a>, <a href="https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L104">hoặc dòng 104</a>.</p>
+<p>Chúng ta có thể thấy <code>($)</code> là một cách viết khác tương đương với việc gôm các biểu thức tính toán vào trong cặp dấu <code>(</code> và <code>)</code> (<strong>chú ý <em>không phải là unit type <code>()</code></em> </strong>) để gôm thứ tự tính toán(<em>evaluation</em>) các biểu thức lại với nhau từ trong ra ngoài.</p>
 <p>Xét ví dụ sau:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- một cách viết khác của hàm add</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">addInteger ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">Integer</span></span>
@@ -62,13 +62,13 @@ Hãy xét một vài ví dụ: <a href="https://github.com/ahaxu/simple-telegram
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ot">combineFunc ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>combineFunc a b <span class="ot">=</span> isEven (addInteger a b) <span class="co">-- (1)</span></span></code></pre></div>
 <p>Vì type của <code>($)</code> là:</p>
-<pre><code>($) :: (a -&gt; b) -&gt; a -&gt; b       -- Defined in ‘GHC.Base’
--- có thể diễn giải như sau, sau $ sẽ là một hàm số và các tham số của hàm số đó</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ot">($) ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> b       <span class="co">-- Defined in ‘GHC.Base’</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- có thể diễn giải như sau, sau $ sẽ là một hàm số và các tham số của hàm số đó</span></span></code></pre></div>
 <p>Cho nên ta có hàm <code>combineFunc</code> được viết lại như sau:</p>
-<pre><code>combineFunc a b = isEven $ addInteger a b -- (2)</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>combineFunc a b <span class="ot">=</span> isEven <span class="op">$</span> addInteger a b <span class="co">-- (2)</span></span></code></pre></div>
 <p>như thế, chúng ta đã hiểu được ý nghĩa của <code>($)</code>, hi vọng chúng ta sẽ học haskell dễ hơn 🥳.</p>
 <p>Mở rộng ra một xíu, tại sao hàm <code>combineFunc</code> lại có thể được viết tương đương thế này:</p>
-<pre><code>combineFunc = (isEven .) . addInteger -- (3)</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>combineFunc <span class="ot">=</span> (isEven <span class="op">.</span>) <span class="op">.</span> addInteger <span class="co">-- (3)</span></span></code></pre></div>
 <p><strong>hint</strong>: bằng cách sửa dụng <strong>function composition</strong> và kỹ thuật <strong>pointfree</strong> trong haskell, chúng ta có thể biến đổi được tương đương từ <code>(2)</code> sang <code>(3)</code></p>
 <h2 id="tham-khảo">Tham khảo</h2>
 <ul>
