@@ -1,21 +1,21 @@
 ---
-title: (Draft) (Vi) Haskell function application
+title: (Vi) Haskell function application
 author: lk
 ---
 
 ## Function application ($)
 
 Hãy check thử thông tin của `($)` trong `ghci`
-```bash
+```haskell
 Prelude> :info ($)
 ($) :: (a -> b) -> a -> b       -- Defined in ‘GHC.Base’
 infixr 0 $
 ```
 
 Khi bắt đầu học haskell, chúng ta thường thắc mắc tại sao `($)` lại được sử dụng khá phổ biến khi code.
-Hãy xét một vài ví dụ: [dòng 152](https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L152), hoặc [hoặc dòng 104](https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L104).
+Hãy xét một vài ví dụ: [dòng 152](https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L152), [hoặc dòng 104](https://github.com/ahaxu/simple-telegram-bot/blob/master/src/EmaImproved.hs#L104).
 
-Chúng ta có thể thấy `($)` là một cách viết khác tương đương với việc gôm các biểu thức tính toán vào trong dấu `( )` (**chú ý *không phải là unit type `()`* **) để gôm thứ tự thực hiện (*evaluation*) các biểu thức lại với nhau từ trong ra ngoài.
+Chúng ta có thể thấy `($)` là một cách viết khác tương đương với việc gôm các biểu thức tính toán vào trong cặp dấu `(` và `)` (**chú ý *không phải là unit type `()`* **) để gôm thứ tự tính toán(*evaluation*) các biểu thức lại với nhau từ trong ra ngoài.
 
 Xét ví dụ sau:
 
@@ -35,14 +35,14 @@ combineFunc a b = isEven (addInteger a b) -- (1)
 
 Vì type của `($)` là:
 
-```
+```haskell
 ($) :: (a -> b) -> a -> b       -- Defined in ‘GHC.Base’
 -- có thể diễn giải như sau, sau $ sẽ là một hàm số và các tham số của hàm số đó
 ```
 
 Cho nên ta có hàm `combineFunc` được viết lại như sau:
 
-```
+```haskell
 combineFunc a b = isEven $ addInteger a b -- (2)
 ```
 
@@ -50,7 +50,7 @@ như thế, chúng ta đã hiểu được ý nghĩa của `($)`, hi vọng chú
 
 Mở rộng ra một xíu, tại sao hàm `combineFunc` lại có thể được viết tương đương thế này:
 
-```
+```haskell
 combineFunc = (isEven .) . addInteger -- (3)
 ```
 
