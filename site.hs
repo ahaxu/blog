@@ -27,7 +27,7 @@ main = hakyllWith config $ do
     -- build up tags
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
     tagsRules tags $ \tag pattern -> do
-      let title = "Tags: "
+      let title = "Posts with tag: \"" <> tag <> "\""
       route idRoute
       compile $ do
           posts <- recentFirst =<< loadAll pattern
@@ -80,7 +80,6 @@ main = hakyllWith config $ do
     match "templates/*" $ compile templateCompiler
 
 
---------------------------------------------------------------------------------
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" <>
