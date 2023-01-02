@@ -1,6 +1,7 @@
 ---
 title: (Vi) Linux 101 - Tìm top IP trong log file
 author: lk
+tags: linux, xargs, ps, awk, sort, cat
 ---
 
 ## Chúng ta xét các lệnh cơ bản sau

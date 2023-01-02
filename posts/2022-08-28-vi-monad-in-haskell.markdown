@@ -1,6 +1,7 @@
 ---
 title: (Vi) Monad trong haskell
 author: lk
+tags: haskell, monad
 ---
 
 ## Link youtube

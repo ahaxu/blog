@@ -1,6 +1,7 @@
 ---
 title: (Vi) Linux 101 - Lệnh `xargs` bá đạo thế nào
 author: lk
+tags: linux, xargs
 ---
 
 ## Outline

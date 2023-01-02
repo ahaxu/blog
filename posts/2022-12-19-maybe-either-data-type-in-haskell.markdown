@@ -1,6 +1,7 @@
 ---
 title: (Vi) 2.1 Maybe, Either data type
 author: lk
+tags: haskell
 ---
 
 <img src="../images/2022-12-19-2-1-maybe-either-data-type-in-haskell.png" width=50% height=50%>
