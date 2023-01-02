@@ -1,6 +1,7 @@
 ---
 title: (Vi) Kleisli composition và ứng dụng thực tế
 author: lk
+tags: haskell, kleisli
 ---
 <img src="../images/2022-12-08-kleisli.png" width=60% height=60%>
 

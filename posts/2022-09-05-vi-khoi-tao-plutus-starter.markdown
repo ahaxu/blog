@@ -1,6 +1,7 @@
 ---
 title: (Vi) Khởi tạo môi truờng dev plutus
 author: lk
+tags: plutus, cardano
 ---
 
 Khởi tạo môi truờng dev plutus

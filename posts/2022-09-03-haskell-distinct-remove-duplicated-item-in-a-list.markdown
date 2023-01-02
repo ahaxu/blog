@@ -2,6 +2,7 @@
 layout: post
 title: Haskell `distinct` function to remove duplicated item in a list
 author: lk
+tags: haskell
 ---
 
 Assume that we need to write a function to remove duplicated items in a list as a code snippet bellow

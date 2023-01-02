@@ -1,6 +1,7 @@
 ---
 title: (Vi) 5.2. Sơ lược về category theory và functor
 author: lk
+tags: vi, functor, category theory
 ---
 
 ## Mở bài

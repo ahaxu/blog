@@ -1,12 +1,13 @@
 ---
 title: (Draft) (Vi) Giới thiệu về lambda calculus
 author: lk
+tags: lambda calculus
 ---
 
 ## Outline
 - Giới thiệu về **Lambda calculus** 
 
-## Giới thiệu về lambda caluculus 
+## Giới thiệu về lambda calculus 
 
 ### Lambda structure
 
