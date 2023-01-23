@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <title>AhaXu Blog - (En) Linux 101 - Find top IP in a log file</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../css/default.css" />
+        <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PHNTX4TPM"></script>
+        <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'G-1PHNTX4TPM');
+        </script>
+    </head>
+    <body class"container-fluid">
+        <div id="header">
+            <div id="logo">
+                <a href="../">AhaXu Blog</a>
+            </div>
+            <div id="navigation">
+              <a href="../"><i class="bi bi-house-heart-fill"></i> </a>
+                <a href="../about.html"><i class="bi bi-info-circle-fill"></i> </a>
+                <a href="../archive.html"><i class="bi bi-archive-fill"></i> </a>
+            </div>
+        </div>
+
+        <div id="content">
+            
+                <h2>(En) Linux 101 - Find top IP in a log file</h2>
+                <div class="info">
+    Posted on January 23, 2023
+    
+        by lk
+    
+</div>
+<div class="info">
+    
+    Tags: <a title="All pages tagged 'linux'." href="../tags/linux.html">linux</a>, <a title="All pages tagged 'xargs'." href="../tags/xargs.html">xargs</a>, <a title="All pages tagged 'ps'." href="../tags/ps.html">ps</a>, <a title="All pages tagged 'awk'." href="../tags/awk.html">awk</a>, <a title="All pages tagged 'sort'." href="../tags/sort.html">sort</a>, <a title="All pages tagged 'cat'." href="../tags/cat.html">cat</a>
+    
+</div>
+
+<h2 id="overview">Overview</h2>
+<ul>
+<li>cat</li>
+<li>grep</li>
+<li>awk</li>
+<li>xargs</li>
+<li>wc</li>
+<li>sort</li>
+<li>uniq</li>
+</ul>
+<h2 id="use-case">Use case</h2>
+<p>Saying that we have the access.log file from nginx, and we want to find the top IP access to our server with bad purpose in “23/Jan/2023”.</p>
+<p>Let’s use this <a href="../sample-files/malicious-log-2.log">sample log file</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">185.254.196.115</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:05:31:27 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.189</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:05:40:14 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.189</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:06:12:38 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">185.254.196.115</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:06:40:29 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">65.2.176.32</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:07:59:00 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.189</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:08:13:37 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.189</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:09:05:01 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">95.214.235.205</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:10:17:52 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.189</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:10:47:41 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">4.236.144.116</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:11:39:13 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 301 169 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:77.0) Gecko/20100101 Firefox/77.0&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.189</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:12:16:54 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">95.214.235.205</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:12:58:25 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.110</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:14:33:52 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">185.254.196.115</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:14:36:35 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">95.214.235.205</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:16:10:31 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.110</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:16:32:27 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.110</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:17:46:38 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">51.195.157.191</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:17:57:33 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ex">20.163.234.175</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:18:20:18 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 153 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0&quot;</span> <span class="st">&quot;-&quot;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ex">135.125.246.110</span> <span class="at">-</span> <span class="at">-</span> [23/Jan/2023:19:29:10 +0700] <span class="st">&quot;GET /.env HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36&quot;</span> <span class="st">&quot;-&quot;</span></span></code></pre></div>
+<h2 id="link-to-video">Link to video</h2>
+<p><a href="https://youtu.be/FzWg8-8bo6M">Linux find top IP in a log file</a></p>
+<h2 id="refs">Refs</h2>
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man1/xargs.1.html">xargs man page</a></li>
+<li><a href="https://man7.org/linux/man-pages/man1/awk.1p.html">awk man page</a></li>
+</ul>
+
+            
+        </div>
+        <div id="footer">
+            AhaXuBlog@2022 - generated by Hakyll
+        </div>
+    </body>
+</html>
