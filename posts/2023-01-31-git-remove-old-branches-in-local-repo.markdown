@@ -24,3 +24,7 @@ Key commands:
 ## Ref
 
 - [`git for-each-ref`](https://git-scm.com/docs/git-for-each-ref)
+
+## Link to youtube video
+
+- [Linux 101 - git remove old branches in local repo](https://youtu.be/uFi6FrDlSS8)
