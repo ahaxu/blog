@@ -93,7 +93,7 @@ getSum $ fold $ pure Sum &lt;*&gt; [1..5]</code></pre>
 <li>Monad (bind function) <code>(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code>
 <img src="../images/2022-12-07-monad-chain.png" /></li>
 </ul>
-<p>In real life, we see many computation cases that need to take value <code>a</code> out of the computation context (or take value <code>a</code> out of any abitrary structure which denoted as <code>m</code>)</p>
+<p>In real life, we see many computation cases that need to take value <code>a</code> out of the computation context (or take value <code>a</code> out of any context(structure) which denoted as <code>m</code>)</p>
 <p>The sample bellow, illustrate the case that we need to take a value <code>a</code> out of <code>Maybe</code> structure, and <em>then</em> calling <code>(+)</code> function for a sum computation, and <em>then</em> put the result value into <code>Maybe</code> structure.</p>
 <pre><code>maybePlus :: Maybe Int -&gt; Maybe Int -&gt; Maybe Int
 maybePlus ma mb =
@@ -123,7 +123,7 @@ maybePlus' ma mb = ma `andThen` \a -&gt; mb `andThen` \b -&gt; Just (a + b)</cod
 <pre><code>(&lt;$&gt;) :: (a -&gt; b)  -&gt; f a -&gt; f b
 
 (=&lt;&lt;) :: (a-&gt; m b) -&gt; m a -&gt; m b</code></pre>
-<p>We can see that flip bind function <code>(=&lt;&lt;)</code> is the combination in order of <code>fmap</code> and <code>join :: Monad m =&gt; m (m a) -&gt; m a</code> function. You can read more about the equivalent transformations <a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap">here</a>(<em>english version coming soon but i hope that you can understand the equivalent transformations</em>)</p>
+<p>We can see that flip bind function <code>(=&lt;&lt;)</code> is the combination in order of <code>fmap</code> and <code>join :: Monad m =&gt; m (m a) -&gt; m a</code> function. You can read more about the equivalent transformations <a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap">here</a>(<em>english version coming soon, but i hope that you can understand the equivalent transformations</em>)</p>
 <h2 id="ref">Ref</h2>
 <ul>
 <li><a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md">Monad tutorial in Vietnamese</a></li>

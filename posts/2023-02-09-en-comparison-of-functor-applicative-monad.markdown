@@ -69,7 +69,7 @@ getSum $ fold $ pure Sum <*> [1..5]
 - Monad (bind function) `(>>=) :: Monad m => m a -> (a -> m b) -> m b`
 ![](../images/2022-12-07-monad-chain.png)
 
-In real life, we see many computation cases that need to take value `a` out of the computation context (or take value `a` out of any abitrary structure which denoted as `m`)
+In real life, we see many computation cases that need to take value `a` out of the computation context (or take value `a` out of any context(structure) which denoted as `m`)
 
 The sample bellow, illustrate the case that we need to take a value `a` out of `Maybe` structure, and *then* calling `(+)` function for a sum computation, and *then* put the result value into `Maybe` structure.
 
@@ -110,7 +110,7 @@ We can see that `(<*>)` indeed is the combination of `($)` and `(<>)`
 (=<<) :: (a-> m b) -> m a -> m b
 ```
 
-We can see that flip bind function `(=<<)` is the combination in order of `fmap` and `join :: Monad m => m (m a) -> m a` function. You can read more about the equivalent transformations [here](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap)(_english version coming soon but i hope that you can understand the equivalent transformations_)
+We can see that flip bind function `(=<<)` is the combination in order of `fmap` and `join :: Monad m => m (m a) -> m a` function. You can read more about the equivalent transformations [here](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap)(_english version coming soon, but i hope that you can understand the equivalent transformations_)
 
 ## Ref
 
