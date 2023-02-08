@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-        <title>AhaXu Blog - (Vi) So sánh functor, applicative và monad</title>
+        <title>AhaXu Blog - (En) Comparision of functor, applicative and monad</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
@@ -33,9 +33,9 @@
 
         <div id="content">
             
-                <h2>(Vi) So sánh functor, applicative và monad</h2>
+                <h2>(En) Comparision of functor, applicative and monad</h2>
                 <div class="info">
-    Posted on December  7, 2022
+    Posted on February  9, 2023
     
         by lk
     
@@ -47,35 +47,36 @@
 </div>
 
 <p><img src="../images/2022-12-07-recap.png" /></p>
-<h2 id="tóm-tắt-nội-dung">Tóm tắt nội dung</h2>
-<p>Bài viết này sẽ trình bày về sự liên quan giữa các type class, bạn có thể tìm hiểu thêm về các type class này ở link video đính kèm trong bài viết.</p>
+<h2 id="outline">Outline</h2>
+<p>We will dicuss about the relationship between each type class (monoid, functor, applicative, and monad).
+You can discover more with the links to the relevant videos as bellow (English videos coming soon).</p>
 <ul>
-<li><a href="https://youtu.be/I48P7LY1LHk">Giới thiệu về type class</a></li>
+<li><a href="https://youtu.be/I48P7LY1LHk">Introduction to haskell type class</a></li>
 <li><a href="https://youtu.be/DurtGLmG1qc">Monoid</a></li>
 <li><a href="https://youtu.be/pqkNBKiYOY8">Functor</a></li>
 <li><a href="https://youtu.be/h2pVUDLL82g">Applicative</a></li>
 <li><a href="https://youtu.be/LhGxO9-tKzg">Monad</a></li>
 </ul>
-<h2 id="review-về-kiểu-của-các-hàm-hay-flip-bind">Review về kiểu của các hàm <code>($)</code>, <code>(&lt;&gt;)</code>, <code>(&lt;$&gt;)</code>, <code>(&lt;*&gt;)</code>, <code>(&gt;&gt;=)</code> hay flip bind <code>(=&lt;&lt;)</code></h2>
+<h2 id="review-about-type-signature-of-or-flip-bind">Review about type signature of <code>($)</code>, <code>(&lt;&gt;)</code>, <code>(&lt;$&gt;)</code>, <code>(&lt;*&gt;)</code>, <code>(&gt;&gt;=)</code> or flip bind <code>(=&lt;&lt;)</code></h2>
 <ul>
 <li>Function application <code>($) :: (a -&gt; b) -&gt; a -&gt; b</code>
 <img src="../images/2022-12-07-value-apply.png" /></li>
 </ul>
-<p>Xét hàm số <code>f :: a -&gt; b</code>, các phép biến đổi bên dưới là tương đương</p>
+<p>let’s say that function <code>f</code> has signature <code>f :: a -&gt; b</code>, we have these equivalent transformations as below</p>
 <pre><code>f             :: a -&gt; b
-f a           :: b              -- apply a vào f
-(a -&gt; b) -&gt; a :: b              -- thay f bằng (a -&gt; b)
-($)           :: (a-&gt;b)-&gt;a-&gt;b   -- chuyển vế b </code></pre>
-<p>Thực tế ta sẽ thấy các đoạn code sau</p>
+f a           :: b                  -- apply f to a
+(a -&gt; b) -&gt; a :: b                  -- replace f with (a -&gt; b)
+($)           :: (a -&gt; b) -&gt; a -&gt;b</code></pre>
+<p>In fact, we see lots of block of code as below</p>
 <pre><code>print $ show a</code></pre>
 <ul>
-<li>Monoid (hàm mappend) <code>(&lt;&gt;) :: Semigroup m =&gt; m -&gt; m -&gt; m</code>
+<li>Monoid (mappend function) <code>(&lt;&gt;) :: Semigroup m =&gt; m -&gt; m -&gt; m</code>
 <img src="../images/2022-12-07-monoid-illustration.png" /></li>
 </ul>
-<p>Chúng ta có thể thấy rằng <code>(&lt;&gt;)</code> hay <code>mappend</code> nhận vào 2 tham số cùng kiểu (type),và trả về kết quả mà vẫn giữ nguyên cấu trúc (structure)</p>
+<p>We see that <code>(&lt;&gt;)</code> or <code>mappend</code> receive 2 params which have the same type (structure), and return the result which also keep the original structure (type)</p>
 <pre><code>putStrLn $ &quot;hello&quot; &lt;&gt; &quot; &quot; &lt;&gt; &quot;world!&quot;</code></pre>
 <ul>
-<li>Functor (hàm fmap) <code>(&lt;$&gt;) :: Functor f =&gt; (a-&gt;b) -&gt; f a -&gt; f b</code></li>
+<li>Functor (fmap function) <code>(&lt;$&gt;) :: Functor f =&gt; (a-&gt;b) -&gt; f a -&gt; f b</code></li>
 </ul>
 <p><img src="../images/2022-12-07-fmap.png" /></p>
 <pre><code>(\x -&gt; x * 2) &lt;$&gt; [1..2]
@@ -89,12 +90,11 @@ getSum $ fold $ Sum &lt;$&gt; [1..5]</code></pre>
 
 getSum $ fold $ pure Sum &lt;*&gt; [1..5]</code></pre>
 <ul>
-<li>Monad (hàm bind) <code>(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code>
+<li>Monad (bind function) <code>(&gt;&gt;=) :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b</code>
 <img src="../images/2022-12-07-monad-chain.png" /></li>
 </ul>
-<p>Ta thấy có nhiều trường hợp, cần phải lấy được giá trị <code>a</code> ra khỏi context tính toán nào đó (ký hiệu là <code>m</code>).</p>
-<p>Ví dụ bên dưới minh hoạ về trường hợp chúng ta cần lấy giá trị <code>a</code> ra khỏi context <code>Maybe</code> sau đó dùng hàm <code>+</code> để tính tổng, sau đó để giá trị sau khi tính tổng vào lại trong context <code>Maybe</code>.</p>
-<p><em>chú ý: trong các bài viết thì chúng ta thường thấy thuật ngữ <strong>monadic function</strong>, ở đây chính là hàm <code>a -&gt;  m b</code>, tức là một hàm số nhận vào một giá trị <code>a</code> (chưa nằm trong context tính toán nào, hoặc chưa nào trong một container nào có side effect), và trả về một giá trị <code>b</code> nào đó nằm trong context <code>m</code> nào đó.</em></p>
+<p>In real life, we see many computation cases that need to take value <code>a</code> out of the computation context (or take value <code>a</code> out of any abitrary structure which denoted as <code>m</code>)</p>
+<p>The sample bellow, illustrate the case that we need to take a value <code>a</code> out of <code>Maybe</code> structure, and <em>then</em> calling <code>(+)</code> function for a sum computation, and <em>then</em> put the result value into <code>Maybe</code> structure.</p>
 <pre><code>maybePlus :: Maybe Int -&gt; Maybe Int -&gt; Maybe Int
 maybePlus ma mb =
   case ma of
@@ -114,20 +114,20 @@ andThen ma f =
 -- using helper function to refactor
 maybePlus' :: Maybe Int -&gt; Maybe Int -&gt; Maybe Int
 maybePlus' ma mb = ma `andThen` \a -&gt; mb `andThen` \b -&gt; Just (a + b)</code></pre>
-<h2 id="mối-quan-hệ-giữa">Mối quan hệ giữa <code>($) (&lt;&gt;) &lt;*&gt;</code></h2>
+<h2 id="relation-between">Relation between <code>($) (&lt;&gt;) &lt;*&gt;</code></h2>
 <pre><code>($)   ::   (a -&gt; b)   -&gt;   a -&gt;   b
 (&lt;&gt;)  :: f            -&gt; f   -&gt; f 
 (&lt;*&gt;) :: f (a -&gt; b)   -&gt; f a -&gt; f b</code></pre>
-<p>Ta có thể thấy rằng, <code>(&lt;*&gt;)</code> là sự kết hợp giữa <code>($)</code> và <code>(&lt;&gt;)</code></p>
-<h2 id="mối-quan-hệ-giữa-1">Mối quan hệ giữa <code>&lt;$&gt; (=&lt;&lt;)</code></h2>
+<p>We can see that <code>(&lt;*&gt;)</code> indeed is the combination of <code>($)</code> and <code>(&lt;&gt;)</code></p>
+<h2 id="relation-between-1">Relation between <code>&lt;$&gt; (=&lt;&lt;)</code></h2>
 <pre><code>(&lt;$&gt;) :: (a -&gt; b)  -&gt; f a -&gt; f b
 
 (=&lt;&lt;) :: (a-&gt; m b) -&gt; m a -&gt; m b</code></pre>
-<p>Ta có thể thấy rằng bản chất của flip bind <code>(=&lt;&lt;)</code> là sự kết hợp theo trình tự: hàm <code>fmap</code>(hay <code>(&lt;$&gt;)</code>) và sau đó là hàm <code>join :: Monad m =&gt; m (m a) -&gt; m a</code>. Bạn có thể đọc thêm tại <a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap">đây</a></p>
-<h2 id="link-tham-khảo">Link tham khảo</h2>
+<p>We can see that flip bind function <code>(=&lt;&lt;)</code> is the combination in order of <code>fmap</code> and <code>join :: Monad m =&gt; m (m a) -&gt; m a</code> function. You can read more about the equivalent transformations <a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap">here</a>(<em>english version coming soon but i hope that you can understand the equivalent transformations</em>)</p>
+<h2 id="ref">Ref</h2>
 <ul>
-<li><a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md">Bài giảng về monad</a></li>
-<li>Hình minh hoạ tham khảo tại <a href="https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">adit.io</a></li>
+<li><a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md">Monad tutorial in Vietnamese</a></li>
+<li>Credit to <a href="https://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html">adit.io</a> about pictures about functors, applicative and monad</li>
 <li><a href="https://www.michael-noll.com/blog/2013/12/02/twitter-algebird-monoid-monad-for-large-scala-data-analytics/#what-is-a-monoid">Of Algebirds, Monoids, Monads, and other Bestiary for Large-Scale Data Analytics</a></li>
 </ul>
 
