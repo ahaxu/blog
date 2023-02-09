@@ -124,6 +124,10 @@ maybePlus' ma mb = ma `andThen` \a -&gt; mb `andThen` \b -&gt; Just (a + b)</cod
 
 (=&lt;&lt;) :: (a-&gt; m b) -&gt; m a -&gt; m b</code></pre>
 <p>We can see that flip bind function <code>(=&lt;&lt;)</code> is the combination in order of <code>fmap</code> and <code>join :: Monad m =&gt; m (m a) -&gt; m a</code> function. You can read more about the equivalent transformations <a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap">here</a>(<em>english version coming soon, but i hope that you can understand the equivalent transformations</em>)</p>
+<h2 id="link-to-youtube-video">Link to youtube video</h2>
+<ul>
+<li><a href="https://youtu.be/ckUVRGETbbY">https://youtu.be/ckUVRGETbbY</a></li>
+</ul>
 <h2 id="ref">Ref</h2>
 <ul>
 <li><a href="https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md">Monad tutorial in Vietnamese</a></li>
