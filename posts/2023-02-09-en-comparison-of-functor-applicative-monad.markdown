@@ -112,6 +112,10 @@ We can see that `(<*>)` indeed is the combination of `($)` and `(<>)`
 
 We can see that flip bind function `(=<<)` is the combination in order of `fmap` and `join :: Monad m => m (m a) -> m a` function. You can read more about the equivalent transformations [here](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md#ch%E1%BB%A9ng-minh-join-fmap)(_english version coming soon, but i hope that you can understand the equivalent transformations_)
 
+## Link to youtube video
+
+- [https://youtu.be/ckUVRGETbbY](https://youtu.be/ckUVRGETbbY)
+
 ## Ref
 
 - [Monad tutorial in Vietnamese](https://gitlab.com/ahaxu/haskell-tutorial-vietnamese/-/blob/master/overview/8_monad.md)
