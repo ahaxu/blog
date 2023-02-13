@@ -4,6 +4,7 @@ description: (Draft) (Vi) Giới thiệu về lambda calculus
 author: lk
 tags: lambda calculus
 keywords: lambda calculus
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Outline

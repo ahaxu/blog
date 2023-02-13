@@ -4,6 +4,7 @@ description: So sánh functor, applicative và monad
 author: lk
 tags: haskell, monoid, monad, functor, applicative
 keywords: haskell, monoid, monad, functor, applicative
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ![](../images/2022-12-07-recap.png)

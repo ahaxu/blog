@@ -4,6 +4,7 @@ description: (Vi) Haskell function application
 author: lk
 tags: haskell, function application
 keywords: haskell, function application
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Function application ($)

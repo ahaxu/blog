@@ -4,6 +4,7 @@ author: lk
 tags: linux, xargs, ps, awk, sort, cat
 description: Linux 101 - Find top IP in a log file
 keywords: linux, xargs, ps, awk, sort, cat
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Overview

@@ -4,6 +4,7 @@ description: (Vi) Linux 101 - Lệnh `xargs` bá đạo thế nào
 author: lk
 tags: linux, xargs
 keywords: linux, xargs
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Outline

@@ -4,6 +4,7 @@ description: (Vi) 2.1 Maybe, Either data type
 author: lk
 tags: haskell
 keywords: haskell
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 <img src="../images/2022-12-19-2-1-maybe-either-data-type-in-haskell.png" width=50% height=50%>
