@@ -1,7 +1,9 @@
 ---
 title: (En) Comparision of functor, applicative and monad 
+description: Comparision of functor, applicative and monad 
 author: lk
 tags: haskell, monoid, monad, functor, applicative
+keywords: monad, applicative, monoid, functor, haskell
 ---
 
 ![](../images/2022-12-07-recap.png)

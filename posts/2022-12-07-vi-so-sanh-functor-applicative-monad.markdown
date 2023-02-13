@@ -1,7 +1,9 @@
 ---
 title: (Vi) So sánh functor, applicative và monad 
+description: So sánh functor, applicative và monad 
 author: lk
 tags: haskell, monoid, monad, functor, applicative
+keywords: haskell, monoid, monad, functor, applicative
 ---
 
 ![](../images/2022-12-07-recap.png)

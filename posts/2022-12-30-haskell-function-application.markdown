@@ -1,7 +1,9 @@
 ---
 title: (Vi) Haskell function application
+description: (Vi) Haskell function application
 author: lk
 tags: haskell, function application
+keywords: haskell, function application
 ---
 
 ## Function application ($)

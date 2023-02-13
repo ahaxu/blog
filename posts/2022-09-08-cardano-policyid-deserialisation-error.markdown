@@ -1,7 +1,9 @@
 ---
 title: Cardano plutus policyid deserialisation error
+description: Cardano plutus policyid deserialisation error
 author: lk
 tags: cardano
+keywords: cardano
 ---
 
 *tags: #cardano #plutus #DeserialisationError*
