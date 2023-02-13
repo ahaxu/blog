@@ -4,6 +4,7 @@ description: (Vi) 5.2. Sơ lược về category theory và functor
 author: lk
 tags: vi, functor, category theory
 description: vi, functor, category theory
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Mở bài

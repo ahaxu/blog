@@ -2,6 +2,7 @@
 title: Hello World
 author: lk
 tags: kyxuan
+cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ```haskell
