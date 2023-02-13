@@ -1,7 +1,9 @@
 ---
 title: (Vi) Partial application và curry trong haskell
+description: (Vi) Partial application và curry trong haskell
 author: lk
 tags: haskell
+keywords: haskell
 ---
 
 ## Outline

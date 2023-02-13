@@ -1,7 +1,9 @@
 ---
 title: (Vi) XSS attack sample
+description: XSS attack sample
 author: lk
 tags: security
+keywords: security
 ---
 
 Disclaimer: Kỹ thuật này có thể đã lạc hậu tại thời điểm bài  này đuợc viết ;). Enjoy your day lah ^^.

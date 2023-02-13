@@ -1,7 +1,9 @@
 ---
 title: (En) Git - remove old branches in local repo
+description: Git - remove old branches in local repo
 author: lk
 tags: git
+keywords: git
 ---
 
 ## Git 101 - Remove old branches in local repo

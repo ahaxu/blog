@@ -1,7 +1,9 @@
 ---
 title: (Draft) (Vi) Giới thiệu về lambda calculus
+description: (Draft) (Vi) Giới thiệu về lambda calculus
 author: lk
 tags: lambda calculus
+keywords: lambda calculus
 ---
 
 ## Outline
