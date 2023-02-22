@@ -8,7 +8,16 @@ cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Outline
-- Giới thiệu về **Lambda calculus** 
+
+*trong phạm vi bài viết này, mình sẽ giữ nguyên các thuật ngữ tiếng anh, và có chú giải nếu có về các term này*
+
+- Lambda structure
+- Beta reduction
+- Nested lambda
+- Function application
+- Free variable
+- Combinator
+- Church encoding
 
 ## Giới thiệu về lambda calculus 
 
