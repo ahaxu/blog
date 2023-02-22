@@ -29,14 +29,12 @@ cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
   └────── phần mở rộng của phần đầu của lambda.
 
 λ x . x
-  ^────── the single parameter of the function. This
-          tham số duy nhất của hàm số. Tham số này móc (bind) bất kỳ
+  ^────── tham số duy nhất của hàm số. Tham số này móc (bind) bất kỳ
           tham số nào cùng tên trong phần thân (body) của hàm.
 
 λ x . x
-      ^── body, the expression the lambda returns
-          phần thân, biểu thức mà lambda trả về khi hàm số được applied.
-          Chúng ta gọi x là bound variable
+      ^── phần thân, biểu thức mà lambda trả về khi hàm số được applied.
+          Chúng ta gọi x là bound variable.
 ```
 
 ### Beta reduction
