@@ -9,7 +9,7 @@ cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 
 ## Outline
 
-*trong phạm vi bài viết này, mình sẽ giữ nguyên các thuật ngữ tiếng anh, và có chú giải nếu có về các term này*
+*trong phạm vi bài viết này, mình sẽ giữ nguyên các thuật ngữ tiếng anh, và sẽ có chú giải về các thuật ngữ này*
 
 - Lambda structure
 - Beta reduction
