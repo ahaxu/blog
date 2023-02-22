@@ -1,6 +1,6 @@
 ---
-title: (Vi) Giới thiệu về lambda calculus
-description: (Vi) Giới thiệu về lambda calculus
+title: Giới thiệu về lambda calculus
+description: Giới thiệu về lambda calculus
 author: lk
 tags: lambda calculus
 keywords: lambda calculus
