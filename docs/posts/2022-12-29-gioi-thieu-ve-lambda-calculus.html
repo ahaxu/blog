@@ -65,7 +65,7 @@
 </div>
 
 <h2 id="outline">Outline</h2>
-<p><em>trong phạm vi bài viết này, mình sẽ giữ nguyên các thuật ngữ tiếng anh, và có chú giải nếu có về các term này</em></p>
+<p><em>trong phạm vi bài viết này, mình sẽ giữ nguyên các thuật ngữ tiếng anh, và sẽ có chú giải về các thuật ngữ này</em></p>
 <ul>
 <li>Lambda structure</li>
 <li>Beta reduction</li>
@@ -82,14 +82,12 @@
   └────── phần mở rộng của phần đầu của lambda.
 
 λ x . x
-  ^────── the single parameter of the function. This
-          tham số duy nhất của hàm số. Tham số này móc (bind) bất kỳ
+  ^────── tham số duy nhất của hàm số. Tham số này móc (bind) bất kỳ
           tham số nào cùng tên trong phần thân (body) của hàm.
 
 λ x . x
-      ^── body, the expression the lambda returns
-          phần thân, biểu thức mà lambda trả về khi hàm số được applied.
-          Chúng ta gọi x là bound variable</code></pre>
+      ^── phần thân, biểu thức mà lambda trả về khi hàm số được applied.
+          Chúng ta gọi x là bound variable.</code></pre>
 <h3 id="beta-reduction">Beta reduction</h3>
 <p>Khi chúng ta <strong>áp dụng</strong> hàm số cho một <strong>tham số</strong> nào đó, chúng ta thay thế input cho toàn bộ các <strong>bound variables</strong> trong body của lambda.</p>
 <p>Sau đó, chúng ta còn có thể bỏ phần <strong>head</strong> của lambda đi.</p>
@@ -119,9 +117,28 @@
 <p>ví dụ:</p>
 <pre><code>𝜆b.a -- a là free variable</code></pre>
 <h3 id="combinator">Combinator</h3>
-<p>1 biểu thức được gọi là combinator khi và chỉ khi hàm số hay body không tồn tại <strong>biến tự do</strong></p>
+<ul>
+<li>1 biểu thức được gọi là combinator khi và chỉ khi hàm số hay body không tồn tại <strong>biến tự do</strong></li>
+</ul>
 <p><img src="../images/2023-02-22-def-combinator.png" alt="định nghĩa về combinator" width="60%" height="60%"></p>
-<p>Church encoding: booleans</p>
+<ul>
+<li><p>K va KI combinators:</p>
+<ul>
+<li><code>K</code> tương đương hàm <code>const</code> hay <code>fst</code> trong haskell, một hàm số nhận 2 tham số và luôn trả về tham số thứ 1</li>
+</ul>
+<pre><code>K = 𝜆ab.a</code></pre>
+<ul>
+<li><code>KI</code> là hàm số nhận vào 2 tham số và trả về tham số thứ 2, tương tự như hàm <code>snd</code> trong haskell</li>
+</ul>
+<pre><code>K = 𝜆ab.b</code></pre></li>
+</ul>
+<h2 id="church-encoding-booleans">Church encoding: booleans</h2>
+<ul>
+<li>Nếu chung ta đặt</li>
+</ul>
+<pre><code>K = True
+KI = False</code></pre>
+<p>thì chúng ta có thể suy diễn ra các combinator khác <code>NOT</code> <code>AND</code> như hình sau (<em>chi tiết cách suy diễn các bạn có thể xem clip rất hay <a href="https://www.youtube.com/watch?v=3VQ382QG-y4&amp;t=2890s">sau</a></em>)</p>
 <p><img src="../images/2023-02-22-bool-combinators.png" alt="lambda calculus" width="60%" height="60%"></p>
 <h2 id="tài-liệu-tham-khảo">Tài liệu tham khảo</h2>
 <ul>

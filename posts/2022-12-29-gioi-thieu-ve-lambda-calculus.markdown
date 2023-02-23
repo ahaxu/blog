@@ -101,11 +101,34 @@ ví dụ:
 
 ### Combinator
 
-1 biểu thức được gọi là combinator khi và chỉ khi hàm số hay body không tồn tại **biến tự do**
+- 1 biểu thức được gọi là combinator khi và chỉ khi hàm số hay body không tồn tại **biến tự do**
 
 <img src="../images/2023-02-22-def-combinator.png" alt="định nghĩa về combinator" width="60%" height="60%">
 
-Church encoding: booleans
+
+
+- K va KI combinators:
+
+    - `K` tương đương hàm `const` hay `fst` trong haskell, một hàm số nhận 2 tham số và luôn trả về tham số thứ 1
+    ```
+    K = 𝜆ab.a
+    ```
+
+    - `KI` là hàm số nhận vào 2 tham số và trả về tham số thứ 2, tương tự như hàm `snd` trong haskell
+    ```
+    K = 𝜆ab.b
+    ```
+
+## Church encoding: booleans
+
+
+- Nếu chung ta đặt
+
+```
+K = True
+KI = False
+```
+thì chúng ta có thể suy diễn ra các combinator khác `NOT` `AND` như hình sau (*chi tiết cách suy diễn các bạn có thể xem clip rất hay [sau](https://www.youtube.com/watch?v=3VQ382QG-y4&t=2890s)*)
 
 <img src="../images/2023-02-22-bool-combinators.png" alt="lambda calculus" width="60%" height="60%">
 
