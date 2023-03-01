@@ -4,7 +4,7 @@ description: Git - remove old branches in local repo
 author: lk
 tags: git
 keywords: git
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Git 101 - Remove old branches in local repo

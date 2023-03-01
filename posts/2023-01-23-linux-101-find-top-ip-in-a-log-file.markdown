@@ -4,7 +4,7 @@ author: lk
 tags: linux, xargs, ps, awk, sort, cat
 description: Linux 101 - Find top IP in a log file
 keywords: linux, xargs, ps, awk, sort, cat
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Overview
@@ -21,7 +21,7 @@ cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 
 Saying that we have the access.log file from nginx, and we want to find the top IP access to our server with bad purpose in "23/Jan/2023".
 
-Let's use this [sample log file](https://github.com/ahaxu/ahaxu.github.io/blob/main/sample-files/malicious-log-2.log)
+Let's use this [sample log file](https://github.com/ahaxu/ahaxu.com/blob/main/sample-files/malicious-log-2.log)
 
 ```bash
 185.254.196.115 - - [23/Jan/2023:05:31:27 +0700] "GET /.env HTTP/1.1" 404 555 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36" "-"

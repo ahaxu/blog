@@ -4,7 +4,7 @@ description: Cardano plutus policyid deserialisation error
 author: lk
 tags: cardano
 keywords: cardano
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 *tags: #cardano #plutus #DeserialisationError*

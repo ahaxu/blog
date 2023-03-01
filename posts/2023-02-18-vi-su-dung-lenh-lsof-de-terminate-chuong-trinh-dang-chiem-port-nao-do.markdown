@@ -4,7 +4,7 @@ description: Sử dụng lệnh lsof để terminate chương trình đang chi�
 author: lk
 tags: lsof, linux
 keywords: lsof, linux
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Sử dụng lệnh lsof để terminate chương trình đang chiếm port nào đó

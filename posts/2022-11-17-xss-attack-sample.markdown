@@ -4,7 +4,7 @@ description: XSS attack sample
 author: lk
 tags: security
 keywords: security
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 Disclaimer: Kỹ thuật này có thể đã lạc hậu tại thời điểm bài  này đuợc viết ;). Enjoy your day lah ^^.

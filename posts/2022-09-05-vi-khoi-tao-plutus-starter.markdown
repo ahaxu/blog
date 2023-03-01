@@ -4,7 +4,7 @@ description: (Vi) Khởi tạo môi truờng dev plutus
 author: lk
 tags: plutus, cardano
 keywords: plutus, cardano
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 Khởi tạo môi truờng dev plutus

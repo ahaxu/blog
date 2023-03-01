@@ -9,7 +9,7 @@ ship() {
     echo "λ> sleep abit for page rendering ...!"
     sleep 10
 
-    echo "λ> https://ahaxu.github.io/ updated!"
+    echo "λ> https://ahaxu.com/ updated!"
 }
 
 COMMIT_MSG=$1

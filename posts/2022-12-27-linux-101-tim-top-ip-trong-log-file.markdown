@@ -4,7 +4,7 @@ description: (Vi) Linux 101 - Tìm top IP trong log file
 author: lk
 tags: linux, xargs, ps, awk, sort, cat
 keywords: linux, xargs, ps, awk, sort, cat
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Chúng ta xét các lệnh cơ bản sau
@@ -19,7 +19,7 @@ cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
 
 ## Ví dụ thực tế 
 
-Xét đoạn log trong ngày **"27/Dec/2022"** ([trong file](https://github.com/ahaxu/ahaxu.github.io/blob/main/sample-files/malicious.log)]).
+Xét đoạn log trong ngày **"27/Dec/2022"** ([trong file](https://github.com/ahaxu/ahaxu.com/blob/main/sample-files/malicious.log)]).
 Đoạn log này scan thử xem hệ thống của bạn có những lỗ hổng nào có thể khai thác hay không, 
 Giờ chúng ta hãy tìm ra **top 5 IP** có pattern như trên, để tiến hành block các IP có mục đích không được tốt truy cập vào website của bạn nhé.
 

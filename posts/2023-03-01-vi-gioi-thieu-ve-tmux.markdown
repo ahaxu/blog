@@ -4,7 +4,7 @@ description: Giới thiệu về tmux
 author: lk
 tags: tmux
 keywords: giới thiệu về tmux
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Tại sao lại cần đến tmux
