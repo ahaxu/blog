@@ -4,7 +4,7 @@ description: Monad trong haskell
 author: lk
 tags: haskell, monad
 keywords: haskell, monad
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Link youtube

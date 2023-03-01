@@ -4,7 +4,7 @@ description: (Vi) Kleisli composition và ứng dụng thực tế
 author: lk
 tags: haskell, kleisli
 keywords: haskell, kleisli
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 <img src="../images/2022-12-08-kleisli.png" width=60% height=60%>

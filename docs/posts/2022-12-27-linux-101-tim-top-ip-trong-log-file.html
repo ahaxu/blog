@@ -10,7 +10,7 @@
           <meta property="og:url" content="/posts/2022-12-27-linux-101-tim-top-ip-trong-log-file.html" />
           <meta property="og:title" content="(Vi) Linux 101 - Tìm top IP trong log file" />
           <meta property="og:description" content="(Vi) Linux 101 - Tìm top IP trong log file" />
-          <meta property="og:image" content="https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg" />
+          <meta property="og:image" content="https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg" />
           <meta name="description" content="(Vi) Linux 101 - Tìm top IP trong log file">
           <meta name="keywords" content="linux, xargs, ps, awk, sort, cat">
         
@@ -75,7 +75,7 @@
 <li>uniq</li>
 </ul>
 <h2 id="ví-dụ-thực-tế">Ví dụ thực tế</h2>
-<p>Xét đoạn log trong ngày <strong>“27/Dec/2022”</strong> (<a href="https://github.com/ahaxu/ahaxu.github.io/blob/main/sample-files/malicious.log">trong file</a>]).
+<p>Xét đoạn log trong ngày <strong>“27/Dec/2022”</strong> (<a href="https://github.com/ahaxu/ahaxu.com/blob/main/sample-files/malicious.log">trong file</a>]).
 Đoạn log này scan thử xem hệ thống của bạn có những lỗ hổng nào có thể khai thác hay không,
 Giờ chúng ta hãy tìm ra <strong>top 5 IP</strong> có pattern như trên, để tiến hành block các IP có mục đích không được tốt truy cập vào website của bạn nhé.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">13.213.73.235</span> <span class="at">-</span> <span class="at">-</span> [27/Dec/2022:02:43:02 +0000] <span class="st">&quot;GET /.aws/credentials HTTP/1.1&quot;</span> 404 555 <span class="st">&quot;-&quot;</span> <span class="st">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246&quot;</span> <span class="st">&quot;-&quot;</span></span>

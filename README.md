@@ -1,6 +1,6 @@
 # ahaxu-blog
 
-Source code for this blog [https://ahaxu.github.io/](https://ahaxu.github.io/)
+Source code for this blog [https://ahaxu.com/](https://ahaxu.com/)
 
 ## local mode
 

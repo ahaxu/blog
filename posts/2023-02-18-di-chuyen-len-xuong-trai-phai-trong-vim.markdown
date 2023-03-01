@@ -4,7 +4,7 @@ description: Vim 101 - Di chuyển lên xuống, trái phải trong vim
 author: lk
 tags: vim, navigation in vim 
 keywords: vim, di chuyển con trỏ trong vim
-cover_image: https://ahaxu.github.io/images/2022-08-28-hello-world-kyxuan.jpg
+cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
 
 ## Vim 101 - Di chuyển lên xuống, trái phải trong vim
