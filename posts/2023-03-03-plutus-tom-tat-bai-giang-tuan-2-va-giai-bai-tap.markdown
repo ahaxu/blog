@@ -14,6 +14,7 @@ cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 
 ## Tham khảo
 
-- [https://www.youtube.com/watch?v=g4fBo4QPir0&list=PLNEK_Ejlx3x3xFHJJKdyfo9eB0Iw-OQDd](https://www.youtube.com/watch?v=g4fBo4QPir0&list=PLNEK_Ejlx3x3xFHJJKdyfo9eB0Iw-OQDd)
+- [https://github.com/input-output-hk/plutus-pioneer-program](https://github.com/input-output-hk/plutus-pioneer-program)
+
 
 
