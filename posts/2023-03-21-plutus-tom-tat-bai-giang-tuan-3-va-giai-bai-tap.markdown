@@ -10,7 +10,7 @@ cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ## Link bài giảng youtube
 
 - Part 1 [https://youtu.be/_eTk_7fPudE](https://youtu.be/_eTk_7fPudE)
-- Part 2 [https://youtu.be/Jyckxec510o](https://youtu.be/Jyckxec510o)
+- Part 2 [https://youtu.be/T9JJWHj_Ffg](https://youtu.be/T9JJWHj_Ffg)
 
 ## Giải thích về script address và script
 
