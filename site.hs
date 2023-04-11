@@ -27,7 +27,13 @@ main = hakyllWith config $ do
     -- build up tags
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
     tagsRules tags $ \tag pattern -> do
-      let title = "Posts with tag: \"" <> tag <> "\""
+      --if tag == "thơ thẩn"
+      --then let title = "Dăm ba bài thơ lẩn thẩn, gọi là tập tành mần thơ: "
+      let title =
+            if tag == "thơ thẩn"
+            then "Tập tành thơ thẩn, thẩn thơ: "
+            else "Posts with tag: \"" <> tag <> "\""
+
       route idRoute
       compile $ do
           posts <- recentFirst =<< loadAll pattern
