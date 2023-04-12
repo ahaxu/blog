@@ -2,11 +2,19 @@
 
 import           Data.Monoid
 import           Hakyll
+import           Sitemap
+
 
 config :: Configuration
 config = defaultConfiguration
     { destinationDirectory = "docs"
     }
+
+sitemapConfig :: SitemapConfiguration
+sitemapConfig = def {
+    sitemapBase     = "https://ahaxu.com/"
+}
+
 
 main :: IO ()
 main = hakyllWith config $ do
@@ -66,6 +74,10 @@ main = hakyllWith config $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
+    -- gen sitemap.xml
+    create ["sitemap.xml"] $ do
+        route   idRoute
+        compile $ generateSitemap sitemapConfig
 
     match "index.html" $ do
         route idRoute
