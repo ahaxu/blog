@@ -10,6 +10,8 @@ cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ## Link bài giảng youtube
 
 - Part1 [https://youtu.be/bhFmfa86JYU](https://youtu.be/bhFmfa86JYU)
+- Part2 [https://youtu.be/Q_NlpQ23Rog](https://youtu.be/Q_NlpQ23Rog)
+
 
 ## Tham khảo
 
