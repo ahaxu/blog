@@ -9,6 +9,8 @@ cover_image: https://bellevuecollection.com/app/uploads/2023/12/LNY24__Mobile-He
 
 ## Chào mừng năm mới
 
+<img src="../images/2024-02-09-chuc-mung-nam-moi-giap-thin.png" width=80% height=80%>
+
 Năm mới Giáp Thìn sắp đến, cầu mong bình an, sức khoẻ, hạn phúc đến cho gia đình và mọi người.
 
 Năm mới ý chí mới, sức khoẻ mới, tinh thần mới. Vạn sự hanh thông 🍀
