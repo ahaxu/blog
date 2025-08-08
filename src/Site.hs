@@ -13,7 +13,7 @@ config = defaultConfiguration
 
 sitemapConfig :: SitemapConfiguration
 sitemapConfig = def {
-    sitemapBase     = "https://ahaxu.com/"
+    sitemapBase     = "https://ahaxu.github.io/blog/"
 }
 
 
@@ -100,8 +100,6 @@ main = hakyllWith config $ do
     match "templates/*" $ compile templateCompiler
 
     mapM_ static ["humans.txt", "robots.txt"]
-
-
 
 postCtx :: Context String
 postCtx =
