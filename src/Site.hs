@@ -3,6 +3,7 @@
 import           Data.Monoid
 import           Hakyll
 import           Sitemap
+import           Data.List (isInfixOf)
 
 
 config :: Configuration
@@ -32,7 +33,7 @@ main = hakyllWith config $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    -- build up tags
+    -- build up tags (excluding private posts)
     tags <- buildTags "posts/*" (fromCapture "tags/*.html")
     tagsRules tags $ \tag pattern -> do
       let title =
@@ -43,9 +44,10 @@ main = hakyllWith config $ do
       route idRoute
       compile $ do
           posts <- recentFirst =<< loadAll pattern
+          filteredPosts <- filterPrivatePosts posts
           let ctx =
                 constField "title" title <>
-                listField "posts" postCtx (return posts) <>
+                listField "posts" postCtx (return filteredPosts) <>
                 defaultContext
 
           makeItem ""
@@ -64,8 +66,9 @@ main = hakyllWith config $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
+            filteredPosts <- filterPrivatePosts posts
             let archiveCtx =
-                    listField "posts" postCtx (return posts) <>
+                    listField "posts" postCtx (return filteredPosts) <>
                     constField "title" "Archives"            <>
                     defaultContext
 
@@ -83,8 +86,9 @@ main = hakyllWith config $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
+            filteredPosts <- filterPrivatePosts posts
             let indexCtx =
-                    listField "posts" postCtx (return posts) <>
+                    listField "posts" postCtx (return filteredPosts) <>
                     constField "title" "Home"                <>
                     defaultContext
 
@@ -115,3 +119,15 @@ static f = match f $ do
 
 directory :: (Pattern -> Rules a) -> String -> Rules a
 directory act f = act $ fromGlob $ f ++ "/**"
+
+-- Filter out posts with "private" tags
+filterPrivatePosts :: [Item String] -> Compiler [Item String]
+filterPrivatePosts posts = do
+    filtered <- mapM checkPost posts
+    return $ concat filtered
+  where
+    checkPost item = do
+        metadata <- getMetadata (itemIdentifier item)
+        case lookupString "tags" metadata of
+            Just tags | "private" `isInfixOf` tags -> return []
+            _ -> return [item]
