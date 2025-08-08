@@ -61,12 +61,12 @@
 </div>
 <div class="info">
     
-    Tags: <a title="All pages tagged 'haskell'." href="../tags/haskell.html">haskell</a>
+    Tags: <a title="All pages tagged 'haskell'." href="../tags/haskell.html" rel="tag">haskell</a>
     
 </div>
 
 <p>Assume that we need to write a function to remove duplicated items in a list as a code snippet bellow</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> let xs = [1..5] ++ [2..9]</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> let xs = <span class="pp">[</span><span class="ss">1..5</span><span class="pp">]</span> ++ <span class="pp">[</span><span class="ss">2..9</span><span class="pp">]</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> xs</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[1,2,3,4,5,2,3,4,5,6,7,8,9]</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -80,7 +80,7 @@
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[1,2,3,4,5,6,7,8,9]</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> distinct4 xs</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Logger</span> [<span class="st">&quot;inserting 1&quot;</span>,<span class="st">&quot;inserting 2&quot;</span>,<span class="st">&quot;inserting 3&quot;</span>,<span class="st">&quot;inserting 4&quot;</span>,<span class="st">&quot;inserting 5&quot;</span>,<span class="st">&quot;2 duplicated&quot;</span>,<span class="st">&quot;3 duplicated&quot;</span>,<span class="st">&quot;4 duplicated&quot;</span>,<span class="st">&quot;5 duplicated&quot;</span>,<span class="st">&quot;inserting 6&quot;</span>,<span class="st">&quot;inserting 7&quot;</span>,<span class="st">&quot;inserting 8&quot;</span>,<span class="st">&quot;inserting 9&quot;</span>] [1,2,3,4,5,6,7,8,9]</span></code></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Logger</span> <span class="pp">[</span><span class="st">&quot;inserting 1&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 2&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 3&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 4&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 5&quot;</span><span class="ss">,</span><span class="st">&quot;2 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;3 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;4 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;5 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 6&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 7&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 8&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 9&quot;</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">1,2,3,4,5,6,7,8,9</span><span class="pp">]</span></span></code></pre></div>
 <p>If you are rush to see how hell the code is ^^, here is the link to replit.co <a href="https://replit.com/@longnguyen207/AhaxuBlog1?v=1" target="_blank">https://replit.com/<span class="citation" data-cites="longnguyen207/AhaxuBlog1?v">@longnguyen207/AhaxuBlog1?v</span>=1</a></p>
 <h2 id="recursive-with-accumulated-list">Recursive with accumulated list</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>distinct1</span>
@@ -195,7 +195,7 @@
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> <span class="dt">Logger</span> l2 b <span class="ot">=</span>  f a</span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">in</span> <span class="dt">Logger</span> (l1<span class="op">++</span>l2) b</span></code></pre></div>
 <p>Try with ghci <a href="https://replit.com/@longnguyen207/HarmlessSteelblueDownloads#distinct.hs">repl.it</a></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> let xs = [1..5] ++ [2..9]</span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> let xs = <span class="pp">[</span><span class="ss">1..5</span><span class="pp">]</span> ++ <span class="pp">[</span><span class="ss">2..9</span><span class="pp">]</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> xs</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">[1,2,3,4,5,2,3,4,5,6,7,8,9]</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -209,7 +209,7 @@
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">[1,2,3,4,5,6,7,8,9]</span></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ex">~</span><span class="op">&gt;</span> distinct4 xs</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Logger</span> [<span class="st">&quot;inserting 1&quot;</span>,<span class="st">&quot;inserting 2&quot;</span>,<span class="st">&quot;inserting 3&quot;</span>,<span class="st">&quot;inserting 4&quot;</span>,<span class="st">&quot;inserting 5&quot;</span>,<span class="st">&quot;2 duplicated&quot;</span>,<span class="st">&quot;3 duplicated&quot;</span>,<span class="st">&quot;4 duplicated&quot;</span>,<span class="st">&quot;5 duplicated&quot;</span>,<span class="st">&quot;inserting 6&quot;</span>,<span class="st">&quot;inserting 7&quot;</span>,<span class="st">&quot;inserting 8&quot;</span>,<span class="st">&quot;inserting 9&quot;</span>] [1,2,3,4,5,6,7,8,9]</span></code></pre></div>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Logger</span> <span class="pp">[</span><span class="st">&quot;inserting 1&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 2&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 3&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 4&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 5&quot;</span><span class="ss">,</span><span class="st">&quot;2 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;3 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;4 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;5 duplicated&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 6&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 7&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 8&quot;</span><span class="ss">,</span><span class="st">&quot;inserting 9&quot;</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">1,2,3,4,5,6,7,8,9</span><span class="pp">]</span></span></code></pre></div>
 <h2 id="more-about-statet">More about StateT</h2>
 <p>_TODO</p>
 <h2 id="final-thoughts">Final thoughts</h2>
@@ -221,7 +221,7 @@
             
         </div>
         <div id="footer">
-            AhaXuBlog@2024 - generated by Hakyll
+            AhaXuBlog@2025 - generated by Hakyll
         </div>
     </body>
 </html>

@@ -2,7 +2,7 @@
 title: (Vi) Nhật ký về lo âu, căng thẳng (p1)
 description: Nhật ký về lo âu, căng thẳng (p1)
 author: lk
-tags: stress, anxious
+tags: stress, anxious, private
 keywords: stress, anxious
 cover_image: https://ahaxu.com/images/2022-08-28-hello-world-kyxuan.jpg
 ---
