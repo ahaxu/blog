@@ -15,6 +15,6 @@ Hi vọng app sẽ hữu ích cho các bạn nào cần!
 
 Đối với quý vị phụ huynh, có thể dùng phần mềm này để cho phép con cái sử dụng máy tính trong một khoảng thời gian, sau đó lock lại.
 
-<a href="../sample-files/FocusTimer_macOS_Advanced.dmg">[Link tải]</a>
+<a href="https://github.com/ahaxu/blog/raw/refs/heads/main/sample-files/FocusTimer_macOS_Advanced.dmg">[Link tải]</a>
 
 ### Happy coding <3
