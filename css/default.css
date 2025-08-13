@@ -50,10 +50,11 @@ body {
     color: #f8fafc;
     text-decoration: none;
     letter-spacing: -0.025em;
+    transition: color 0.2s ease;
 }
 
 .logo a:hover {
-    color: #cbd5e1;
+    color: #60a5fa;
 }
 
 .main-nav {
@@ -67,18 +68,41 @@ body {
     color: #94a3b8;
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
-    transition: color 0.2s ease;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    position: relative;
 }
 
 .nav-link:hover {
     color: #f1f5f9;
+    background-color: #1e293b;
+    transform: translateY(-1px);
 }
 
 .nav-link:focus {
     outline: 2px solid #60a5fa;
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 8px;
+    background-color: #1e293b;
+}
+
+/* Active navigation link indicator */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #60a5fa;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 80%;
 }
 
 /* Screen reader only text */
@@ -585,7 +609,7 @@ blockquote {
         right: -100%;
     }
     
-    /* Navigation close button */
+    /* Navigation close button - only visible on mobile */
     .nav-close-btn {
         position: absolute;
         top: 1.5rem;
@@ -628,6 +652,8 @@ blockquote {
         color: #f1f5f9;
         font-weight: 500;
         transition: all 0.2s ease;
+        border-radius: 0;
+        transform: none;
     }
     
     .nav-link:last-child {
@@ -639,6 +665,7 @@ blockquote {
         background-color: #334155;
         padding-left: 1rem;
         border-radius: 8px;
+        transform: none;
     }
     
     .nav-link:focus {
@@ -646,6 +673,11 @@ blockquote {
         outline-offset: 2px;
         border-radius: 8px;
         background-color: #334155;
+    }
+    
+    /* Hide desktop navigation effects on mobile */
+    .nav-link::after {
+        display: none;
     }
     
     .header-content {
@@ -675,6 +707,41 @@ blockquote {
         width: 36px;
         height: 36px;
         font-size: 1.3rem;
+    }
+}
+
+/* Desktop styles - hide close button and enhance navigation */
+@media (min-width: 769px) {
+    .nav-close-btn {
+        display: none;
+    }
+    
+    .main-nav {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-link {
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+    
+    .nav-link:hover {
+        color: #f1f5f9;
+        background-color: #1e293b;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    .nav-link:focus {
+        outline: 2px solid #60a5fa;
+        outline-offset: 2px;
+        border-radius: 8px;
+        background-color: #1e293b;
     }
 }
 
