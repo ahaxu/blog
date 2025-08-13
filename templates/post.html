@@ -1,13 +1,17 @@
-<div class="info">
-    Posted on $date$
+<div class="post-meta">
+    <time class="post-date" datetime="$date$">$date$</time>
     $if(author)$
-        by $author$
+        <span class="post-author">by $author$</span>
     $endif$
-</div>
-<div class="info">
     $if(tags)$
-    Tags: $tags$
+        <div class="post-tags">
+            $for(tags)$
+                <a href="/tags/$tag$.html" class="tag-link">$tag$</a>
+            $endfor$
+        </div>
     $endif$
 </div>
 
-$body$
+<div class="post-body">
+    $body$
+</div>
