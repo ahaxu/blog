@@ -36,13 +36,23 @@
                     <div class="logo">
                         <a href="../">AhaXu</a>
                     </div>
-                    <nav class="main-nav">
-                        <a href="../" class="nav-link">Home</a>
-                        <a href="../about.html" class="nav-link">About</a>
-                        <a href="../tags/thơ%20thẩn.html" class="nav-link">Poetry</a>
-                        <a href="../archive.html" class="nav-link">Archive</a>
-                    </nav>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="main-nav" aria-haspopup="true" type="button">
+                        <span class="sr-only">Menu</span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </button>
                 </div>
+                
+                <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+                    <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation menu" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <a href="../" class="nav-link">Home</a>
+                    <a href="../about.html" class="nav-link">About</a>
+                    <a href="../tags/thơ%20thẩn.html" class="nav-link">Poetry</a>
+                    <a href="../archive.html" class="nav-link">Archive</a>
+                </nav>
             </div>
         </header>
 
@@ -53,19 +63,15 @@
                         <header class="post-header">
                             <h1 class="post-title">(Vi) Haskell function application</h1>
                         </header>
-                        <div class="info">
-    Posted on December 30, 2022
+                        <div class="post-meta">
+    <time class="post-date" datetime="December 30, 2022">December 30, 2022</time>
     
-        by lk
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged 'haskell'." href="../tags/haskell.html" rel="tag">haskell</a>, <a title="All pages tagged 'function application'." href="../tags/function%20application.html" rel="tag">function application</a>
+        <span class="post-author">by lk</span>
     
 </div>
 
-<h2 id="function-application">Function application ($)</h2>
+<div class="post-body">
+    <h2 id="function-application">Function application ($)</h2>
 <p>Hãy check thử thông tin của <code>($)</code> trong <code>ghci</code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Prelude</span><span class="op">&gt;</span> <span class="op">:</span>info (<span class="op">$</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">($) ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> b       <span class="co">-- Defined in ‘GHC.Base’</span></span>
@@ -98,6 +104,7 @@ Hãy xét một vài ví dụ: <a href="https://github.com/ahaxu/simple-telegram
 <ul>
 <li><a href="https://youtu.be/cucVyKgeMyI">4. Haskell function composition, áp dụng vào bài tập liên quan đến list</a></li>
 </ul>
+</div>
 
                     </article>
                 
@@ -109,5 +116,122 @@ Hãy xét một vài ví dụ: <a href="https://github.com/ahaxu/simple-telegram
                 <p>&copy; 2025 AhaXu - Built with Hakyll</p>
             </div>
         </footer>
+
+        <script>
+            // Mobile menu functionality with accessibility improvements
+            document.addEventListener('DOMContentLoaded', function() {
+                const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+                const mainNav = document.getElementById('main-nav');
+                const navLinks = document.querySelectorAll('.nav-link');
+                const navCloseBtn = document.getElementById('nav-close-btn');
+                let isMenuOpen = false;
+                
+                // Focus trap for mobile menu
+                function trapFocus(element) {
+                    const focusableElements = element.querySelectorAll(
+                        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+                    );
+                    const firstFocusableElement = focusableElements[0];
+                    const lastFocusableElement = focusableElements[focusableElements.length - 1];
+                    
+                    element.addEventListener('keydown', function(e) {
+                        if (e.key === 'Tab') {
+                            if (e.shiftKey) {
+                                if (document.activeElement === firstFocusableElement) {
+                                    e.preventDefault();
+                                    lastFocusableElement.focus();
+                                }
+                            } else {
+                                if (document.activeElement === lastFocusableElement) {
+                                    e.preventDefault();
+                                    firstFocusableElement.focus();
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // Toggle menu function
+                function toggleMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        mainNav.classList.add('active');
+                        mobileMenuToggle.classList.add('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                        mainNav.setAttribute('aria-hidden', 'false');
+                        
+                        // Focus first navigation link
+                        const firstLink = mainNav.querySelector('.nav-link');
+                        if (firstLink) {
+                            firstLink.focus();
+                        }
+                        
+                        // Add focus trap
+                        trapFocus(mainNav);
+                        
+                        // Prevent body scroll
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        closeMenu();
+                    }
+                }
+                
+                // Close menu function
+                function closeMenu() {
+                    isMenuOpen = false;
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    mainNav.setAttribute('aria-hidden', 'true');
+                    
+                    // Return focus to toggle button
+                    mobileMenuToggle.focus();
+                    
+                    // Restore body scroll
+                    document.body.style.overflow = '';
+                }
+                
+                // Event listeners
+                mobileMenuToggle.addEventListener('click', toggleMenu);
+                
+                // Keyboard support for toggle button
+                mobileMenuToggle.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleMenu();
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                navLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                // Close menu when clicking on the close button
+                navCloseBtn.addEventListener('click', closeMenu);
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (isMenuOpen && !mobileMenuToggle.contains(event.target) && !mainNav.contains(event.target) && (!navCloseBtn || !navCloseBtn.contains(event.target))) {
+                        closeMenu();
+                    }
+                });
+                
+                // Close menu on Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isMenuOpen) {
+                        closeMenu();
+                    }
+                });
+                
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && isMenuOpen) {
+                        closeMenu();
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

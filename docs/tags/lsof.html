@@ -30,13 +30,23 @@
                     <div class="logo">
                         <a href="../">AhaXu</a>
                     </div>
-                    <nav class="main-nav">
-                        <a href="../" class="nav-link">Home</a>
-                        <a href="../about.html" class="nav-link">About</a>
-                        <a href="../tags/thơ%20thẩn.html" class="nav-link">Poetry</a>
-                        <a href="../archive.html" class="nav-link">Archive</a>
-                    </nav>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="main-nav" aria-haspopup="true" type="button">
+                        <span class="sr-only">Menu</span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </button>
                 </div>
+                
+                <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+                    <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation menu" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <a href="../" class="nav-link">Home</a>
+                    <a href="../about.html" class="nav-link">About</a>
+                    <a href="../tags/thơ%20thẩn.html" class="nav-link">Poetry</a>
+                    <a href="../archive.html" class="nav-link">Archive</a>
+                </nav>
             </div>
         </header>
 
@@ -47,7 +57,12 @@
                         <header class="post-header">
                             <h1 class="post-title">Posts with tag "lsof"</h1>
                         </header>
-                        <div class="post-list">
+                        <div class="tag-header">
+    <h1 class="tag-title">Posts tagged: lsof</h1>
+</div>
+
+<div class="tag-content">
+    <div class="post-list">
     
         <article class="post-item">
             <header class="post-item-header">
@@ -63,6 +78,7 @@
     
 </div>
 
+</div>
 
 
                     </article>
@@ -75,5 +91,122 @@
                 <p>&copy; 2025 AhaXu - Built with Hakyll</p>
             </div>
         </footer>
+
+        <script>
+            // Mobile menu functionality with accessibility improvements
+            document.addEventListener('DOMContentLoaded', function() {
+                const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+                const mainNav = document.getElementById('main-nav');
+                const navLinks = document.querySelectorAll('.nav-link');
+                const navCloseBtn = document.getElementById('nav-close-btn');
+                let isMenuOpen = false;
+                
+                // Focus trap for mobile menu
+                function trapFocus(element) {
+                    const focusableElements = element.querySelectorAll(
+                        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+                    );
+                    const firstFocusableElement = focusableElements[0];
+                    const lastFocusableElement = focusableElements[focusableElements.length - 1];
+                    
+                    element.addEventListener('keydown', function(e) {
+                        if (e.key === 'Tab') {
+                            if (e.shiftKey) {
+                                if (document.activeElement === firstFocusableElement) {
+                                    e.preventDefault();
+                                    lastFocusableElement.focus();
+                                }
+                            } else {
+                                if (document.activeElement === lastFocusableElement) {
+                                    e.preventDefault();
+                                    firstFocusableElement.focus();
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // Toggle menu function
+                function toggleMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        mainNav.classList.add('active');
+                        mobileMenuToggle.classList.add('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                        mainNav.setAttribute('aria-hidden', 'false');
+                        
+                        // Focus first navigation link
+                        const firstLink = mainNav.querySelector('.nav-link');
+                        if (firstLink) {
+                            firstLink.focus();
+                        }
+                        
+                        // Add focus trap
+                        trapFocus(mainNav);
+                        
+                        // Prevent body scroll
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        closeMenu();
+                    }
+                }
+                
+                // Close menu function
+                function closeMenu() {
+                    isMenuOpen = false;
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    mainNav.setAttribute('aria-hidden', 'true');
+                    
+                    // Return focus to toggle button
+                    mobileMenuToggle.focus();
+                    
+                    // Restore body scroll
+                    document.body.style.overflow = '';
+                }
+                
+                // Event listeners
+                mobileMenuToggle.addEventListener('click', toggleMenu);
+                
+                // Keyboard support for toggle button
+                mobileMenuToggle.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleMenu();
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                navLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                // Close menu when clicking on the close button
+                navCloseBtn.addEventListener('click', closeMenu);
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (isMenuOpen && !mobileMenuToggle.contains(event.target) && !mainNav.contains(event.target) && (!navCloseBtn || !navCloseBtn.contains(event.target))) {
+                        closeMenu();
+                    }
+                });
+                
+                // Close menu on Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isMenuOpen) {
+                        closeMenu();
+                    }
+                });
+                
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && isMenuOpen) {
+                        closeMenu();
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

