@@ -47,6 +47,7 @@ main = hakyllWith config $ do
           filteredPosts <- filterPrivatePosts posts
           let ctx =
                 constField "title" title <>
+                constField "tag" tag <>
                 listField "posts" postCtx (return filteredPosts) <>
                 defaultContext
 
@@ -107,7 +108,10 @@ postCtx =
     defaultContext
 
 postCtxWithTags :: Tags -> Context String
-postCtxWithTags tags = tagsField "tags" tags <> postCtx
+postCtxWithTags tags = 
+    tagsField "tags" tags <> 
+    postCtx <>
+    constField "hasTags" "true"
 
 
 static :: Pattern -> Rules ()
