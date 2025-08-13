@@ -2,7 +2,7 @@
 title: About
 ---
 
-<img src="../images/2022-08-28-hello-world-kyxuan.jpg" width=60% height=60% alt="ky xuan beach">
+<img src="https://raw.githubusercontent.com/ahaxu/blog/refs/heads/main/images/2022-08-28-hello-world-kyxuan.jpg" width=60% height=60% alt="ky xuan beach">
 
 Just stay hungry, stay humble, stay foolish!
 
