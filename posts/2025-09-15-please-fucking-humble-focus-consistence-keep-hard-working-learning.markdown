@@ -1,7 +1,7 @@
 ---
 title: Please fucking humble focus consistence and keep hard working and learning
 description: Please fucking humble focus consistence and keep hard working and learning
-tags: diary
+tags: diary, private
 keywords: diary
 author: lk
 cover_image: https://img.freepik.com/premium-vector/stay-disciplined-be-consistent-hard-work-especially-when-you-feel-like-ittshirt_566680-656.jpg?w=800
