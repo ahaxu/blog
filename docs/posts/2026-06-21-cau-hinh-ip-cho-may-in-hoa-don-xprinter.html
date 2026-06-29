@@ -7,13 +7,13 @@
         <meta name="keywords" content="AhaXu, Haskell, programming, technology, blog" />
         
           <meta property="og:url" content="/posts/2026-06-21-cau-hinh-ip-cho-may-in-hoa-don-xprinter.html" />
-          <meta property="og:title" content="Cấu hình IP cho máy in hóa đơn" />
-          <meta property="og:description" content="Cấu hình IP cho máy in hóa đơn" />
+          <meta property="og:title" content="Cấu hình IP cho máy in hóa đơn Xprinter" />
+          <meta property="og:description" content="Cấu hình IP cho máy in hóa đơn Xprinter" />
           <meta property="og:image" content />
-          <meta name="description" content="Cấu hình IP cho máy in hóa đơn">
+          <meta name="description" content="Cấu hình IP cho máy in hóa đơn Xprinter">
           <meta name="keywords" content="support, it, pos,printer, xprinter">
         
-        <title>AhaXu - Cấu hình IP cho máy in hóa đơn</title>
+        <title>AhaXu - Cấu hình IP cho máy in hóa đơn Xprinter</title>
         <link rel="stylesheet" type="text/css" href="../css/default.css" />
         <link rel="stylesheet" type="text/css" href="../css/syntax.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +61,7 @@
                 
                     <article class="post-content">
                         <header class="post-header">
-                            <h1 class="post-title">Cấu hình IP cho máy in hóa đơn</h1>
+                            <h1 class="post-title">Cấu hình IP cho máy in hóa đơn Xprinter</h1>
                         </header>
                         <div class="post-meta">
     <time class="post-date" datetime="June 21, 2026">June 21, 2026</time>
@@ -72,23 +72,23 @@
 
 <div class="post-body">
     <p>Máy POS (iPos) ko kết nối được đến máy in hóa đơn (Xprinter)</p>
-<ul>
+<ol type="1">
 <li>Cần xác định được đúng giải IP của máy trạm POS đang kết nối vào wifi, và xác định đúng dây cáp đang cắm vào máy in Xprinter có cùng giải mạng ko.
-<ul>
+<ol type="1">
 <li>Nếu giải IP của máy trạn POS khác với dải IP của của dây cáp đấu vào máy in hóa đơn:
-<ul>
-<li>Lấy 1 máy tính, đấu vào cáp đấu vào máy in hóa đơn, tay lấy được giải IP của máy in hóa đơn.</li>
+<ol type="1">
+<li>Lấy 1 máy tính, đấu vào cáp đấu vào máy in hóa đơn, ta lấy được giải IP của máy in hóa đơn.</li>
 <li>kết nối máy trạm POS đến các wifi trong nhà, khi dải IP trùng với giải IP của máy in hóa đơn là được</li>
-<li>Chú ý dải máy in của POS đã kết nối đúng wifi trùng mạng với dây LAN đấu vào máy in, giả sử IP máy POS lúc này là: 192.168.1.2, khi này ta cần set IP của máy in thành 192.168.1.x</li>
-</ul></li>
-</ul></li>
-<li>In test page từ máy in để lấy IP hiện tại của máy in (ko cần cắm dây LAN), giả sử lúc này là 202.161.1.111 … khác dải 192.168.1.x</li>
-<li>Đấu máy in vào máy tính bằng dây LAN, cấu hình IP máy tính lúc này sao cho cùng giải 202.161.1.x, ví dụ: 202.161.1.112</li>
-<li>Sau đó, ta có thể vào trang quản lý máy in giao diện web với IP 202.161.1.111</li>
-<li>Vào mục đổi IP, ta đổi lại IP máy in thành 192.168.1.123 sao cho cùng mạng với wifi đang kết nối của POS (b1.1.2)</li>
-<li>In thử ta được địa chỉ IP mới của máy in lúc này là 192.168.1.123</li>
-<li>Cắm máy in vào dây LAN cùng dải IP với POS (192.168.1.x) là in được.</li>
-</ul>
+<li>Chú ý dải máy in của POS đã kết nối đúng wifi trùng mạng với dây LAN đấu vào máy in, giả sử IP máy POS lúc này là: <code>192.168.1.2</code>, khi này ta cần set IP của máy in thành <code>192.168.1.x</code></li>
+</ol></li>
+</ol></li>
+<li>In test page từ máy in để lấy IP hiện tại của máy in (ko cần cắm dây LAN), giả sử lúc này là <code>202.161.1.111</code> … khác dải <code>192.168.1.x</code></li>
+<li>Đấu máy in vào máy tính bằng dây LAN, cấu hình IP máy tính lúc này sao cho cùng giải <code>202.161.1.x</code>, ví dụ: <code>202.161.1.112</code></li>
+<li>Sau đó, ta có thể vào trang quản lý máy in giao diện web với IP <code>202.161.1.111</code></li>
+<li>Vào mục đổi IP, ta đổi lại IP máy in thành <code>192.168.1.123</code> sao cho cùng mạng với wifi đang kết nối của POS (<strong>b1.1.2</strong>)</li>
+<li>In thử ta được địa chỉ IP mới của máy in lúc này là <code>192.168.1.123</code></li>
+<li>Cắm máy in vào dây LAN cùng dải IP với POS (<code>192.168.1.x</code>) là in được.</li>
+</ol>
 </div>
 
                     </article>
